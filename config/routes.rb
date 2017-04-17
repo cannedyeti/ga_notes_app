@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   get 'favorites' => 'user#index'
   post 'comments' => "comments#create"
   delete 'comments/:id' => "comments#destroy"
+  delete 'tags/:note_id/:tag_id' => "tags#destroy"
 
   resources :users
   resources :notes

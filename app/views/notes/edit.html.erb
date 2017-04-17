@@ -1,13 +1,21 @@
 <h1 class="text-center">Edit <%= @note.title %></h1>
 <br>
 
-
-
 <div class="container">
   <%= bootstrap_form_for @note do |n| %>
     <%= n.text_field :title %>
     <%= n.text_area :content, :class => "tinymce", :rows => 10, :cols => 100 %>
     <%= tinymce %>
+    <%= n.text_field :tag_ids, placeholder: "Add more comma-separated tags", value: "" %>
+    Click on a tag to remove it
+    <div>
+      <% @note.tags.each do |t| %>
+        <%= link_to "##{t.tag_name}", "/tags/" + @note.id.to_s + "/" + t.id.to_s, method: :delete%>
+      <% end %>
+    </div>
+    <br>
     <%= n.submit "Submit Changes", class: 'btn default-btn'%>
   <% end %>
+
+
 </div>
