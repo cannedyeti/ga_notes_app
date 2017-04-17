@@ -96,6 +96,7 @@
 ## Course
 **Attributes**
 * name: string
+
 **Associations**
 * has_many :notes
 
