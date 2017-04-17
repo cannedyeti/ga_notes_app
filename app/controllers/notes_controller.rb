@@ -10,26 +10,29 @@ class NotesController < ApplicationController
   def create
     @n = Note.new(note_params)
     @n.save!
-    redirect_to "/profile"
+    redirect_to "/notes/#{@n.id}"
   end
 
   def update
+    n = Note.find(params[:id])
+    n.update(note_params)
+    redirect_to "/notes/#{n.id}"
   end
 
   def destroy
+    Note.find(params[:id]).delete
+    redirect_to '/courses'
   end
 
   def edit
+    @note = Note.find(params[:id])
   end
 
   def show
     @note = Note.find(params[:id])
     @comments = Comment.where(:note_id => @note.id)
     @comment = Comment.new
-    # render html: @note.content.html_safe
-    # respond_to do |format|
-    #   format.html { render :text => @note.content }
-    # end
+    @user = @current_user
   end
 
   private

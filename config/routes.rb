@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   post 'profile/edit' => "user#update"
   get 'notes/new' => "notes#new"
   post 'notes/new' => "notes#create"
-  get 'notes/:id/edit' => "notes#show"
+  get 'notes/:id/edit' => "notes#edit"
   put 'notes/:id/edit' => "notes#update"
   get 'notes/:id' => 'notes#show'
   get 'profile/:id' => 'user#show'
