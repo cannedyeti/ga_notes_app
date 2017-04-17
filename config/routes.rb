@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'tags/index'
+
+  get 'tags/new'
+
+  get 'tags/create'
+
+  get 'tags/show'
+
   get 'courses/index'
 
 # PLURAL NOTES CONTROLLER?
