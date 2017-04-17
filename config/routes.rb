@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'courses/index'
+
 # PLURAL NOTES CONTROLLER?
 
   root "main#index"
+  get 'courses' => 'courses#index'
   get 'notes' => 'notes#index'
-  get 'find/:category' => 'notes#show'
+  get 'courses/:course_id' => 'notes#show'
   get 'signup' => "user#new"
   post 'signup' => "user#create"
   get 'login' => "sessions#new"

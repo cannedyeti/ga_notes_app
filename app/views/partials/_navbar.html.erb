@@ -1,9 +1,16 @@
 <nav class="navbar navbar-inverse">
   <div>
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">
-        <%= image_tag 'ga-logo.png', class: 'ga-logo'%>
-      </a>
+      <% if not @current_user %>
+        <a class="navbar-brand" href="/">
+          <%= image_tag 'ga-logo.png', class: 'ga-logo'%>
+        </a>
+      <% else %>
+        <a class="navbar-brand" href="/courses">
+          <%= image_tag 'ga-logo.png', class: 'ga-logo'%>
+        </a>
+      <% end %>
+
     </div>
     <ul class="nav navbar-nav pull-right">
       <li class="dropdown">
@@ -19,9 +26,9 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="">Category
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">WDI</a></li>
-          <li><a href="#">UXDI</a></li>
-          <li><a href="#">DSI</a></li>
+          <% @courses.each do |c| %>
+            <li><a href="/courses/<%=c.id%>"><%= c.code %></a></li>
+          <% end %>
         </ul>
       </li>
       <li><a href="/notes/new">Create Note</a></li>
