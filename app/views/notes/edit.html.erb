@@ -1,2 +1,13 @@
-<h1>Notes#edit</h1>
-<p>Find me in app/views/notes/edit.html.erb</p>
+<h1 class="text-center">Edit <%= @note.title %></h1>
+<br>
+
+
+
+<div class="container">
+  <%= bootstrap_form_for @note do |n| %>
+    <%= n.text_field :title %>
+    <%= n.text_area :content, :class => "tinymce", :rows => 10, :cols => 100 %>
+    <%= tinymce %>
+    <%= n.submit "Submit Changes", class: 'btn default-btn'%>
+  <% end %>
+</div>

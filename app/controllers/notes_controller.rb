@@ -10,16 +10,22 @@ class NotesController < ApplicationController
   def create
     @n = Note.new(note_params)
     @n.save!
-    redirect_to "/profile"
+    redirect_to "/notes/#{@n.id}"
   end
 
   def update
+    n = Note.find(params[:id])
+    n.update(note_params)
+    redirect_to "/notes/#{n.id}"
   end
 
   def destroy
+    Note.find(params[:id]).delete
+    redirect_to '/courses'
   end
 
   def edit
+    @note = Note.find(params[:id])
   end
 
   def show

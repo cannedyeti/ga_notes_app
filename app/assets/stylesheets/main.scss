@@ -92,3 +92,11 @@ nav.navbar {
 .btn {
   padding: 14px 12px;
 }
+
+.profile-link {
+  color: #fa4542;
+  &:hover {
+    color: black;
+    text-decoration: none;
+  }
+}
