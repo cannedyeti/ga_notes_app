@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+  background-color: #f6f6f6;
+  font-family: News\ 706,Georgia,serif;
+}
 
 .ga-logo {
   width: 224px;
@@ -12,22 +16,74 @@ nav.navbar {
   background-color: black;
   border: none;
   border-radius: 0;
+  font-size: 17px;
 }
 
 .navbar {
+  height: 57px;
+  li {
+    height: 57px;
+  }
+  li a {
+    padding: 18px 15px 16px 15px;
+  }
   li:hover {
     background: white;
   }
-  li.dropdown a:hover {
-    color: red;
+  ul.pull-right a {
+    color: white;
+    &:hover {
+      color: #fa4542
+    }
+  }
+  li.dropdown a {
+    color: white;
+    &:hover {
+      color: #fa4542;
+    }
   }
   li a:hover {
-    color:red;
+    color:#fa4542;
     background: white;
   }
-  ul.pull-right a {
-    &:hover {
-      color: red
-    }
+  ul.dropdown-menu a{
+    color: black;
+  }
+}
+
+.banner-img {
+  background: url('notes-banner.jpg');
+  height: 600px;
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+
+.home-description {
+  color: black;
+  h1 { 
+    font-size: 47px;
+  }
+  padding: 10px 50px 10px 50px;
+  position: absolute;
+  z-index: 10;
+  width: 400px;
+  background: white;
+  top: 160px;
+  h4 {
+    padding: 20px 0 20px 0;
+  }
+}
+
+.btn-red {
+  margin: 10px 0 30px 0;
+  background-color: #fa4542;
+  color: white;
+  border-bottom: 4px solid #af302e;
+  width: 95%;
+  height: 60px;
+  font-size: 25px;
+  &:hover {
+    color: white;
+    background-color: red;
   }
 }
