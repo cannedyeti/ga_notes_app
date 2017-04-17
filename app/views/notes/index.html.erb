@@ -1,2 +1,16 @@
-<h1>Notes#index</h1>
-<p>Find me in app/views/notes/index.html.erb</p>
+<h1 class="text-center">My Notes</h1>
+
+<div class="container">
+  <% @notes.each do |n| %>
+    <div class="well">
+      <a href="/notes/<%=n.id%>">
+        <h3><%= n.title %></h3>
+      </a>
+      by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %>
+      <br><br>
+      <% n.tags.each do |t| %>
+        <a href="#">#<%=t.tag_name%></a>
+      <% end %>
+    </div>
+  <% end %>
+</div>

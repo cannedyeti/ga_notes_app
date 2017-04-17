@@ -5,6 +5,9 @@
 
 <div class="container">
   <p><%=@note.content.html_safe%></p>
+  <% @note.tags.each do |t| %>
+    <p class="btn btn-default"><%= t.tag_name %></p>
+  <% end %>
 </div>
 
 <% if @current_user && @current_user.id == @note.user.id %>
