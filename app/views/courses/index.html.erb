@@ -1,0 +1,25 @@
+<h1 class="text-center">Start Learning</h1>
+
+<div class="container">
+  <div class="row">
+    <% @courses.each do |c| %>
+      <div class="col-xs-4">
+        <div class="well">
+          <a href="/courses/<%= c.id %>">
+            <div class="row">
+              <div class="col-xs-10">
+                <h3><%= c.name %></h3>
+                <p>SUBTOPICS</p>
+                <p>APIs, Git, Mobile Devlopment</p>
+              </div>
+              <div class="col-xs-2">
+                <i class="fa fa-wheelchair-alt fa-lg" aria-hidden="true"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

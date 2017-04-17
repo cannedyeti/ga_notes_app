@@ -1,2 +1,9 @@
-<h1>Notes#show</h1>
-<p>Find me in app/views/notes/show.html.erb</p>
+<h1 class="text-center">Viewing notes for <%= @course.code %></h1>
+
+<div class="container">
+  <% @notes.each do |n| %>
+    <div class="well">
+      <h3><%= n.title %></h3>
+    </div>
+  <% end %>
+</div>
