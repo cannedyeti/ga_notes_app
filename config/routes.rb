@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   get 'notes/:id/edit' => "notes#show"
   put 'notes/:id/edit' => "notes#update"
   get 'notes/:id' => 'notes#show'
-  # get 'search' =>
   get 'profile/:id' => 'user#show'
   get 'favorites' => 'user#index'
 
