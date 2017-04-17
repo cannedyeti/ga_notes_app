@@ -1,9 +1,4 @@
-<h1 class="text-center">Viewing notes for <%= @course.code %></h1>
-
+<h1 class="text-center"><%=@note.title%></h1>
 <div class="container">
-  <% @notes.each do |n| %>
-    <div class="well">
-      <h3><%= n.title %></h3>
-    </div>
-  <% end %>
+  <p><%=@note.content.html_safe%></p>
 </div>

@@ -1,0 +1,11 @@
+<h1 class="text-center">Viewing notes for <%= @course.code %></h1>
+
+<div class="container">
+  <% @notes.each do |n| %>
+    <div class="well">
+      <a href="/notes/<%=n.id%>">
+        <h3><%= n.title %></h3>
+      </a>
+    </div>
+  <% end %>
+</div>
