@@ -1,2 +1,12 @@
-<h1>Notes#new</h1>
-<p>Find me in app/views/notes/new.html.erb</p>
+<h1 class="text-center">New Note</h1>
+
+<div class="container">
+  <%= bootstrap_form_for @note do |f| %>
+    <%= f.text_field :title%>
+    <%= f.text_area :content, :class => "tinymce", :rows => 10, :cols => 100 %>
+    <%= tinymce %>
+    <%= f.collection_select :course_id, @courses, :id, :name %>
+    <%= f.hidden_field :user_id, :value => @current_user.id %>
+    <%= f.submit "Create note", class: 'btn default-btn'%>
+  <% end %>
+</div>

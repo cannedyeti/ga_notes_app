@@ -34,7 +34,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem "font-awesome-rails"
 gem 'bootstrap_form'
 gem 'jquery-ui-rails'
-
+gem 'tinymce-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
