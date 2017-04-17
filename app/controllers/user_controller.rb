@@ -1,6 +1,8 @@
 class UserController < ApplicationController
   def index
     @user = @current_user
+    @location = Location.find(@user.location_id)
+    @course = Course.find(@user.default_course_id)
   end
 
   def show
@@ -23,6 +25,8 @@ class UserController < ApplicationController
 
   def edit
     @user = @current_user
+    @locations = Location.all
+    @courses = Course.all
   end
 
   def new

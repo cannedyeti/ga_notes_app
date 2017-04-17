@@ -1,1 +1,24 @@
-<%= @current_user.name %>
+<h1 class="text-center">My Profile</h1>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <p><strong>Name: </strong><%= @current_user.name %></p>
+      <p><strong>Email: </strong><%= @current_user.email %></p>
+      <p><strong>Password: </strong>************</p>
+      <p><strong>Location: </strong><%= @location.name %></p>
+      <p><strong>Course: </strong><%= @course.name %> (<%= @course.code %>)</p>
+      <p><strong>Privileges: </strong><%= @current_user.privilege %></p>
+      <p><strong>Points: </strong><%= @current_user.points %></p>
+      <a href="/profile/edit" class="btn btn-info">Edit Profile</a>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <div class="text-center">
+        <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>
+        <br><br>
+        <button class="btn btn-info">Change Profile Pic</button>
+      </div>
+
+    </div>
+  </div>
+</div>
