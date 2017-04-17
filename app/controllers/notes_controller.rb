@@ -24,6 +24,8 @@ class NotesController < ApplicationController
 
   def show
     @note = Note.find(params[:id])
+    @comments = Comment.where(:note_id => @note.id)
+    @comment = Comment.new
     # render html: @note.content.html_safe
     # respond_to do |format|
     #   format.html { render :text => @note.content }

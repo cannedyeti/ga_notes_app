@@ -24,9 +24,8 @@ Rails.application.routes.draw do
   get 'notes/:id' => 'notes#show'
   get 'profile/:id' => 'user#show'
   get 'favorites' => 'user#index'
-
-
-
+  post 'comments' => "comments#create"
+  delete 'comments/:id' => "comments#destroy"
 
   resources :users
   resources :notes
