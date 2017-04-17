@@ -30,10 +30,7 @@ class NotesController < ApplicationController
 
   def show
     @note = Note.find(params[:id])
-    # render html: @note.content.html_safe
-    # respond_to do |format|
-    #   format.html { render :text => @note.content }
-    # end
+    @user = @current_user
   end
 
   private

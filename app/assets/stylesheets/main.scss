@@ -100,3 +100,17 @@ nav.navbar {
     text-decoration: none;
   }
 }
+
+.reviews {
+  img {
+    height: 30px;
+  }
+  color: grey;
+  font-family: 'Times New Roman', Times, serif;
+  h3 {
+    font-size: 30px;
+  }
+  &:last-of-type {
+    margin-bottom: 50px;
+  }
+}
