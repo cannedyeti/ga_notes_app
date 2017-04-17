@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'tags/index'
+
+  get 'tags/new'
+
+  get 'tags/create'
+
+  get 'tags/show'
+
   get 'courses/index'
 
 # PLURAL NOTES CONTROLLER?
@@ -24,9 +32,8 @@ Rails.application.routes.draw do
   get 'notes/:id' => 'notes#show'
   get 'profile/:id' => 'user#show'
   get 'favorites' => 'user#index'
-
-
-
+  post 'comments' => "comments#create"
+  delete 'comments/:id' => "comments#destroy"
 
   resources :users
   resources :notes

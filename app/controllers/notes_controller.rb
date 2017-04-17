@@ -30,12 +30,15 @@ class NotesController < ApplicationController
 
   def show
     @note = Note.find(params[:id])
+    @comments = Comment.where(:note_id => @note.id)
+    @comment = Comment.new
     @user = @current_user
   end
 
   private
+  
   def note_params
-    params.require(:note).permit(:title, :content, :user_id, :course_id)
+    params.require(:note).permit(:title, :content, :user_id, :course_id, :tag_ids => [])
   end
 
 end
