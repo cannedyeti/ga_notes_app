@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   delete 'favorites/:id' => "favorites#destroy"
   post 'comments' => "comments#create"
   delete 'comments/:id' => "comments#destroy"
+  delete 'tags/:note_id/:tag_id' => "tags#destroy"
 
   resources :users
   resources :notes

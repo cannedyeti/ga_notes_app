@@ -11,6 +11,14 @@ class TagsController < ApplicationController
   def show
   end
 
+  def destroy
+    #delete the association, not the tag
+    note = Note.find(params[:note_id])
+    tag = Tag.find(params[:tag_id])
+    note.tags.delete(tag)
+    redirect_to "/notes/#{params[:note_id]}/edit"
+  end
+
   private
 
   def tag_params
