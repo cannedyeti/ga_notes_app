@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     if user
       session[:user_id] = user.id
       flash[:success] = "User logged in!!"
-      redirect_to "/users/show"
+      redirect_to "/profile"
     else
       flash[:danger] = "Credentials Invalid!!"
       redirect_to login_path
@@ -24,5 +24,4 @@ class SessionsController < ApplicationController
   def user_params
     params.require(:user).permit(:email, :password)
   end
-
 end
