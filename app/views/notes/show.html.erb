@@ -12,16 +12,13 @@
     <a href="/notes/<%=@note.id%>/edit" class="btn btn-info">Edit Note</a>
     <%= link_to "Delete Note", note_path(@note), method: :delete, class: 'btn btn-danger' %>
     <br>
-    <%= bootstrap_form_for @user do |f| %>
-      <%= f.hidden_field :note_id, :value => @note.id %>
-      <%= f.primary "Save Note", class: 'btn btn-success'%>
-    <% end %>
   </div>
-<% else %>
+<% elsif @current_user %>
   <div class="text-center">
-    <%= bootstrap_form_for @user do |f| %>
-      <%= f.hidden_field :note_id, :value => @note.id %>
-      <%= f.primary "Save Note", class: 'btn btn-success'%>
+    <%= bootstrap_form_for :favorite do |f| %>
+      <%= f.hidden_field :user_id, :value => @current_user.id%>
+      <%= f.hidden_field :note_id, :value => @note.id%>
+      <%= f.submit "Save Note", class: 'btn btn-success'%>
     <% end %>
   </div>
 <%end%>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417154030) do
+ActiveRecord::Schema.define(version: 20170417214021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 20170417154030) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "code"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "note_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_favorites_on_user_id", using: :btree
   end
 
   create_table "locations", force: :cascade do |t|
@@ -86,6 +94,7 @@ ActiveRecord::Schema.define(version: 20170417154030) do
 
   add_foreign_key "comments", "notes"
   add_foreign_key "comments", "users"
+  add_foreign_key "favorites", "users"
   add_foreign_key "notes", "courses"
   add_foreign_key "notes", "users"
   add_foreign_key "notes_tags", "notes"

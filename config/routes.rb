@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'favorites/index'
+
   get 'tags/index'
 
   get 'tags/new'
@@ -30,8 +32,10 @@ Rails.application.routes.draw do
   get 'notes/:id/edit' => "notes#edit"
   put 'notes/:id/edit' => "notes#update"
   get 'notes/:id' => 'notes#show'
+  post 'notes/:id' => 'favorites#create'
   get 'profile/:id' => 'user#show'
-  get 'favorites' => 'user#index'
+  get 'favorites' => 'favorites#index'
+  delete 'favorites/:id' => "favorites#destroy"
   post 'comments' => "comments#create"
   delete 'comments/:id' => "comments#destroy"
 

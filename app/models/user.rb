@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :notes
   has_many :comments
+  has_many :favorites
 
   validates :email,
     presence: true,

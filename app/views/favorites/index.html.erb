@@ -1,0 +1,10 @@
+
+<div class="container">
+  <h1><%=@current_user.name%></h1>
+  <% @favorites.each do |n| %>
+    <a href="/notes/<%=n.id%>">
+      <h2><%= n.title %></h2>
+    </a>
+    <%= link_to "Delete Note", "/favorites/" + n.id.to_s, method: :delete, class: 'btn btn-danger' %>
+  <%end%>
+</div>
