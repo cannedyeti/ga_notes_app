@@ -1,0 +1,30 @@
+<nav class="navbar navbar-inverse">
+  <div>
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        <%= image_tag 'ga-logo.png', class: 'ga-logo'%>
+      </a>
+    </div>
+    <ul class="nav navbar-nav pull-right">
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="">My Stuff
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/notes">My Notes</a></li>
+          <li><a href="#">Saved Notes</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="">Category
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">WDI</a></li>
+          <li><a href="#">UXDI</a></li>
+          <li><a href="#">DSI</a></li>
+        </ul>
+      </li>
+      <li><a href="/notes/new">Create Note</a></li>
+    </ul>
+  </div>
+</nav>

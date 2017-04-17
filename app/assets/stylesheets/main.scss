@@ -1,3 +1,33 @@
 // Place all the styles related to the main controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.ga-logo {
+  width: 224px;
+  height: 24px;
+}
+
+nav.navbar {
+  background-color: black;
+  border: none;
+  border-radius: 0;
+}
+
+.navbar {
+  li:hover {
+    background: white;
+  }
+  li.dropdown a:hover {
+    color: red;
+  }
+  li a:hover {
+    color:red;
+    background: white;
+  }
+  ul.pull-right a {
+    &:hover {
+      color: red
+    }
+  }
+}
