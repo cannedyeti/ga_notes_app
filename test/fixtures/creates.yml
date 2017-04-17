@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  notes_tags: MyString
+  note: one
+  tag: one
+
+two:
+  notes_tags: MyString
+  note: two
+  tag: two

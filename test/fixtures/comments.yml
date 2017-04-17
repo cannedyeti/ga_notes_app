@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyText
+  up_votes: 
+  down_votes: 
+  user: one
+  note: one
+
+two:
+  content: MyText
+  up_votes: 
+  down_votes: 
+  user: two
+  note: two
