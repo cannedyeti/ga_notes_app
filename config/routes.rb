@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root "main#index"
   get 'courses' => 'courses#index'
   get 'notes' => 'notes#index'
-  get 'courses/:course_id' => 'notes#show'
+  get 'courses/:course_id' => 'courses#show'
   get 'signup' => "user#new"
   post 'signup' => "user#create"
   get 'login' => "sessions#new"
