@@ -11,7 +11,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    #delete all replies too
     @c = Comment.find(params[:id])
+    @c.child_comments.destroy_all
     note_id = @c.note.id
     @c.delete
     redirect_to "/notes/" + note_id.to_s
@@ -19,6 +21,6 @@ class CommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:comment).permit(:content, :user_id, :note_id)
+    params.require(:comment).permit(:content, :user_id, :note_id, :parent_id)
   end
 end
