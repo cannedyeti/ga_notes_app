@@ -6,7 +6,7 @@
 <div class="container">
   <p><%=@note.content.html_safe%></p>
   <% @note.tags.each do |t| %>
-    <a href="/find/<%=t.id%>" class="tag">#<%= t.tag_name %></a>
+    <a href="/find/<%=t.id %>" class="tag">#<%= t.tag_name %></a>
   <% end %>
 </div>
 
