@@ -34,6 +34,7 @@
       <%= f.hidden_field :user_id, :value => @current_user.id %>
     <% end %>
     <%= f.hidden_field :note_id, :value => @note.id %>
+    <%= f.hidden_field :parent_id, :value => nil %>
     <br>
     <%= f.submit "add comment" %>
   <% end %>
@@ -43,11 +44,37 @@
     <p><strong><%= c.user.name %></strong> <%=c.content%></p>
     <a href="#">Like </a>
     <a href="#">Dislike </a>
-    <a href="#">Reply </a>
+    <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a>
     <% if @current_user.id == c.user.id%>
       <%= link_to "Delete", "/comments/" + c.id.to_s, method: :delete%>
     <% end %>
     <p><%= c.created_at.strftime("%b %d %Y at %l:%M %p") %></p>
+
+    <% c.child_comments.each do |r| %>
+      <div class="reply">
+        <p><strong><%= r.user.name %></strong> <%=r.content%></p>
+        <a href="#">Like </a>
+        <a href="#">Dislike </a>
+        <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a>
+        <% if @current_user.id == r.user.id%>
+          <%= link_to "Delete", "/comments/" + r.id.to_s, method: :delete, action: 'destroy_reply'%>
+        <% end %>
+        <p><%= c.created_at.strftime("%b %d %Y at %l:%M %p") %></p>
+      </div>
+    <% end %>
+
+    <div id="comment_<%=c.id%>_reply_form" class="comment-reply text-right">
+      <%= form_for :comment, :url => {:controller => "comments", :action => "create"}, html:{method:'post'} do |f| %>
+        <%= f.text_area :content, class: "my-text-area", placeholder: "Write a reply..." %>
+        <% if @current_user %>
+          <%= f.hidden_field :user_id, :value => @current_user.id %>
+        <% end %>
+        <%= f.hidden_field :note_id, :value => @note.id %>
+        <%= f.hidden_field :parent_id, :value => c.id %>
+        <br>
+        <%= f.submit "reply" %>
+      <% end %>
+    </div>
     <br>
   <% end %>
 
