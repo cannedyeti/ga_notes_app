@@ -10,19 +10,24 @@
   <% end %>
 </div>
 
+
 <% if @current_user && @current_user.id == @note.user.id %>
   <div class="text-center">
     <a href="/notes/<%=@note.id%>/edit" class="btn btn-info">Edit Note</a>
     <%= link_to "Delete Note", note_path(@note), method: :delete, class: 'btn btn-danger' %>
     <br>
   </div>
-<% elsif @current_user %>
+<% elsif (@current_user && !@favorite_ids.include?(@note.id)) %>
   <div class="text-center">
     <%= bootstrap_form_for :favorite do |f| %>
       <%= f.hidden_field :user_id, :value => @current_user.id%>
       <%= f.hidden_field :note_id, :value => @note.id%>
       <%= f.submit "Save Note", class: 'btn btn-success'%>
     <% end %>
+  </div>
+<%else%>
+  <div class="text-center">
+    <%= link_to "Remove Favorite", '/favorites/'+ @note.id.to_s, method: :delete, class: 'btn btn-danger' %>
   </div>
 <%end%>
 

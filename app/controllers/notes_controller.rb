@@ -78,6 +78,10 @@ class NotesController < ApplicationController
     @comments = Comment.where(:note_id => @note.id)
     @comment = Comment.new
     @user = @current_user
+    @favorite_ids = []
+    @current_user.favorites.each do |f|
+      @favorite_ids.push(f.note_id)
+    end
   end
 
   private
