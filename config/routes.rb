@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   post 'comments' => "comments#create"
   delete 'comments/:id' => "comments#destroy"
   delete 'tags/:note_id/:tag_id' => "tags#destroy"
+  put 'notes/vote/:isDown/:id' => "notes#vote"
+  put 'comments/vote/:isDown/:id' => "comments#vote"
 
   resources :users
   resources :notes

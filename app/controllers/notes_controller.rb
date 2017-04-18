@@ -21,9 +21,42 @@ class NotesController < ApplicationController
     redirect_to '/notes'
   end
 
+
+  def vote()
+    isDown = (params[:isDown] == 'true')
+    n = Note.find(params[:id])
+    dv = []
+    uv = []
+    if isDown
+      dv = n.down_votes
+      uv = n.up_votes
+    else
+      dv = n.up_votes
+      uv = n.down_votes
+    end
+
+    if !(dv.include?(@current_user.id.to_s))
+      dv.push(@current_user.id.to_s)
+    else
+      dv.delete(@current_user.id.to_s)
+    end
+
+    if uv.include?(@current_user.id.to_s)
+      uv.delete(@current_user.id.to_s)
+    end
+
+    if isDown
+      n.update(up_votes: uv, down_votes: dv)
+    else
+      n.update(up_votes: dv, down_votes: uv)
+    end
+
+    redirect_to '/courses/' + n.course_id.to_s
+  end
+
   def create_whitelist(existing_whitelist, note_params)
-    whitelist = []
-    whitelist.concat existing_whitelist
+    whitelist = existing_whitelist || []
+    # whitelist.concat existing_whitelist
     note_params[:whitelist] = whitelist.push(@current_user.id)
     return note_params
   end
@@ -83,7 +116,7 @@ class NotesController < ApplicationController
 
   def show
     @note = Note.find(params[:id])
-    @comments = Comment.where(:note_id => @note.id, :parent_id => nil)
+    @comments = Comment.where(:note_id => @note.id, :parent_id => nil).order(created_at: :desc)
     @comment = Comment.new
     @user = @current_user
     @favorite_ids = []
