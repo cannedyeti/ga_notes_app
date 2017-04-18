@@ -1,2 +1,17 @@
-<h1>Tags#show</h1>
-<p>Find me in app/views/tags/show.html.erb</p>
+<h1 class="text-center">#<%= @tag.tag_name %></h1>
+<div class="container">
+
+  <% @notes.each do |n| %>
+        <div class="well">
+          <a class="note-link" href="/notes/<%=n.id%>">
+            <h3><%= n.title %></h3>
+          </a>
+          by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %>
+          <br><br>
+          <% n.tags.each do |t| %>
+            <a class="tag" href="#">#<%=t.tag_name%></a>
+          <% end %>
+        </div>
+  <% end %>
+</div>
+  

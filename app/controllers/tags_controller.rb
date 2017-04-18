@@ -9,6 +9,12 @@ class TagsController < ApplicationController
   end
 
   def show
+    @notes = []
+    @tag = Tag.find(params[:id])
+    @tag.note_ids.each do |n|
+      temp = Note.find(n)
+      @notes.push(temp)
+    end
   end
 
   def destroy
@@ -20,6 +26,10 @@ class TagsController < ApplicationController
   end
 
   private
+
+  def tag_search_params
+    params.require(:tag).permit(:tag_name)
+  end
 
   def tag_params
     params.require(:tag).permit(:tag_name, :note_ids => [])
