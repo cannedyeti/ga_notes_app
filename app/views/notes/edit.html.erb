@@ -6,6 +6,7 @@
     <%= n.text_field :title %>
     <%= n.text_area :content, :class => "tinymce", :rows => 10, :cols => 100 %>
     <%= tinymce %>
+    <%= n.collection_select :course_id, @courses, :id, :name, {:selected => @current_user.default_course_id} %>
     <%= n.text_field :tag_ids, placeholder: "Add more comma-separated tags", value: "" %>
     Click on a tag to remove it
     <div>

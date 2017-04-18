@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get 'login' => "sessions#new"
   post "login" => "sessions#create"
   get "logout" => "sessions#destroy"
-  get 'find/:tag' => "notes#show"
+  get 'find/:id' => "tags#show"
   get 'profile' => "user#index"
   get 'profile/edit' => "user#edit"
   post 'profile/edit' => "user#update"
