@@ -1,25 +1,27 @@
-<h1 class="text-center">Start Learning</h1>
+<div class="all-courses">
+  <h1 class="text-center"><strong>Start Learning</strong></h1>
 
-<div class="container">
-  <div class="row">
-    <% @courses.each do |c| %>
-      <div class="col-xs-4">
-        <div class="well">
-          <a href="/courses/<%= c.id %>">
-            <div class="row">
-              <div class="col-xs-10">
-                <h3><%= c.name %></h3>
-                <p>SUBTOPICS</p>
-                <p>APIs, Git, Mobile Development</p>
+  <div class="container text-center">
+    <div class="row">
+      <% @courses.each do |c| %>
+        <div class="col-xs-4">
+          <div class="well course-well">
+            <a class="course-link" href="/courses/<%= c.id %>">
+              <div class="row">
+                <div class="col-xs-10">
+                  <h3><strong><%= c.name %></strong></h3>
+                  <p class="gray"><strong>SUBTOPICS</strong></p>
+                  <p>APIs, Git, Mobile Development</p>
+                </div>
+                <div class="col-xs-2">
+                  <i class="arrow fa fa-angle-right fa-3x" aria-hidden="true"></i>
+                </div>
               </div>
-              <div class="col-xs-2">
-                <i class="fa fa-wheelchair-alt fa-lg" aria-hidden="true"></i>
-              </div>
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
-      </div>
-    <% end %>
-
+      <% end %>
+    </div>
+    <a href="#" class="btn btn-red btn-md">Browse All Notes</a>
   </div>
 </div>
