@@ -10,7 +10,7 @@
     Click on a tag to remove it
     <div>
       <% @note.tags.each do |t| %>
-        <%= link_to "##{t.tag_name}", "/tags/" + @note.id.to_s + "/" + t.id.to_s, method: :delete%>
+        <%= link_to "##{t.tag_name}", "/tags/" + @note.id.to_s + "/" + t.id.to_s, class: 'tag', method: :delete%>
       <% end %>
     </div>
     <br>

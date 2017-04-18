@@ -12,6 +12,7 @@
  *
  *= require main
  *= require user
+ *= require prism
  *= require_tree .
  *= require_self
  */
