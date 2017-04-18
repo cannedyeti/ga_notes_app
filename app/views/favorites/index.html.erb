@@ -1,18 +1,16 @@
-
+<h1 class="text-center">Saved Notes</h1>
 <div class="container">
-  <h1><%=@current_user.name%></h1>
-  <% if @favorites.length <= 0 %>
-    <br>
-    <p class="text-center">Aww there's nothing here :(
-      <br>
-      <a href="/courses">Favorite some notes!</a>
-    </p>
-  <% else %>
-    <% @favorites.each do |n| %>
-      <a href="/notes/<%=n.id%>">
-        <h2><%= n.title %></h2>
-      </a>
-      <%= link_to "Delete Note", "/favorites/" + n.id.to_s, method: :delete, class: 'btn btn-danger' %>
-    <%end%>
+
+  <% @favorites.each do |n| %>
+        <div class="well">
+          <a class="note-link" href="/notes/<%=n.id%>">
+            <h3><%= n.title %></h3>
+          </a>
+          by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %>
+          <br><br>
+          <% n.tags.each do |t| %>
+            <a class="tag" href="#">#<%=t.tag_name%></a>
+          <% end %>
+        </div>
   <% end %>
 </div>
