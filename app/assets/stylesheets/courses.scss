@@ -18,6 +18,27 @@
   }
 }
 
+.note-link {
+  color: black;
+
+  &:hover {
+    color: rgba(0,0,0,0.5);
+    text-decoration: none;
+  }
+}
+
+.tag {
+  @extend .gray;
+  padding: 2px;
+  border-radius: 2px;
+
+  &:hover {
+    background-color: rgba(250,69,66, 0.3);
+    color: rgb(229,27,36);
+    text-decoration: none;
+  }
+}
+
 .gray {
   color: rgb(162,162,162);
 }

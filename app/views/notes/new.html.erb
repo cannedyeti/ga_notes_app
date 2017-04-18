@@ -5,7 +5,7 @@
     <%= f.text_field :title%>
     <%= f.text_area :content, :class => "tinymce", :rows => 10, :cols => 100 %>
     <%= tinymce %>
-    <%= f.collection_select :course_id, @courses, :id, :name %>
+    <%= f.collection_select :course_id, @courses, :id, :name, {:selected => @current_user.default_course_id} %>
     <%= f.text_field :tag_ids, placeholder: "comma-separated tags" %>
     <%= f.hidden_field :user_id, :value => @current_user.id %>
     <%= f.submit "Create note", class: 'btn default-btn'%>

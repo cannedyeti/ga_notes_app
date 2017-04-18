@@ -1,10 +1,18 @@
 
 <div class="container">
   <h1><%=@current_user.name%></h1>
-  <% @favorites.each do |n| %>
-    <a href="/notes/<%=n.id%>">
-      <h2><%= n.title %></h2>
-    </a>
-    <%= link_to "Delete Note", "/favorites/" + n.id.to_s, method: :delete, class: 'btn btn-danger' %>
-  <%end%>
+  <% if @favorites.length <= 0 %>
+    <br>
+    <p class="text-center">Aww there's nothing here :(
+      <br>
+      <a href="/courses">Favorite some notes!</a>
+    </p>
+  <% else %>
+    <% @favorites.each do |n| %>
+      <a href="/notes/<%=n.id%>">
+        <h2><%= n.title %></h2>
+      </a>
+      <%= link_to "Delete Note", "/favorites/" + n.id.to_s, method: :delete, class: 'btn btn-danger' %>
+    <%end%>
+  <% end %>
 </div>
