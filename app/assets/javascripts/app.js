@@ -6,4 +6,8 @@ $( document ).ready(function() {
     $(".reply-btn").click(function(){
       $("#" + event.target.id + "_reply_form").toggle();
     });
+
+
+    $('[data-toggle="tooltip"]').tooltip();
+
 });

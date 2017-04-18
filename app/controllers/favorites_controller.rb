@@ -16,8 +16,7 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    f = Favorite.where(:user_id => @current_user.id, :note_id => params[:id]).first.delete
-    puts f.id
+    Favorite.where(:user_id => @current_user.id, :note_id => params[:id]).first.delete
     redirect_to '/favorites'
   end
 

@@ -8,6 +8,71 @@ class NotesController < ApplicationController
     @courses = Course.all
   end
 
+
+  def make_private
+    n = Note.find(params[:id])
+    n.update(:whitelist => [@current_user.id.to_s])
+    redirect_to '/notes'
+  end
+
+  def publish
+    n = Note.find(params[:id])
+    n.update(:whitelist => [])
+    redirect_to '/notes'
+  end
+
+
+  def vote()
+    isDown = (params[:isDown] == 'true')
+    n = Note.find(params[:id])
+    dv = []
+    uv = []
+    if isDown
+      dv = n.down_votes
+      uv = n.up_votes
+    else
+      dv = n.up_votes
+      uv = n.down_votes
+    end
+
+    if !(dv.include?(@current_user.id.to_s))
+      dv.push(@current_user.id.to_s)
+    else
+      dv.delete(@current_user.id.to_s)
+    end
+
+    if uv.include?(@current_user.id.to_s)
+      uv.delete(@current_user.id.to_s)
+    end
+
+    if isDown
+      n.update(up_votes: uv, down_votes: dv)
+    else
+      n.update(up_votes: dv, down_votes: uv)
+    end
+
+    redirect_to '/courses/' + n.course_id.to_s
+  end
+
+  def create_whitelist(existing_whitelist, note_params)
+    whitelist = existing_whitelist || []
+    # whitelist.concat existing_whitelist
+    note_params[:whitelist] = whitelist.push(@current_user.id)
+    return note_params
+  end
+
+  def add_to_white_list
+    n = Note.find(params[:id])
+    existing_whitelist = n.whitelist
+    # !!!!!!!! FIX THIS CURRENT USER PUSH TO THE ENTERED USER
+    existing_whitelist.push(@current_user.id.to_s)
+    # !!!!!!!!!
+    temp_param = note_params
+    temp_param[:whitelist] = existing_whitelist
+    n.update(temp_param)
+    redirect_to '/notes'
+  end
+
   def create_tags(existing_tag_ids, note_params)
     tag_names = note_params[:tag_ids]
     tag_ids = []
@@ -16,12 +81,16 @@ class NotesController < ApplicationController
       new_tag = Tag.find_or_create_by(tag_name: tn)
       tag_ids.push(new_tag.id)
     end
+    existing_whitelist = note_params[:whitelist]
+    create_whitelist(existing_whitelist, note_params)
     note_params[:tag_ids] = tag_ids
     return note_params
   end
 
   def create
     #create the post
+    whitelist = []
+    note_params[:whitelist] = whitelist.push(@current_user.id)
     @n = Note.new(create_tags([], note_params))
     @n.save!
     redirect_to "/notes/#{@n.id}"
@@ -35,6 +104,7 @@ class NotesController < ApplicationController
   end
 
   def destroy
+    NotesTags.where(:note_id => params[:id]).destroy_all
     Note.find(params[:id]).delete
     redirect_to '/courses'
   end
@@ -46,15 +116,18 @@ class NotesController < ApplicationController
 
   def show
     @note = Note.find(params[:id])
-    @comments = Comment.where(:note_id => @note.id, :parent_id => nil)
+    @comments = Comment.where(:note_id => @note.id, :parent_id => nil).order(created_at: :desc)
     @comment = Comment.new
     @user = @current_user
+    @favorite_ids = []
+    @current_user.favorites.each do |f|
+      @favorite_ids.push(f.note_id)
+    end
   end
 
   private
 
   def note_params
-    params.require(:note).permit(:title, :content, :user_id, :course_id, :tag_ids)
+    params.require(:note).permit(:title, :content, :user_id, :course_id, :tag_ids, :whitelist)
   end
-
 end
