@@ -15,6 +15,11 @@
         </a>
         by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %>
         <% if n.whitelist.length > 0 %>
+          <%= bootstrap_form_for :note, :url => '/notes/' + n.id.to_s, html:{method:'put'} do |f| %>
+            <%= f.hidden_field :id, :value => n.id %>
+            <%= f.text_field :whitelist %>
+            <%= f.submit "Add", class: 'btn default-btn'%>
+          <% end %>
           <%= link_to "Publish", '/publish/' + n.id.to_s, method: :put, class: 'pull-right btn btn-primary'%>
         <% else %>
           <%= link_to "Make Private", '/makeprivate/' + n.id.to_s, method: :put, class: 'pull-right btn btn-warning'%>

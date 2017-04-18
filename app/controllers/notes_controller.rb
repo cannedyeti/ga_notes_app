@@ -8,11 +8,6 @@ class NotesController < ApplicationController
     @courses = Course.all
   end
 
-  def create_whitelist(existing_whitelist, note_params)
-    whitelist = existing_whitelist || []
-    note_params[:whitelist] = whitelist.push(@current_user.id)
-    return note_params
-  end
 
   def make_private
     n = Note.find(params[:id])
@@ -26,10 +21,23 @@ class NotesController < ApplicationController
     redirect_to '/notes'
   end
 
+  def create_whitelist(existing_whitelist, note_params)
+    whitelist = []
+    whitelist.concat existing_whitelist
+    note_params[:whitelist] = whitelist.push(@current_user.id)
+    return note_params
+  end
+
   def add_to_white_list
     n = Note.find(params[:id])
     existing_whitelist = n.whitelist
-    n.update(create_whitelist, note_params)
+    # !!!!!!!! FIX THIS CURRENT USER PUSH TO THE ENTERED USER
+    existing_whitelist.push(@current_user.id.to_s)
+    # !!!!!!!!!
+    temp_param = note_params
+    temp_param[:whitelist] = existing_whitelist
+    n.update(temp_param)
+    redirect_to '/notes'
   end
 
   def create_tags(existing_tag_ids, note_params)
@@ -89,5 +97,4 @@ class NotesController < ApplicationController
   def note_params
     params.require(:note).permit(:title, :content, :user_id, :course_id, :tag_ids, :whitelist)
   end
-
 end

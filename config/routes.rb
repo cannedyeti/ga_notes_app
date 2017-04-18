@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   put 'notes/:id/edit' => "notes#update"
   put 'publish/:id' => "notes#publish"
   put 'makeprivate/:id' => "notes#make_private"
+  put 'notes/:id' => 'notes#add_to_white_list'
   get 'notes/:id' => 'notes#show'
   post 'notes/:id' => 'favorites#create'
   get 'profile/:id' => 'user#show'
