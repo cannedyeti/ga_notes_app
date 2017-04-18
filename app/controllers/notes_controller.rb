@@ -14,6 +14,18 @@ class NotesController < ApplicationController
     return note_params
   end
 
+  def make_private
+    n = Note.find(params[:id])
+    n.update(:whitelist => [@current_user.id.to_s])
+    redirect_to '/notes'
+  end
+
+  def publish
+    n = Note.find(params[:id])
+    n.update(:whitelist => [])
+    redirect_to '/notes'
+  end
+
   def add_to_white_list
     n = Note.find(params[:id])
     existing_whitelist = n.whitelist

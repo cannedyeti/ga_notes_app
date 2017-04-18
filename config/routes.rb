@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   post 'notes/new' => "notes#create"
   get 'notes/:id/edit' => "notes#edit"
   put 'notes/:id/edit' => "notes#update"
+  put 'publish/:id' => "notes#publish"
+  put 'makeprivate/:id' => "notes#make_private"
   get 'notes/:id' => 'notes#show'
   post 'notes/:id' => 'favorites#create'
   get 'profile/:id' => 'user#show'

@@ -14,6 +14,11 @@
           <h3><%= n.title %></h3>
         </a>
         by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %>
+        <% if n.whitelist.length > 0 %>
+          <%= link_to "Publish", '/publish/' + n.id.to_s, method: :put, class: 'pull-right btn btn-primary'%>
+        <% else %>
+          <%= link_to "Make Private", '/makeprivate/' + n.id.to_s, method: :put, class: 'pull-right btn btn-warning'%>
+        <%end%>
         <br><br>
         <% n.tags.each do |t| %>
           <a class="tag" href="#">#<%=t.tag_name%></a>
@@ -21,5 +26,4 @@
       </div>
     <% end %>
   <% end %>
-
 </div>
