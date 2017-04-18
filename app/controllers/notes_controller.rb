@@ -75,7 +75,7 @@ class NotesController < ApplicationController
 
   def show
     @note = Note.find(params[:id])
-    @comments = Comment.where(:note_id => @note.id)
+    @comments = Comment.where(:note_id => @note.id, :parent_id => nil)
     @comment = Comment.new
     @user = @current_user
     @favorite_ids = []
