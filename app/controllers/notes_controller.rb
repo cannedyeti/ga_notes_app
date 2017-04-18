@@ -41,6 +41,7 @@ class NotesController < ApplicationController
 
   def edit
     @note = Note.find(params[:id])
+    @courses = Course.all
   end
 
   def show

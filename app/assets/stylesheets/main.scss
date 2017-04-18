@@ -49,6 +49,9 @@ nav.navbar {
   ul.dropdown-menu a{
     color: black;
   }
+  li:hover a {
+    color: black;
+  }
 }
 
 .banner-img {
@@ -114,3 +117,8 @@ nav.navbar {
     margin-bottom: 50px;
   }
 }
+
+.dropdown:hover .dropdown-menu {
+display: block;
+}
+
