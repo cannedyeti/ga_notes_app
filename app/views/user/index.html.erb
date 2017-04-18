@@ -10,13 +10,13 @@
       <p><strong>Course: </strong><%= @course.name %> (<%= @course.code %>)</p>
       <p><strong>Privileges: </strong><%= @current_user.privilege %></p>
       <p><strong>Points: </strong><%= @current_user.points %></p>
-      <a href="/profile/edit" class="btn btn-info">Edit Profile</a>
+      <a href="/profile/edit" class="btn btn-default">Edit Profile</a>
     </div>
     <div class="col-xs-12 col-sm-6">
       <div class="text-center">
         <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>
         <br><br>
-        <button class="btn btn-info">Change Profile Pic</button>
+        <button class="btn btn-default">Change Profile Pic</button>
       </div>
 
     </div>

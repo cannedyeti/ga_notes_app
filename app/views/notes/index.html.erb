@@ -1,16 +1,25 @@
 <h1 class="text-center">My Notes</h1>
 
 <div class="container">
-  <% @notes.each do |n| %>
-    <div class="well">
-      <a href="/notes/<%=n.id%>">
-        <h3><%= n.title %></h3>
-      </a>
-      by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %>
-      <br><br>
-      <% n.tags.each do |t| %>
-        <a href="#">#<%=t.tag_name%></a>
-      <% end %>
-    </div>
+  <%if @notes.length <= 0 %>
+    <br>
+    <p class="text-center">Aww there's nothing here :(
+      <br>
+      <a href="/notes/new">Create some notes!</a>
+    </p>
+  <% else %>
+    <% @notes.each do |n| %>
+      <div class="well">
+        <a class="note-link" href="/notes/<%=n.id%>">
+          <h3><%= n.title %></h3>
+        </a>
+        by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %>
+        <br><br>
+        <% n.tags.each do |t| %>
+          <a class="tag" href="#">#<%=t.tag_name%></a>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
+
 </div>
