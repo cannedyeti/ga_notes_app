@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417214021) do
+ActiveRecord::Schema.define(version: 20170418033332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,8 +83,8 @@ ActiveRecord::Schema.define(version: 20170417214021) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "photo"
-    t.integer  "points"
-    t.integer  "privilege"
+    t.integer  "points",            default: 0
+    t.integer  "privilege",         default: 0
     t.text     "favorites",         default: [],              array: true
     t.integer  "default_course_id"
     t.integer  "location_id"
