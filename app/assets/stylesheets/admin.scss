@@ -9,3 +9,11 @@
   background-color: rgba(250,69,66, 0.3);
   color: rgb(229,27,36);
 }
+
+.deactivated {
+  color: rgb(162, 162, 162);
+
+  .note-link {
+    color: inherit;
+  }
+}
