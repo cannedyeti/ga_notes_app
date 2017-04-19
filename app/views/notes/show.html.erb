@@ -1,113 +1,115 @@
-<div class="text-center">
-  <h1><strong><%=@note.title%></strong></h1>
-  <h4><%=@note.course.name%></h4>
+<div class="blog">
 
-  <p>Courtesy of: <a class="profile-link" href="/profile/<%=@note.user.id%>"><%= @note.user.name %></a></p>
-</div>
+  <div class="container">
+  <div>
+    <h1><strong><%=@note.title%></strong></h1>
+    <h4><%=@note.course.name%></h4>
 
-<div class="container">
-  <p><%=@note.content.html_safe%></p>
-  <div class="row">
-    <div class="col-xs-12 col-sm-10">
-      <% @note.tags.each do |t| %>
-        <a href="/find/<%=t.id %>" class="tag">#<%= t.tag_name %></a>
-      <% end %>
+    <p><a class="profile-link" href="/profile/<%=@note.user.id%>">By <span><%= @note.user.name %></span></a></p>
+  </div>
+    <p><%=@note.content.html_safe%></p>
+    <div class="row">
+      <div class="col-xs-12 col-sm-10">
+        <% @note.tags.each do |t| %>
+          <a href="/find/<%=t.id %>" class="tag">#<%= t.tag_name %></a>
+        <% end %>
+      </div>
+      <div class="col-xs-12 col-sm-2 text-right">
+        <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/notes/vote/false/'+ @note.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote"%>
+        <%=@note.up_votes.length%>
+        &ensp;
+        <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i> ').html_safe, '/notes/vote/true/'+ @note.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
+        <%=@note.down_votes.length%>
+      </div>
     </div>
-    <div class="col-xs-12 col-sm-2 text-right">
-      <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/notes/vote/false/'+ @note.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote"%>
-      <%=@note.up_votes.length%>
-      &ensp;
-      <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i> ').html_safe, '/notes/vote/true/'+ @note.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
-      <%=@note.down_votes.length%>
-    </div>
   </div>
-</div>
 
 
 
-<% if @current_user && @current_user.id == @note.user.id %>
-  <div class="text-center">
-    <a href="/notes/<%=@note.id%>/edit" class="btn btn-info">Edit Note</a>
-    <%= link_to "Delete Note", note_path(@note), method: :delete, class: 'btn btn-danger' %>
-    <br>
-  </div>
-<% elsif (@current_user && !@favorite_ids.include?(@note.id)) %>
-  <div class="text-center">
-    <%= bootstrap_form_for :favorite do |f| %>
-      <%= f.hidden_field :user_id, :value => @current_user.id%>
-      <%= f.hidden_field :note_id, :value => @note.id%>
-      <%= f.submit "Save Note", class: 'btn btn-success'%>
-    <% end %>
-  </div>
-<%else%>
-  <div class="text-center">
-    <%= link_to "Remove Favorite", '/favorites/'+ @note.id.to_s, method: :delete, class: 'btn btn-danger' %>
-  </div>
-<%end%>
-
-<br>
-<div class="container">
-  <% if @note.whitelist.length != 1 %>
-    <%= form_for :comment, :url => {:controller => "comments", :action => "create"}, html:{method:'post'} do |f| %>
-      <%= f.text_area :content, class: "my-text-area", placeholder: "Write a comment..." %>
-      <% if @current_user %>
-        <%= f.hidden_field :user_id, :value => @current_user.id %>
-      <% end %>
-      <%= f.hidden_field :note_id, :value => @note.id %>
-      <%= f.hidden_field :parent_id, :value => nil %>
+  <% if @current_user && @current_user.id == @note.user.id %>
+    <div class="text-center">
+      <a href="/notes/<%=@note.id%>/edit" class="btn btn-red">Edit Note</a>
+      <%= link_to "Delete Note", note_path(@note), method: :delete, class: 'btn btn-red' %>
       <br>
-      <%= f.submit "add comment" %>
-    <% end %>
-  <% end %>
+    </div>
+  <% elsif (@current_user && !@favorite_ids.include?(@note.id)) %>
+    <div class="text-center">
+      <%= bootstrap_form_for :favorite do |f| %>
+        <%= f.hidden_field :user_id, :value => @current_user.id%>
+        <%= f.hidden_field :note_id, :value => @note.id%>
+        <%= f.submit "Save Note", class: 'btn btn-success'%>
+      <% end %>
+    </div>
+  <%else%>
+    <div class="text-center">
+      <%= link_to "Remove Favorite", '/favorites/'+ @note.id.to_s, method: :delete, class: 'btn btn-danger' %>
+    </div>
+  <%end%>
 
   <br>
-  <% @comments.each do |c| %>
-    <p><strong><%= c.user.name %></strong> <%=c.content%></p>
+  <div class="container">
     <% if @note.whitelist.length != 1 %>
-      <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a> &#8729; &ensp;
-    <% end %>
-    <%= c.up_votes.length - c.down_votes.length %> &ensp;
-    <%= link_to ('<i class="fa fa-female" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ c.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
-    &ensp;
-    <%= link_to ('<i class="fa fa-male" aria-hidden="true"></i> ').html_safe, '/comments/vote/true/'+ c.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
-
-    <% if @current_user.id == c.user.id%>
-      &ensp;
-      <%= link_to "Delete", "/comments/" + c.id.to_s, method: :delete%>
-    <% end %>
-    <p><%= c.created_at.strftime("%b %d %Y at %l:%M %p") %></p>
-
-    <% c.child_comments.each do |r| %>
-      <div class="reply">
-        <p><strong><%= r.user.name %></strong> <%=r.content%></p>
-        <% if @note.whitelist.length != 1 %>
-          <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a> &#8729; &ensp;
-        <% end %>
-        <%= r.up_votes.length - r.down_votes.length %> &ensp;
-        <%= link_to ('<i class="fa fa-female" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ r.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
-        &ensp;
-        <%= link_to ('<i class="fa fa-male" aria-hidden="true"></i> ').html_safe, '/comments/vote/true/'+ r.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
-        <% if @current_user.id == r.user.id%>
-          &ensp;
-          <%= link_to "Delete", "/comments/" + r.id.to_s, method: :delete, action: 'destroy_reply'%>
-        <% end %>
-        <p><%= r.created_at.strftime("%b %d %Y at %l:%M %p") %></p>
-      </div>
-    <% end %>
-
-    <div id="comment_<%=c.id%>_reply_form" class="comment-reply text-right">
       <%= form_for :comment, :url => {:controller => "comments", :action => "create"}, html:{method:'post'} do |f| %>
-        <%= f.text_area :content, class: "my-text-area", placeholder: "Write a reply..." %>
+        <%= f.text_area :content, class: "my-text-area", placeholder: "Write a comment..." %>
         <% if @current_user %>
           <%= f.hidden_field :user_id, :value => @current_user.id %>
         <% end %>
         <%= f.hidden_field :note_id, :value => @note.id %>
-        <%= f.hidden_field :parent_id, :value => c.id %>
+        <%= f.hidden_field :parent_id, :value => nil %>
         <br>
-        <%= f.submit "reply" %>
+        <%= f.submit "add comment" %>
       <% end %>
-    </div>
-    <br>
-  <% end %>
+    <% end %>
 
+    <br>
+    <% @comments.each do |c| %>
+      <p><strong><%= c.user.name %></strong> <%=c.content%></p>
+      <% if @note.whitelist.length != 1 %>
+        <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a> &#8729; &ensp;
+      <% end %>
+      <%= c.up_votes.length - c.down_votes.length %> &ensp;
+      <%= link_to ('<i class="fa fa-female" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ c.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
+      &ensp;
+      <%= link_to ('<i class="fa fa-male" aria-hidden="true"></i> ').html_safe, '/comments/vote/true/'+ c.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
+
+      <% if @current_user.id == c.user.id%>
+        &ensp;
+        <%= link_to "Delete", "/comments/" + c.id.to_s, method: :delete%>
+      <% end %>
+      <p><%= c.created_at.strftime("%b %d %Y at %l:%M %p") %></p>
+
+      <% c.child_comments.each do |r| %>
+        <div class="reply">
+          <p><strong><%= r.user.name %></strong> <%=r.content%></p>
+          <% if @note.whitelist.length != 1 %>
+            <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a> &#8729; &ensp;
+          <% end %>
+          <%= r.up_votes.length - r.down_votes.length %> &ensp;
+          <%= link_to ('<i class="fa fa-female" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ r.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
+          &ensp;
+          <%= link_to ('<i class="fa fa-male" aria-hidden="true"></i> ').html_safe, '/comments/vote/true/'+ r.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
+          <% if @current_user.id == r.user.id%>
+            &ensp;
+            <%= link_to "Delete", "/comments/" + r.id.to_s, method: :delete, action: 'destroy_reply'%>
+          <% end %>
+          <p><%= r.created_at.strftime("%b %d %Y at %l:%M %p") %></p>
+        </div>
+      <% end %>
+
+      <div id="comment_<%=c.id%>_reply_form" class="comment-reply text-right">
+        <%= form_for :comment, :url => {:controller => "comments", :action => "create"}, html:{method:'post'} do |f| %>
+          <%= f.text_area :content, class: "my-text-area", placeholder: "Write a reply..." %>
+          <% if @current_user %>
+            <%= f.hidden_field :user_id, :value => @current_user.id %>
+          <% end %>
+          <%= f.hidden_field :note_id, :value => @note.id %>
+          <%= f.hidden_field :parent_id, :value => c.id %>
+          <br>
+          <%= f.submit "reply" %>
+        <% end %>
+      </div>
+      <br>
+    <% end %>
+
+  </div>
 </div>

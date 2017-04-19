@@ -77,13 +77,12 @@ nav.navbar {
   }
 }
 
-.btn-red {
+.btn-red, .btn-red-home {
   margin: 10px 0 30px 0;
   background-color: #fa4542;
   font-family: Circular,Helvetica,Arial,sans-serif;
   color: white;
   box-shadow: 0 3px 0 0 #a20101;
-  width: 95%;
   height: 60px;
   font-size: 1.5em;
   &:hover {
@@ -92,15 +91,31 @@ nav.navbar {
   }
 }
 
+.btn-red-home {
+  width: 95%;
+}
+
+
 .btn {
   padding: 14px 12px;
 }
 
-.profile-link {
-  color: #fa4542;
-  &:hover {
+.blog {
+  h1 {
+    font-family: 'Impact';
+    font-weight: .8;
     color: black;
+  }
+}
+
+.profile-link {
+  color: rgb(162, 162, 162);
+  &:hover {
     text-decoration: none;
+    color: rgb(162, 162, 162);
+    span{
+      color: #fa4542;
+    }
   }
 }
 
@@ -121,4 +136,5 @@ nav.navbar {
 .dropdown:hover .dropdown-menu {
 display: block;
 }
+
 
