@@ -47,21 +47,25 @@
 
 <br>
 <div class="container">
-  <%= form_for :comment, :url => {:controller => "comments", :action => "create"}, html:{method:'post'} do |f| %>
-    <%= f.text_area :content, class: "my-text-area", placeholder: "Write a comment..." %>
-    <% if @current_user %>
-      <%= f.hidden_field :user_id, :value => @current_user.id %>
+  <% if @note.whitelist.length != 1 %>
+    <%= form_for :comment, :url => {:controller => "comments", :action => "create"}, html:{method:'post'} do |f| %>
+      <%= f.text_area :content, class: "my-text-area", placeholder: "Write a comment..." %>
+      <% if @current_user %>
+        <%= f.hidden_field :user_id, :value => @current_user.id %>
+      <% end %>
+      <%= f.hidden_field :note_id, :value => @note.id %>
+      <%= f.hidden_field :parent_id, :value => nil %>
+      <br>
+      <%= f.submit "add comment" %>
     <% end %>
-    <%= f.hidden_field :note_id, :value => @note.id %>
-    <%= f.hidden_field :parent_id, :value => nil %>
-    <br>
-    <%= f.submit "add comment" %>
   <% end %>
 
   <br>
   <% @comments.each do |c| %>
     <p><strong><%= c.user.name %></strong> <%=c.content%></p>
-    <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a> &#8729; &ensp;
+    <% if @note.whitelist.length != 1 %>
+      <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a> &#8729; &ensp;
+    <% end %>
     <%= c.up_votes.length - c.down_votes.length %> &ensp;
     <%= link_to ('<i class="fa fa-female" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ c.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
     &ensp;
@@ -76,7 +80,9 @@
     <% c.child_comments.each do |r| %>
       <div class="reply">
         <p><strong><%= r.user.name %></strong> <%=r.content%></p>
-        <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a> &#8729; &ensp;
+        <% if @note.whitelist.length != 1 %>
+          <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a> &#8729; &ensp;
+        <% end %>
         <%= r.up_votes.length - r.down_votes.length %> &ensp;
         <%= link_to ('<i class="fa fa-female" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ r.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
         &ensp;
