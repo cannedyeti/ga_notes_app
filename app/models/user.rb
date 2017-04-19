@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :favorites
 
-  searchkick
+  searchkick autocomplete: ['name', 'email']
 
   validates :email,
     presence: true,

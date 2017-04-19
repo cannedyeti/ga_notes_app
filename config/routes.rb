@@ -49,7 +49,10 @@ Rails.application.routes.draw do
   resources :notes
 
   resources :notes, only: :index do
-    post :import, on: :collection
+    collection do
+      post :import
+      get :autocomplete # <= add this line
+    end
   end
 
 end

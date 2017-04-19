@@ -3,12 +3,13 @@ class NotesController < ApplicationController
     @notes = Note.where(:user_id => @current_user.id)
     if params[:query].present?
       @users = User.search(params[:query], page: params[:page])
-      @users.each do |u|
-        puts u.name
-      end
     else
-      @users = User.all
+      @users = []
     end
+  end
+
+  def autocomplete
+    render json: User.search(params[:query], autocomplete: true, limit: 10).map(&:name)
   end
 
   def new
