@@ -1,0 +1,42 @@
+<h1 class="text-center">All Users</h1>
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Points</th>
+      <th>Privileges</th>
+      <th># Notes</th>
+      <th># Comments</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @users.each do |u| %>
+      <tr>
+        <th scope="row"><%=u.id%></th>
+        <% if u.id == @current_user.id %>
+          <td><%=u.name%> <strong class="me"><i class="fa fa-user-circle-o" aria-hidden="true"></i> (me)</strong></td>
+        <% else %>
+          <td><%=u.name%></td>
+        <% end %>
+        <td><%=u.email%></td>
+        <td><%=u.points%></td>
+        <td><%=@privilegeMap[u.privilege]%></td>
+        <td><%=u.notes.length%></td>
+        <td><%=u.comments.length%></td>
+        <td>
+          <% if u.id != @current_user.id %>
+            <a href="#" class="btn-sm btn-danger">
+              Delete User
+            </a>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

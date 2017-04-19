@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'admin/allusers'
+
+  get 'admin/allnotes'
+
   get 'favorites/index'
 
   get 'tags/index'
