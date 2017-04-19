@@ -13,6 +13,7 @@
         <!-- <%= f.password_field :password_digest %> -->
         <%= f.collection_select :location_id, @locations, :id, :name %>
         <%= f.collection_select :default_course_id, @courses, :id, :name %>
+        <%= f.text_field :photo %>
         <p><strong>Privileges: </strong><%= @current_user.privilege %></p>
         <p><strong>Points: </strong><%= @current_user.points %></p>
         <%= f.submit "Save", class: 'btn default-btn'%>
@@ -20,9 +21,12 @@
     </div>
     <div class="col-xs-12 col-sm-6">
       <div class="text-center">
-        <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>
+        <% if @current_user.photo == nil %>
+          <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>
+        <% else %>
+          <img src="<%= @current_user.photo %>">
+        <% end%>
         <br><br>
-        <button class="btn btn-info">Change Profile Pic</button>
       </div>
     </div>
   </div>

@@ -11,7 +11,11 @@
     </div>
     <div class="col-xs-12 col-sm-6">
       <div class="text-center">
-        <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>
+        <% if @user.photo == nil %>
+          <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>
+        <% else %>
+          <img src="<%= @user.photo %>">
+        <% end%>
         <br><br>
       </div>
     </div>
