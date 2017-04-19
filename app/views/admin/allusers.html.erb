@@ -18,11 +18,15 @@
     <% @users.each do |u| %>
       <tr>
         <th scope="row"><%=u.id%></th>
-        <% if u.id == @current_user.id %>
-          <td><%=u.name%> <strong class="me"><i class="fa fa-user-circle-o" aria-hidden="true"></i> (me)</strong></td>
-        <% else %>
-          <td><%=u.name%></td>
-        <% end %>
+        <td>
+          <a class="note-link" href="/profile/<%=u.id%>">
+            <% if u.id == @current_user.id %>
+              <%=u.name%> <strong class="me"><i class="fa fa-user-circle-o" aria-hidden="true"></i> (me)</strong>
+            <% else %>
+              <%=u.name%>
+            <% end %>
+          </a>
+        </td>
         <td><%=u.email%></td>
         <td><%=u.points%></td>
         <td><%=@privilegeMap[u.privilege]%></td>

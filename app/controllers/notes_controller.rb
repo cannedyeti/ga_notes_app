@@ -137,6 +137,7 @@ class NotesController < ApplicationController
   def destroy
     NotesTags.where(:note_id => params[:id]).destroy_all
     Note.find(params[:id]).delete
+    puts "request.referer" + request.referer
     redirect_to '/courses'
   end
 
