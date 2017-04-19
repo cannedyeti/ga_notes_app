@@ -48,4 +48,8 @@ Rails.application.routes.draw do
   resources :users
   resources :notes
 
+  resources :notes, only: :index do
+    post :import, on: :collection
+  end
+
 end

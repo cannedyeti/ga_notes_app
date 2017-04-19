@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :comments
   has_many :favorites
 
+  searchkick
+
   validates :email,
     presence: true,
     uniqueness: {case_sensitive: false}

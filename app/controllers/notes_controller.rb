@@ -1,13 +1,20 @@
 class NotesController < ApplicationController
   def index
     @notes = Note.where(:user_id => @current_user.id)
+    if params[:query].present?
+      @users = User.search(params[:query], page: params[:page])
+      @users.each do |u|
+        puts u.name
+      end
+    else
+      @users = User.all
+    end
   end
 
   def new
     @note = Note.new
     @courses = Course.all
   end
-
 
   def make_private
     n = Note.find(params[:id])
