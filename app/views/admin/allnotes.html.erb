@@ -1,0 +1,44 @@
+<h1 class="text-center">All Notes</h1>
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>Title</th>
+      <th>Up Votes</th>
+      <th>Down Votes</th>
+      <th>Author</th>
+      <th>Course</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th>Type</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @notes.each do |u| %>
+      <tr>
+        <th scope="row"><%=u.id%></th>
+        <td><a class="note-link" href="/notes/<%=u.id%>"><%=u.title%></a></td>
+        <td><%=u.up_votes.length%></td>
+        <td><%=u.down_votes.length%></td>
+        <td><%=u.user.name%></td>
+        <td><%=u.course.code%></td>
+        <td><%=u.created_at.strftime("%b %d %Y")%></td>
+        <td><%=u.updated_at.strftime("%b %d %Y")%></td>
+        <% if u.whitelist.length > 1 %>
+          <td><%=@typeMap[2]%></td>
+        <% else %>
+          <td><%=@typeMap[u.whitelist.length]%></td>
+        <% end %>
+        <td>
+          <% if u.id != @current_user.id %>
+            <%= link_to "Delete Note", note_path(u), method: :delete, class: 'btn-sm btn-danger' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

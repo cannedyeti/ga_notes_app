@@ -26,7 +26,7 @@
         <%end%>
         <br><br>
         <% n.tags.each do |t| %>
-          <a class="tag" href="#">#<%=t.tag_name%></a>
+          <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
         <% end %>
       </div>
     <% end %>
