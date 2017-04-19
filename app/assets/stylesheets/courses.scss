@@ -6,7 +6,8 @@
   font-family: Circular,Helvetica,Arial,sans-serif;
 
   h1 {
-    padding-top: 10px;
+    padding: 20px 0px;
+    margin: 0;
   }
 }
 
@@ -33,7 +34,11 @@
   &:hover {
     color: rgba(0,0,0,0.5);
     text-decoration: none;
+    span {
+      color: black;
+    }
   }
+
 }
 
 .tag {

@@ -1,3 +1,17 @@
+<div class="container page_headline course_headline">
+  <div class="col-xs-8 head_title">
+    <h1 class="text-center">Garbage Text</h1>
+    <h3>Other text</h3>
+  </div>
+  <div class="col-xs-4">
+    <div class="desc_container">
+      <h4><strong>Pick your poison</strong></h4>
+      <br>
+      <p>Browse notes by category, class or by similar tags!</p>
+    </div>
+  </div>
+</div>
+
 <div class="all-courses">
   <h1 class="text-center"><strong>Start Learning</strong></h1>
 
@@ -22,6 +36,23 @@
         </div>
       <% end %>
     </div>
+    <!-- <a href="#" class="btn btn-red btn-md">Browse All Notes</a> -->
+  </div>
+</div>
+
+<div class="pop-tags">
+  <h1 class="text-center"><strong>Browse By Popular Tags</strong></h1>
+
+  <div class="container text-center">
+      <% @tags.each do |t| %>
+        <div class="col-xs-4">
+          <a class="course-link" href="/find/<%=t.id %>">
+              <div class="tag">
+                <h3><strong>#<%= t.tag_name %></strong></h3>
+              </div>
+          </a>
+        </div>
+      <% end %>
     <!-- <a href="#" class="btn btn-red btn-md">Browse All Notes</a> -->
   </div>
 </div>
