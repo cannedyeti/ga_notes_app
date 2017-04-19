@@ -7,10 +7,22 @@
 
 <div class="container">
   <p><%=@note.content.html_safe%></p>
-  <% @note.tags.each do |t| %>
-    <a href="/find/<%=t.id %>" class="tag">#<%= t.tag_name %></a>
-  <% end %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-10">
+      <% @note.tags.each do |t| %>
+        <a href="/find/<%=t.id %>" class="tag">#<%= t.tag_name %></a>
+      <% end %>
+    </div>
+    <div class="col-xs-12 col-sm-2 text-right">
+      <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/notes/vote/false/'+ @note.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote"%>
+      <%=@note.up_votes.length%>
+      &ensp;
+      <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i> ').html_safe, '/notes/vote/true/'+ @note.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
+      <%=@note.down_votes.length%>
+    </div>
+  </div>
 </div>
+
 
 
 <% if @current_user && @current_user.id == @note.user.id %>
@@ -51,9 +63,9 @@
     <p><strong><%= c.user.name %></strong> <%=c.content%></p>
     <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a> &#8729; &ensp;
     <%= c.up_votes.length - c.down_votes.length %> &ensp;
-    <%= link_to ('<i class="fa fa-female" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ c.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip' %>
+    <%= link_to ('<i class="fa fa-female" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ c.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
     &ensp;
-    <%= link_to ('<i class="fa fa-male" aria-hidden="true"></i> ').html_safe, '/comments/vote/true/'+ c.id.to_s, method: :put, title: 'I suck', 'data-toggle' => 'tooltip' %>
+    <%= link_to ('<i class="fa fa-male" aria-hidden="true"></i> ').html_safe, '/comments/vote/true/'+ c.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
 
     <% if @current_user.id == c.user.id%>
       &ensp;
@@ -66,9 +78,9 @@
         <p><strong><%= r.user.name %></strong> <%=r.content%></p>
         <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a> &#8729; &ensp;
         <%= r.up_votes.length - r.down_votes.length %> &ensp;
-        <%= link_to ('<i class="fa fa-female" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ r.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip' %>
+        <%= link_to ('<i class="fa fa-female" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ r.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
         &ensp;
-        <%= link_to ('<i class="fa fa-male" aria-hidden="true"></i> ').html_safe, '/comments/vote/true/'+ r.id.to_s, method: :put, title: 'I suck', 'data-toggle' => 'tooltip' %>
+        <%= link_to ('<i class="fa fa-male" aria-hidden="true"></i> ').html_safe, '/comments/vote/true/'+ r.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
         <% if @current_user.id == r.user.id%>
           &ensp;
           <%= link_to "Delete", "/comments/" + r.id.to_s, method: :delete, action: 'destroy_reply'%>

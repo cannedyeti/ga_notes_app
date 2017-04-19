@@ -14,17 +14,39 @@ class CommentsController < ApplicationController
     end
   end
 
-  def vote()
+  def add_points(beforePoints, afterPoints, user_id)
+    u = User.find(user_id)
+    points = u.points || 0
+    points -= beforePoints
+    points += afterPoints
+    u.update(points: points)
+  end
+
+  def update_privillages(points, user)
+    if points >= 50 && user.privilege == 0
+      #make the user a moderator
+      user.update(privilege: 1)
+    elsif points < 50 && user.privilege == 1
+      #make the user basic
+      user.update(privilege: 0)
+    end
+  end
+
+  def vote
     isDown = (params[:isDown] == 'true')
     n = Comment.find(params[:id])
+    beforePoints = 0
+    afterPoints = 0
     dv = []
     uv = []
     if isDown
       dv = n.down_votes
       uv = n.up_votes
+      beforePoints = uv.length - dv.length
     else
       dv = n.up_votes
       uv = n.down_votes
+      beforePoints = dv.length - uv.length
     end
 
     if !(dv.include?(@current_user.id.to_s))
@@ -38,10 +60,14 @@ class CommentsController < ApplicationController
     end
 
     if isDown
+      afterPoints = uv.length - dv.length
       n.update(up_votes: uv, down_votes: dv)
     else
+      afterPoints = dv.length - uv.length
       n.update(up_votes: dv, down_votes: uv)
     end
+
+    add_points(beforePoints, afterPoints, n.user_id)
 
     if n.parent_id == nil
       redirect_to '/notes/' + n.note_id.to_s + "#comment_" + n.id.to_s
