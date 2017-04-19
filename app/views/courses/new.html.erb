@@ -1,0 +1,10 @@
+<h1 class="text-center">New Course</h1>
+
+<div class="container">
+  <%= bootstrap_form_for @course do |f| %>
+    <%= f.text_field :name%>
+    <%= f.text_field :code%>
+    <%= f.text_area :description, class: 'my-text-area' %>
+    <%= f.submit "Create course", class: 'btn default-btn'%>
+  <% end %>
+</div>

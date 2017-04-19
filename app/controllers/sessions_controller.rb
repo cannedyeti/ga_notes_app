@@ -3,11 +3,15 @@ class SessionsController < ApplicationController
   def create
     user = User.authenticate(user_params)
     if user
-      session[:user_id] = user.id
-      flash[:success] = "User logged in!!"
-      redirect_to "/profile"
+      if user != -1
+        session[:user_id] = user.id
+        redirect_to "/profile"
+      else
+        flash[:danger] = "Your account has been deactivated, please contact an admin for further assistance."
+        redirect_to login_path
+      end
     else
-      flash[:danger] = "Credentials Invalid!!"
+      flash[:danger] = "Credentials Invalid."
       redirect_to login_path
     end
   end
@@ -15,7 +19,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    flash[:success] = "User logged out!!"
     redirect_to root_path
   end
 

@@ -7,13 +7,22 @@ class User < ApplicationRecord
     presence: true,
     uniqueness: {case_sensitive: false}
 
-  validates :password, 
-  length: { in: 6..20 }, 
+  validates :password,
+  length: { in: 6..20 },
   on: :create
 
   has_secure_password
 
   def self.authenticate(params)
-      User.find_by_email(params[:email]).try(:authenticate, params[:password])
+      u = User.find_by_email(params[:email])
+      if u
+        if u.is_active
+          u.try(:authenticate, params[:password])
+        else
+          return -1
+        end
+      else
+        return nil
+      end
   end
 end

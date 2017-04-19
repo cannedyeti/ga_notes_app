@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
   get 'admin/allusers'
-
   get 'admin/allnotes'
+  get 'admin/allcourses' => "admin#allcourses"
 
   get 'favorites/index'
 
@@ -20,8 +20,15 @@ Rails.application.routes.draw do
 
   root "main#index"
   get 'courses' => 'courses#index'
-  get 'notes' => 'notes#index'
+  get 'courses/new' => "courses#new"
+
+  post 'courses' => "courses#create"
   get 'courses/:course_id' => 'courses#show'
+  delete 'courses/:id' => "courses#destroy"
+  get 'courses/:id/edit' => "courses#edit"
+  put 'courses/:id/edit' => "courses#update"
+
+  get 'notes' => 'notes#index'
   get 'signup' => "user#new"
   post 'signup' => "user#create"
   get 'login' => "sessions#new"
@@ -48,6 +55,7 @@ Rails.application.routes.draw do
   delete 'tags/:note_id/:tag_id' => "tags#destroy"
   put 'notes/vote/:isDown/:id' => "notes#vote"
   put 'comments/vote/:isDown/:id' => "comments#vote"
+  put 'admin/deactivate/:id' => "admin#toggle_deactivate"
 
   resources :users
   resources :notes

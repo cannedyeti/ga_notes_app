@@ -17,4 +17,15 @@ class AdminController < ApplicationController
       2 => "Shared"
     }
   end
+
+  def allcourses
+    @courses = Course.all.order(id: :asc)
+  end
+
+  def toggle_deactivate
+    u = User.find(params[:id])
+    is_active = !u.is_active
+    u.update(is_active: is_active)
+    redirect_to :back
+  end
 end

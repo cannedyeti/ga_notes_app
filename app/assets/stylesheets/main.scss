@@ -21,6 +21,7 @@ nav.navbar {
 }
 
 .navbar {
+  margin-bottom: 0px;
   height: 57px;
   li {
     height: 57px;
@@ -59,12 +60,12 @@ nav.navbar {
   background: url('notes-banner.jpg');
   height: 700px;
   background-repeat: no-repeat;
-  background-size: cover; 
+  background-size: cover;
 }
 
 .home-description {
   color: black;
-  h1 { 
+  h1 {
     font-size: 47px;
   }
   padding: 10px 50px 10px 50px;
@@ -204,4 +205,3 @@ display: block;
     font-size: 17px;
   }
 }
-
