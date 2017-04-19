@@ -18,6 +18,10 @@ class AdminController < ApplicationController
     }
   end
 
+  def allcourses
+    @courses = Course.all.order(id: :asc)
+  end
+
   def toggle_deactivate
     u = User.find(params[:id])
     is_active = !u.is_active
