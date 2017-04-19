@@ -6,7 +6,9 @@ class UserController < ApplicationController
   end
 
   def show
-    @users = User.all
+    @user = User.find(params[:id])
+    @location = Location.find(@user.location_id)
+    @course = Course.find(@user.default_course_id)
   end
 
   def create

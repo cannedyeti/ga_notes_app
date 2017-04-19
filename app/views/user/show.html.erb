@@ -1,2 +1,43 @@
-<h1>User#show</h1>
-<p>Find me in app/views/user/show.html.erb</p>
+<h1 class="text-center"><%= @user.name %></h1>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <p><strong>Name: </strong><%= @user.name %></p>
+      <p><strong>Location: </strong><%= @location.name %></p>
+      <p><strong>Course: </strong><%= @course.name %> (<%= @course.code %>)</p>
+      <p><strong>Privileges: </strong><%= @user.privilege %></p>
+      <p><strong>Points: </strong><%= @user.points %></p>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <div class="text-center">
+        <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>
+        <br><br>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <% @user.notes.each do |n| %>
+    <% if (n.whitelist.length == 0 || n.whitelist.include?(@current_user.id.to_s))%>
+      <a class="note-link" href="/notes/<%=n.id%>">
+        <h4><strong><%= n.title %></strong> by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %></h4>
+      </a>
+      <div class="row">
+        <div class="col-xs-12 col-sm-10">
+          <% n.tags.each do |t| %>
+            <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
+          <% end %>
+        </div>
+        <div class="col-xs-12 col-sm-2 text-right">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+          <%=n.up_votes.length%>
+          &ensp;
+          <i class="fa fa-male" aria-hidden="true"></i>
+          <%=n.down_votes.length%>
+        </div>
+      </div>
+    <% end%>
+    <hr>
+  <% end %>
+</div>
