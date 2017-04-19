@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>id</th>
+      <th>Status</th>
       <th>Name</th>
       <th>Email</th>
       <th>Points</th>
@@ -16,8 +17,15 @@
   <tbody>
 
     <% @users.each do |u| %>
-      <tr>
+      <tr class="<%= u.is_active ? '' : 'deactivated' %>">
         <th scope="row"><%=u.id%></th>
+        <td>
+          <% if u.is_active %>
+            Active
+          <% else %>
+            Deactivated
+          <% end %>
+        </td>
         <td>
           <a class="note-link" href="/profile/<%=u.id%>">
             <% if u.id == @current_user.id %>
@@ -34,9 +42,12 @@
         <td><%=u.comments.length%></td>
         <td>
           <% if u.id != @current_user.id %>
-            <a href="#" class="btn-sm btn-danger">
-              Delete User
-            </a>
+            <% if u.is_active %>
+              <%= link_to ('Deactivate User <i class="fa fa-user-times" aria-hidden="true"></i>').html_safe, "/admin/deactivate/" + u.id.to_s, method: :put, class: 'btn-sm btn-danger' %>
+            <% else %>
+              <%= link_to ('Activate User <i class="fa fa-user-plus" aria-hidden="true"></i>').html_safe, "/admin/deactivate/" + u.id.to_s, method: :put, class: 'btn-sm btn-danger' %>
+            <% end %>
+
           <% end %>
         </td>
       </tr>
