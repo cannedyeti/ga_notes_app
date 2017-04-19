@@ -1,0 +1,39 @@
+<h1 class="text-center">All Courses</h1>
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <!-- <th>id</th> -->
+      <th>Name</th>
+      <th>Code</th>
+      <th>Description</th>
+      <th># Notes</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @courses.each do |u| %>
+      <tr>
+        <!-- <th scope="row"><%=u.id%></th> -->
+        <th scope="row"><%=u.name%></th>
+        <td><%=u.code%></td>
+        <td><%=u.description[0..50]%>...</td>
+        <td><%=u.notes.length%></td>
+        <td>
+          <% if u.notes.length > 0 %>
+            <a href="#" class="btn-sm btn-danger" data-toggle="tooltip" title="Warning, don't delete courses that have notes!"><i class="fa fa-trash" aria-hidden="true"></i></a>
+          <% else %>
+            <%= link_to ('<i class="fa fa-trash" aria-hidden="true"></i>').html_safe, '/courses/'+ u.id.to_s, method: :delete, title: "Warning, don't delete courses that have notes!", 'data-toggle' => 'tooltip', class: "btn-sm btn-danger"%>
+          <% end %>
+
+        </td>
+        <td>
+          <a class="btn-sm btn-info" href="/courses/<%=u.id%>/edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
