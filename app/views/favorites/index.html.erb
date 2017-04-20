@@ -4,19 +4,26 @@
     <h3><%= @current_user.name %></h3>
   </div>
 </div>
-<div class="col-xs-8">
+<div class="container">
 
   <% @favorites.each do |n| %>
     <% if (n.whitelist.length == 0 || n.whitelist.include?(@current_user.id.to_s))%>
-      <div class="well">
+      <div class="col-xs-9 col-xs-offset-1">
         <a class="note-link" href="/notes/<%=n.id%>">
           <h3><strong><%= n.title %></strong></h3>
         </a>
         by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %>
+        <div class="row preview">
+          <p><%= n.content %></p>
+          <a class="note-link" href="/notes/<%=n.id%>"> <span>Continue reading <i class="fa fa-arrow-right" aria-hidden="true"></i></span></a>
+        </div>
         <br><br>
-        <% n.tags.each do |t| %>
-          <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
-        <% end %>
+        <p class="note-foot">This was posted in <span><%= n.course.code %></span> and tagged with 
+          <% n.tags.each do |t| %>
+            <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
+          <% end %>
+        </p>
+        <hr>
       </div>
     <% end%>
   <% end %>

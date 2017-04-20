@@ -299,3 +299,23 @@ select {
 .control-label {
   font-weight: normal;
 }
+
+.preview {
+  margin: 30px 10px;
+  span {
+    color: #fa4542;
+    text-decoration: underline;
+  }
+}
+
+.note-foot {
+  color: rgb(162, 162, 162);
+  span {
+    color: black;
+  }
+}
+
+hr {
+  @extend .off-black;
+  border-color: #222222;
+}

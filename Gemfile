@@ -35,6 +35,7 @@ gem "font-awesome-rails"
 gem 'bootstrap_form'
 gem 'jquery-ui-rails'
 gem 'tinymce-rails'
+gem 'sanitize'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

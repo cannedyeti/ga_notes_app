@@ -1,6 +1,10 @@
 class NotesController < ApplicationController
   def index
     @notes = Note.where(:user_id => @current_user.id)
+    @notes.each do |n|
+      n.content = Sanitize.clean(n.content)
+      n.content = n.content[0..100] + '...'
+    end
   end
 
   def new
@@ -95,7 +99,7 @@ class NotesController < ApplicationController
   end
 
   def create_tags(existing_tag_ids, note_params)
-    tag_names = note_params[:tag_ids]
+    tag_names = note_params[:tag_ids].downcase
     tag_ids = []
     tag_ids.concat existing_tag_ids
     tag_names.split(/\s*,\s*/).each do |tn|

@@ -5,7 +5,7 @@
   </div>
 </div>
 
-<div class="container col-xs-8 col-xs-offset-2">
+<div class="container">
   <%if @notes.length <= 0 %>
     <br>
     <p class="text-center">Aww there's nothing here :(
@@ -14,20 +14,29 @@
     </p>
   <% else %>
     <% @notes.each do |n| %>
-      <div class="well">
+      <div class="col-xs-9 col-xs-offset-1">
         <a class="note-link" href="/notes/<%=n.id%>">
           <h3><strong><%= n.title %></strong></h3>
         </a>
         by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %>
+        <div class="row preview">
+          <p><%= n.content %></p>
+          <a class="note-link" href="/notes/<%=n.id%>"> <span>Continue reading <i class="fa fa-arrow-right" aria-hidden="true"></i></span></a>
+        </div>
         <% if n.whitelist.length > 0 %>
-          <%= link_to "Publish", '/publish/' + n.id.to_s, method: :put, class: 'pull-right btn btn-primary'%>
+          <%= link_to "Publish", '/publish/' + n.id.to_s, method: :put, class: 'pull-right btn btn-red'%>
+          <br>
         <% else %>
-          <%= link_to "Make Private", '/makeprivate/' + n.id.to_s, method: :put, class: 'pull-right btn btn-warning'%>
+          <%= link_to "Make Private", '/makeprivate/' + n.id.to_s, method: :put, class: 'pull-right btn btn-red'%>
+          <br>
         <%end%>
         <br><br>
+        <p class="note-foot">This was posted in <span><%= n.course.code %></span> and tagged with
         <% n.tags.each do |t| %>
           <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
         <% end %>
+        </p>
+      <hr>
       </div>
     <% end %>
   <% end %>

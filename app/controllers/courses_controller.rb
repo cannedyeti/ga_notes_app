@@ -1,4 +1,7 @@
 class CoursesController < ApplicationController
+  require 'rubygems'
+  require 'sanitize'
+
   def index
     @courses = Course.all
     @tags = Tag.joins(:notes).select("tags.*, count(notes.id) as scount").group("tags.id").order("scount DESC").limit(9)
@@ -7,7 +10,13 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:course_id])
     @notes = Note.where(:course_id => params[:course_id]).order(up_votes: :desc)
+    @notes.each do |n|
+      n.content = Sanitize.clean(n.content)
+      n.content = n.content[0..100] + '...'
+    end
   end
+
+
 
   def new
     @course = Course.new
