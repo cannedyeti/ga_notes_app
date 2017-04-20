@@ -1,7 +1,6 @@
 <div class="container page_headline course_headline">
   <div class="col-xs-8 head_title">
-    <h1 class="text-center">Viewing my saved notes</h1>
-    <h3><%= @current_user.name %></h3>
+    <h1 class="text-center">Saved notes</h1>
   </div>
 </div>
 <div class="container">
@@ -18,7 +17,7 @@
           <a class="note-link" href="/notes/<%=n.id%>"> <span>Continue reading <i class="fa fa-arrow-right" aria-hidden="true"></i></span></a>
         </div>
         <br><br>
-        <p class="note-foot">This was posted in <span><%= n.course.code %></span> and tagged with 
+        <p class="note-foot">This was posted in <span><%= n.course.code %></span> and tagged with
           <% n.tags.each do |t| %>
             <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
           <% end %>

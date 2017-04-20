@@ -23,23 +23,43 @@
 
 .course-link {
   color: black;
+  font-family: 'Poppins', sans-serif;
 
   &:hover {
     color: black;
   }
 }
-
-.note-link {
-  color: black;
-
+.tag-link {
+  @extend .gray;
+  font-family: 'Poppins', sans-serif;
   &:hover {
-    color: rgba(0,0,0,0.5);
-    text-decoration: none;
-    span {
-      color: black;
+    color: #fa4542;
+  }
+}
+
+
+.note-div {
+  padding: 10px;
+  border-radius: 2px;
+  transition: all .3s ease-in-out;
+  &:hover {
+    background-color: #ddd;
+    .note-link {
+      color: #fa4542;
     }
   }
 
+  .note-link {
+    transition: all .3s ease-in-out;
+    color: black;
+    text-decoration: underline;
+    &:hover {
+      color: #fa4542;
+      // span {
+      //   color: black;
+      // }
+    }
+  }
 }
 
 .tag {

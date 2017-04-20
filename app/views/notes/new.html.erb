@@ -9,7 +9,7 @@
       <%= f.collection_select :course_id, @courses, :id, :name, {:selected => @current_user.default_course_id}, class: 'form-field sign-in-field' %>
       <%= f.text_field :tag_ids, placeholder: "comma-separated tags", class: 'form-field sign-in-field' %>
       <%= f.hidden_field :user_id, :value => @current_user.id %>
-      <%= f.submit "Save As Draft", class: 'btn btn-red'%>
+      <%= f.submit "Save As Draft", class: 'btn btn-grey'%>
     <% end %>
   </div>
 

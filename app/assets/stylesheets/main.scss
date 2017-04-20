@@ -28,6 +28,10 @@ body {
   color: #fa4542;
 }
 
+.dk-gray {
+  color: rgb(145,145,145);
+}
+
 nav.navbar {
   background-color: black;
   border: none;
@@ -148,6 +152,11 @@ nav.navbar {
   color: #222222;
 }
 
+.note-content {
+  background-color: white;
+  padding: 5px 10px;
+}
+
 .red-link {
   color: black;
   text-decoration: underline;
@@ -156,7 +165,7 @@ nav.navbar {
   }
 }
 
-.btn-red, .btn-red-home, .btn-red-sign {
+.btn-red, .btn-red-home, .btn-red-sign, .btn-red-sm {
   margin: 10px 0 30px 0;
   background-color: #fa4542;
   font-family: 'Poppins', sans-serif;
@@ -172,9 +181,18 @@ nav.navbar {
 }
 
 .btn-grey {
-  background-color: #f6f6f6;
-  @extend .mary-poppins-font
+  background-color: rgb(195,195,195);
+  margin: 10px 0 30px 0;
+  @extend .mary-poppins-font;
   font-weight: 600;
+  color: rgb(56,56,56);
+  box-shadow: 0 3px 0 0 rgb(129,129,129);
+  height: 52px;
+  font-size: 1em;
+}
+
+.btn-red-sm {
+  font-size: 1em;
 }
 
 .btn-red-home {
@@ -192,10 +210,10 @@ nav.navbar {
 
 .blog {
   .main {
-    font-family: 'Impact';
+    @extend .fiji-font;
     font-weight: .8;
     color: black;
-    font-size: 80px;
+    font-size: 4em;
   }
 }
 
@@ -362,10 +380,6 @@ select {
 
 .preview {
   margin: 30px 10px;
-  span {
-    color: #fa4542;
-    text-decoration: underline;
-  }
 }
 
 .note-foot {
@@ -383,14 +397,12 @@ hr {
 .tag-sidebar-title {
   text-align:right;
   width: 75%;
-  font-family: 'poppins';
+  @extend .fiji-font;
   text-decoration: underline;
 }
 
 .tag-sidebar {
+  margin: 15px 0px;
   text-align: right;
   width: 75%;
-  .tag:hover {
-    background-color: rgb(246,246,246);
-  }
 }

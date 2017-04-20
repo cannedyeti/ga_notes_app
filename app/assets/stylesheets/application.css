@@ -13,6 +13,7 @@
  *= require font-awesome
  *= require main
  *= require user
+ *= require courses
  *= require prism
  *= require_tree .
  *= require_self
