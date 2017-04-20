@@ -5,6 +5,8 @@ class UserController < ApplicationController
     @public_notes = Note.where("user_id = ? AND whitelist = ?", *[@user_id, "{}"])
     @location = Location.find(@user.location_id)
     @course = Course.find(@user.default_course_id)
+    @locations = Location.all
+    @courses = Course.all
   end
 
   def show
@@ -27,12 +29,6 @@ class UserController < ApplicationController
   end
 
   def destroy
-  end
-
-  def edit
-    @user = @current_user
-    @locations = Location.all
-    @courses = Course.all
   end
 
   def new

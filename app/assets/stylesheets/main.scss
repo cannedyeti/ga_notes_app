@@ -11,9 +11,21 @@ body {
   font-family: News\ 706,Georgia,serif;
 }
 
+.fiji-font {
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.mary-poppins-font {
+  font-family: 'Poppins', sans-serif;
+}
+
 .ga-logo {
   width: 224px;
   height: 24px;
+}
+
+.ga-lt-red {
+  color: #fa4542;
 }
 
 nav.navbar {
@@ -80,6 +92,41 @@ nav.navbar {
   top: 160px;
   h4 {
     padding: 20px 0 20px 0;
+  }
+}
+
+.account-well {
+  // margin:10px;
+  padding: 10px;
+  border: 1px solid #dadada;
+  @extend .mary-poppins-font;
+  .sign-in-field {
+    background: transparent;
+    @extend .off-black;
+  }
+  .control-label {
+    font-size: 0.8em;
+  }
+  select {
+    background: transparent !important;
+  }
+}
+
+.profile-side-nav {
+  margin-left: 100px;
+  ul {
+    list-style-type: none;
+    padding-left: 0px;
+    li {
+      padding-bottom: 10px;
+    }
+    a {
+      @extend .off-black;
+      text-decoration: none;
+      &:hover {
+        @extend .ga-lt-red
+      }
+    }
   }
 }
 
