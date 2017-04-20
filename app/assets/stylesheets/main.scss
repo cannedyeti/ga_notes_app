@@ -171,6 +171,12 @@ nav.navbar {
   }
 }
 
+.btn-grey {
+  background-color: #f6f6f6;
+  @extend .mary-poppins-font
+  font-weight: 600;
+}
+
 .btn-red-home {
   width: 95%;
 }
@@ -246,6 +252,9 @@ display: block;
       background-color: #fa4542;
     }
   }
+  h1 {
+    margin: 10px;
+  }
 }
 
 .headline {
@@ -261,12 +270,12 @@ display: block;
   h1{
     font-size: 80px;
     text-align: left;
-    font-family: "Impact";
+    @extend .fiji-font;
+    font-weight: 700;
     color: black;
     margin-bottom: 20px;
   }
   .head_title {
-
     padding: 20px;
     font-family: 'Fjalla One', sans-serif;
   }
