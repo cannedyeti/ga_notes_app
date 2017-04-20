@@ -1,35 +1,67 @@
   <div class="row">
     <div class="col-xs-12 col-sm-4">
-      <h1 class="headline text-center">My Account</h1>
-      <br>
-      <div class="text-center">
-        <% if @current_user.photo == nil %>
-          <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>
-        <% else %>
-          <img src="<%= @current_user.photo %>" class="user-pic">
-        <% end%>
-        <br><br>
-        <a href="/profile/edit" class="btn btn-red">Change Profile Pic</a>
+      <div class="profile-side-nav text-left">
+        <h1 class="fiji-font">MY PROFILE</h1>
+        <br>
+        <div>
+          <% if @current_user.photo == nil %>
+            <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>
+          <% else %>
+            <img src="<%= @current_user.photo %>" class="user-pic">
+          <% end%>
+          <br><br>
+        </div>
+        <ul>
+          <li class="ga-lt-red">Profile Info</li>
+          <li><a href="/notes">My Notes</a></li>
+          <li><a href="/favorites">Saved Notes</a></li>
+          <% if @current_user.privilege == 2 %>
+          <br>
+          <p><strong>Admin</strong></p>
+          <hr>
+          <li><a href="/admin/allusers">All Users</a></li>
+          <li><a href="/admin/allnotes">All Notes</a></li>
+          <li><a href="/admin/allcourses">All Courses</a></li>
+          <li><a href="/courses/new">Create a Course</a></li>
+          <% end %>
+        </ul>
       </div>
+
     </div>
 
 
     <div class="col-xs-12 col-sm-8">
-      <h2>Account Info</h2>
+      <h1 class="fiji-font">PROFILE INFO</h1>
+      <div class="row">
+        <div class="col-xs-10">
+          <%= bootstrap_form_for :user do |f| %>
+            <div class="account-well">
+              <p><strong>Name & Email</strong></p>
+              <%= f.text_field :name, class: 'form-field sign-in-field', placeholder: "Your name"%>
+              <%= f.email_field :email, class: 'form-field sign-in-field', placeholder: "Your email"%>
+              <p><small>Password: ************</small></p>
+            </div>
+            <br>
+            <div class="account-well">
+              <p><strong>About Me</strong></p>
+              <%= f.collection_select :location_id, @locations, :id, :name %>
+              <%= f.collection_select :default_course_id, @courses, :id, :name %>
+              <%= f.text_field :photo, class: 'form-field sign-in-field', placeholder: "Enter a valid URL" %>
+            </div>
+            <br>
+            <div class="account-well">
+              <p><strong>Other Info</strong></p>
+              <p><small>Privileges: <%= @current_user.privilege %></small></p>
+              <p><small>Points: <%= @current_user.points %></small></p>
+            </div>
+            <%= f.submit "Save Changes", class: 'btn btn-red'%>
+          <% end %>
+        </div>
+      </div>
 
-      <h4>Name</h4>
-      <p><strong>Name: </strong><%= @current_user.name %></p>
-
-      <p><strong>Email: </strong><%= @current_user.email %></p>
-      <p><strong>Password: </strong>************</p>
-      <p><strong>Location: </strong><%= @location.name %></p>
-      <p><strong>Course: </strong><%= @course.name %> (<%= @course.code %>)</p>
-      <p><strong>Privileges: </strong><%= @current_user.privilege %></p>
-      <p><strong>Points: </strong><%= @current_user.points %></p>
 
 
-
-      <div class="row badges">
+      <!-- <div class="row badges">
         <div class="well col-xs-3">
           <%= image_tag 'boulder.png', class: 'badgers img-responsive', title: "Boulder Badge! Gained for signing up!", 'data-toggle' => 'tooltip'%>
         </div>
@@ -70,7 +102,6 @@
             <%= image_tag 'volcano.png', class: 'badgers img-responsive', title: "Volcano Badge! 80 comments, 40 posts.", 'data-toggle' => 'tooltip'%>
           <%end%>
         </div>
-      </div>
-      <a href="/profile/edit" class="btn btn-red">Edit Profile</a>
+      </div> -->
     </div>
   </div>
