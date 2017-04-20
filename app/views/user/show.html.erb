@@ -1,13 +1,18 @@
-<h1 class="headline text-center"><%= @user.name %> <%= @user.is_active ? '' : '(deactivated)' %></h1>
+<div class="container page_headline course_headline">
+  <div class="col-xs-8 head_title">
+    <h1 class="text-center">Viewing <%= @user.name %></h1>
+    <h3><%= @user.is_active ? '' : '(deactivated)' %></h3>
+  </div>
+</div>
+
 <br>
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-6">
-      <p><strong>Name: </strong><%= @user.name %></p>
-      <p><strong>Location: </strong><%= @location.name %></p>
-      <p><strong>Course: </strong><%= @course.name %> (<%= @course.code %>)</p>
-      <p><strong>Privileges: </strong><%= @user.privilege %></p>
-      <p><strong>Points: </strong><%= @user.points %></p>
+      <h4><strong>Location: </strong><%= @location.name %></h4>
+      <h4><strong>Course: </strong><%= @course.name %> (<%= @course.code %>)</h4>
+      <h4><strong>Privileges: </strong><%= @user.privilege %></h4>
+      <h4><strong>Points: </strong><%= @user.points %></h4>
         <div class="row badges">
           <div class="well col-xs-3">
             <%= image_tag 'boulder.png', class: 'badgers img-responsive', title: "Boulder Badge! Gained for signing up!", 'data-toggle' => 'tooltip'%>

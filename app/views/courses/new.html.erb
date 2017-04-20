@@ -1,10 +1,14 @@
-<h1 class="text-center">New Course</h1>
 
 <div class="container">
-  <%= bootstrap_form_for @course do |f| %>
-    <%= f.text_field :name%>
-    <%= f.text_field :code%>
-    <%= f.text_area :description, class: 'my-text-area' %>
-    <%= f.submit "Create course", class: 'btn default-btn'%>
-  <% end %>
+  <div class="col-xs-8 col-xs-offset-2">
+    <h1 class="fiji">New Course</h1>
+    <div class="sign-in">
+      <%= bootstrap_form_for @course do |f| %>
+        <%= f.text_field :name, class: 'form-field sign-in-field' %>
+        <%= f.text_field :code, class: 'form-field sign-in-field' %>
+        <%= f.text_area :description, class: 'my-text-area', class: 'form-field sign-in-field', rows: "10"  %>
+        <%= f.submit "Create course", class: 'btn btn-red-sign'%>
+      <% end %>
+    </div>
+  </div>
 </div>

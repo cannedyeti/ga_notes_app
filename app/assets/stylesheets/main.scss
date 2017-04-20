@@ -107,10 +107,11 @@ nav.navbar {
 }
 
 .blog {
-  h1 {
+  .main {
     font-family: 'Impact';
     font-weight: .8;
     color: black;
+    font-size: 80px;
   }
 }
 
@@ -244,4 +245,8 @@ display: block;
   font-weight: 300;
   padding: 1rem;
   border-radius: 0px;
+}
+
+.user-pic {
+  max-height: 300px;
 }

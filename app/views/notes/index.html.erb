@@ -1,6 +1,11 @@
-<h1 class="headline text-center">My Notes</h1>
+<div class="container page_headline course_headline">
+  <div class="col-xs-8 head_title">
+    <h1 class="text-center">Viewing my notes</h1>
+    <h3><%= @current_user.name %></h3>
+  </div>
+</div>
 
-<div class="container">
+<div class="container col-xs-8 col-xs-offset-2">
   <%if @notes.length <= 0 %>
     <br>
     <p class="text-center">Aww there's nothing here :(
