@@ -79,7 +79,7 @@ nav.navbar {
   }
 }
 
-.btn-red, .btn-red-home {
+.btn-red, .btn-red-home, .btn-red-sign {
   margin: 10px 0 30px 0;
   background-color: #fa4542;
   font-family: Circular,Helvetica,Arial,sans-serif;
@@ -95,6 +95,10 @@ nav.navbar {
 
 .btn-red-home {
   width: 95%;
+}
+
+.btn-red-sign {
+  width: 100%;
 }
 
 
@@ -185,7 +189,7 @@ display: block;
   .head_title {
   
     padding: 20px;
-    font-family: Arial, Helvetica, sans-serif
+    font-family: 'Fjalla One', sans-serif;
   }
 }
 
@@ -218,4 +222,26 @@ display: block;
 .badgewell {
   width: 85%;
   background-color: rgba(0,123,255, .5);
+}
+
+.fiji {
+  margin-top: 100px;
+  margin-bottom: 20px;
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 36px;
+}
+
+.sign-in {
+  font-family: Circular,Helvetica,Arial,sans-serif;
+}
+
+.form-field {
+  height: 52px;
+  border: 1px solid #dadada;
+  background-color: #ffffff;
+  margin: 0rem 0rem 1rem 0rem;
+  font-size: 15px;
+  font-weight: 300;
+  padding: 1rem;
+  border-radius: 0px;
 }

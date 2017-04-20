@@ -1,10 +1,12 @@
-<div class="col-xs-8 col-xs-offset-2">
-  <h1>Login</h1>
-  <div class="">
-    <%= bootstrap_form_for :user do |f| %>
-      <%= f.email_field :email, placeholder: "Enter your email" %>
-      <%= f.password_field :password, placeholder: "Enter your password" %>
-      <%= f.submit "Login", class: 'btn default-btn'%>
-    <% end %>
+<div class="container">
+  <div class="col-xs-8 col-xs-offset-2">
+    <h1 class="fiji">SIGN IN</h1>
+    <div class="sign-in">
+      <%= bootstrap_form_for :user do |f| %>
+        <%= f.email_field :email, placeholder: "Enter your email", class: 'form-field' %>
+        <%= f.password_field :password, placeholder: "Enter your password", class: 'form-field' %>
+        <%= f.submit "Sign In", class: 'btn btn-red-sign'%>
+      <% end %>
+    </div>
   </div>
 </div>
