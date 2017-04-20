@@ -1,15 +1,23 @@
 <div class="container">
   <div class="col-xs-8 col-xs-offset-2 text-left">
-  <h1 class="fiji">CREATE ACCOUNT</h1>
+  <h1 class="fiji">SIGN UP</h1>
     <div class="sign-in">
     <%= bootstrap_form_for :user do |p| %>
-      <%= p.text_field :name, placeholder: "Enter your name", class: 'form-field' %>
-      <%= p.email_field :email, placeholder: "Enter your email", class: 'form-field'  %>
-      <%= p.password_field :password, placeholder: "Enter your password", class: 'form-field'  %>
-      <%= p.collection_select :default_course_id, @courses, :id, :name %>
+      <%= p.text_field :name, placeholder: "Your name", class: 'form-field sign-in-field', :autofocus => true %>
+      <%= p.email_field :email, placeholder: "Your email", class: 'form-field sign-in-field'  %>
+      <%= p.password_field :password, placeholder: "Your password", class: 'form-field sign-in-field'  %>
+      <%= p.collection_select :default_course_id, @courses, :id, :name, {:class=>'custom-select'}%>
       <%= p.collection_select :location_id, @locations, :id, :name %>
-      <%= p.primary "Submit", class: 'btn btn-red-sign' %>
+      <p class="text-center dark-gray fancy-font">
+        <small>
+          By signing up for a General Assembly notes account,<br>
+          you are helping your classmates!
+        </small>
+      </p>
+      <%= p.primary "Sign Up", class: 'btn btn-red-sign' %>
     <% end %>
+    <div class="no-account text-center">Have an account? <a href="/login" class="red-link">Sign In</a></div>
+
     </div>
   </div>
 </div>

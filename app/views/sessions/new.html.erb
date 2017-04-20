@@ -3,10 +3,11 @@
     <h1 class="fiji">SIGN IN</h1>
     <div class="sign-in">
       <%= bootstrap_form_for :user do |f| %>
-        <%= f.email_field :email, placeholder: "Your email", class: 'form-field sign-in-field' %>
+        <%= f.email_field :email, placeholder: "Your email", class: 'form-field sign-in-field', :autofocus => true %>
         <%= f.password_field :password, placeholder: "Your password", class: 'form-field sign-in-field' %>
         <%= f.submit "Sign In", class: 'btn btn-red-sign'%>
       <% end %>
     </div>
+    <div class="no-account text-center">Don't have an account? <a href="/signup" class="red-link">Sign Up</a></div>
   </div>
 </div>
