@@ -37,7 +37,17 @@
         </td>
         <td><%=u.email%></td>
         <td><%=u.points%></td>
-        <td><%=@privilegeMap[u.privilege]%></td>
+        <td>
+          <% if @current_user.id != u.id %>
+            <%= bootstrap_form_for u, :url => "/admin/privilege/" + u.id.to_s, :method => :put do |f| %>
+              <%= f.collection_select :privilege, @privileges, :id, :name, {:selected => u.privilege} %>
+              <%= f.submit "Update", class: 'btn-xs btn-info'%>
+            <% end %>
+          <% else %>
+            <%=@privileges[u.privilege-1][:name]%>
+          <% end %>
+
+        </td>
         <td><%=u.notes.length%></td>
         <td><%=u.comments.length%></td>
         <td>

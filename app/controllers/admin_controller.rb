@@ -1,11 +1,7 @@
 class AdminController < ApplicationController
   def allusers
     @users = User.all.order(points: :desc)
-    @privilegeMap = {
-      0 => "Basic",
-      1 => "Moderator",
-      2 => "Admin"
-    }
+    @privileges = Privilege.all
   end
 
   def allnotes
@@ -27,5 +23,18 @@ class AdminController < ApplicationController
     is_active = !u.is_active
     u.update(is_active: is_active)
     redirect_to :back
+  end
+
+  def update_privilege
+    u = User.find(params[:id])
+    u.update(user_params)
+    flash[:success] = "Updated privileges for " + u.name
+    redirect_to :back
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:privilege)
   end
 end

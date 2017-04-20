@@ -29,16 +29,6 @@ class NotesController < ApplicationController
     u.update(points: points)
   end
 
-  def update_privillages(points, user)
-    if points >= 50 && user.privilege == 0
-      #make the user a moderator
-      user.update(privilege: 1)
-    elsif points < 50 && user.privilege == 1
-      #make the user basic
-      user.update(privilege: 0)
-    end
-  end
-
   def vote
     #don't let user vote if the note is private
     n = Note.find(params[:id])
