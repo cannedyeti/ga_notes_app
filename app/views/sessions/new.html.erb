@@ -3,8 +3,8 @@
     <h1 class="fiji">SIGN IN</h1>
     <div class="sign-in">
       <%= bootstrap_form_for :user do |f| %>
-        <%= f.email_field :email, placeholder: "Enter your email", class: 'form-field' %>
-        <%= f.password_field :password, placeholder: "Enter your password", class: 'form-field' %>
+        <%= f.email_field :email, placeholder: "Your email", class: 'form-field sign-in-field' %>
+        <%= f.password_field :password, placeholder: "Your password", class: 'form-field sign-in-field' %>
         <%= f.submit "Sign In", class: 'btn btn-red-sign'%>
       <% end %>
     </div>
