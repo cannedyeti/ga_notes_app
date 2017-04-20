@@ -1,44 +1,67 @@
-<div class="container page_headline course_headline">
-  <div class="col-xs-8 head_title">
-    <h1 class="text-center">Viewing All Courses</h1>
-    <h3>Admin - <%= @current_user.name %></h3>
+<div class="row">
+  <div class="col-xs-12 col-sm-4">
+    <div class="profile-side-nav text-left">
+      <h1 class="fiji-font">MY PROFILE</h1>
+      <br>
+      <div>
+        <% if @current_user.photo == nil %>
+          <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>
+        <% else %>
+          <img src="<%= @current_user.photo %>" class="user-pic">
+        <% end%>
+        <br><br>
+      </div>
+      <ul>
+        <li><a href="/profile">Profile Info</a></li>
+        <li><a href="/notes">My Notes</a></li>
+        <li><a href="/favorites">Saved Notes</a></li>
+        <% if @current_user.privilege == 2 %>
+        <br>
+        <p><strong>Admin</strong></p>
+        <hr>
+        <li><a href="/admin/allusers">All Users</a></li>
+        <li><a href="/admin/allnotes">All Notes</a></li>
+        <li class="ga-lt-red">All Courses</li>
+        <li><a href="/courses/new">Create a Course</a></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-</div>
-<div class="container">
-<table class="table">
-  <thead>
-    <tr>
-      <!-- <th>id</th> -->
-      <th>Name</th>
-      <th>Code</th>
-      <th>Description</th>
-      <th># Notes</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
+  <div class="col-xs-12 col-sm-8">
+    <h1 class="fiji-font">ALL COURSES (<%=@courses.length%>)</h1>
+    <table class="table table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Code</th>
+          <th>Description</th>
+          <th># Notes</th>
+          <th>Delete</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
 
-    <% @courses.each do |u| %>
-      <tr>
-        <!-- <th scope="row"><%=u.id%></th> -->
-        <th scope="row"><%=u.name%></th>
-        <td><%=u.code%></td>
-        <td><%=u.description[0..50]%>...</td>
-        <td><%=u.notes.length%></td>
-        <td>
-          <% if u.notes.length > 0 %>
-            <a href="#" class="btn-sm btn-danger" data-toggle="tooltip" title="Warning, don't delete courses that have notes!"><i class="fa fa-trash" aria-hidden="true"></i></a>
-          <% else %>
-            <%= link_to ('<i class="fa fa-trash" aria-hidden="true"></i>').html_safe, '/courses/'+ u.id.to_s, method: :delete, title: "Warning, don't delete courses that have notes!", 'data-toggle' => 'tooltip', class: "btn-sm btn-danger"%>
-          <% end %>
+        <% @courses.each do |u| %>
+          <tr>
+            <th scope="row"><%=u.name%></th>
+            <td><%=u.code%></td>
+            <td><%=u.description[0..50]%>...</td>
+            <td><%=u.notes.length%></td>
+            <td>
+              <% if u.notes.length > 0 %>
+                <a href="#" class="btn-sm btn-danger" data-toggle="tooltip" title="Warning, don't delete courses that have notes!"><i class="fa fa-trash" aria-hidden="true"></i></a>
+              <% else %>
+                <%= link_to ('<i class="fa fa-trash" aria-hidden="true"></i>').html_safe, '/courses/'+ u.id.to_s, method: :delete, title: "Warning, don't delete courses that have notes!", 'data-toggle' => 'tooltip', class: "btn-sm btn-danger"%>
+              <% end %>
 
-        </td>
-        <td>
-          <a class="btn-sm btn-info" href="/courses/<%=u.id%>/edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            </td>
+            <td>
+              <a class="btn-sm btn-info" href="/courses/<%=u.id%>/edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
