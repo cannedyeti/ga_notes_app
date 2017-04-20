@@ -7,6 +7,10 @@ body {
   font-family: News\ 706,Georgia,serif;
 }
 
+.fancy-font {
+  font-family: News\ 706,Georgia,serif;
+}
+
 .ga-logo {
   width: 224px;
   height: 24px;
@@ -76,6 +80,28 @@ nav.navbar {
   top: 160px;
   h4 {
     padding: 20px 0 20px 0;
+  }
+}
+
+.no-account {
+  margin: 10px 0 30px 0;
+  padding: 18px;
+  font-size: 1.2em;
+  height: 62px;
+  border: 1px solid #dadada;
+  @extend .off-black;
+  @extend .fancy-font;
+}
+
+.off-black {
+  color: #222222;
+}
+
+.red-link {
+  color: black;
+  text-decoration: underline;
+  &:hover {
+    color: #fa4542;
   }
 }
 
@@ -253,6 +279,16 @@ display: block;
     border: 2px rgb(255,219,0) solid;
     outline: none;
     box-shadow: none;
+  }
+}
+
+select {
+  height: 52px !important;
+  font-family: Circular,Helvetica,Arial,sans-serif;
+  &:focus {
+    border: 2px rgb(255,219,0) solid !important;
+    outline: none !important;
+    box-shadow: none !important;
   }
 }
 
