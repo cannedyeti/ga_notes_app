@@ -1,49 +1,72 @@
-<div class="container page_headline course_headline">
-  <div class="col-xs-8 head_title">
-    <h1 class="text-center">Viewing All Notes</h1>
-    <h3>Admin - <%= @current_user.name %></h3>
-  </div>
-</div>
-<div class="container">
-<table class="table">
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>Title</th>
-      <th>Up Votes</th>
-      <th>Down Votes</th>
-      <th>Author</th>
-      <th>Course</th>
-      <th>Created At</th>
-      <th>Updated At</th>
-      <th>Type</th>
-      <th>Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-
-    <% @notes.each do |u| %>
-      <tr>
-        <th scope="row"><%=u.id%></th>
-        <td><a class="note-link" href="/notes/<%=u.id%>"><%=u.title%></a></td>
-        <td><%=u.up_votes.length%></td>
-        <td><%=u.down_votes.length%></td>
-        <td><%=u.user.name%></td>
-        <td><%=u.course.code%></td>
-        <td><%=u.created_at.strftime("%b %d %Y")%></td>
-        <td><%=u.updated_at.strftime("%b %d %Y")%></td>
-        <% if u.whitelist.length > 1 %>
-          <td><%=@typeMap[2]%></td>
+<div class="row">
+  <div class="col-xs-12 col-sm-4">
+    <div class="profile-side-nav text-left">
+      <h1 class="fiji-font">MY PROFILE</h1>
+      <br>
+      <div>
+        <% if @current_user.photo == nil %>
+          <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>
         <% else %>
-          <td><%=@typeMap[u.whitelist.length]%></td>
+          <img src="<%= @current_user.photo %>" class="user-pic">
+        <% end%>
+        <br><br>
+      </div>
+      <ul>
+        <li><a href="/profile">Profile Info</a></li>
+        <li><a href="/notes">My Notes</a></li>
+        <li><a href="/favorites">Saved Notes</a></li>
+        <% if @current_user.privilege == 2 %>
+        <br>
+        <p><strong>Admin</strong></p>
+        <hr>
+        <li><a href="/admin/allusers">All Users</a></li>
+        <li class="ga-lt-red">All Notes</li>
+        <li><a href="/admin/allcourses">All Courses</a></li>
+        <li><a href="/courses/new">Create a Course</a></li>
         <% end %>
-        <td>
-          <% if u.id != @current_user.id %>
-            <%= link_to "Delete Note", note_path(u), method: :delete, class: 'btn-sm btn-danger' %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </ul>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-8">
+    <h1 class="fiji-font">ALL NOTES (<%=@notes.length%>)</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Title</th>
+          <th>Up Votes</th>
+          <th>Down Votes</th>
+          <th>Author</th>
+          <th>Course</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+          <th>Type</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <% @notes.each do |u| %>
+          <tr>
+            <th scope="row"><%=u.id%></th>
+            <td><a class="note-link" href="/notes/<%=u.id%>"><%=u.title%></a></td>
+            <td><%=u.up_votes.length%></td>
+            <td><%=u.down_votes.length%></td>
+            <td><%=u.user.name%></td>
+            <td><%=u.course.code%></td>
+            <td><%=u.created_at.strftime("%b %d %Y")%></td>
+            <td><%=u.updated_at.strftime("%b %d %Y")%></td>
+            <% if u.whitelist.length > 1 %>
+              <td><%=@typeMap[2]%></td>
+            <% else %>
+              <td><%=@typeMap[u.whitelist.length]%></td>
+            <% end %>
+            <td>
+              <%= link_to ('<i class="fa fa-trash" aria-hidden="true"></i>').html_safe, note_path(u), method: :delete, class: 'btn-sm btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

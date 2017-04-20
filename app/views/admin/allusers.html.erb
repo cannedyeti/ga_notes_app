@@ -1,72 +1,97 @@
-<div class="container page_headline course_headline">
-  <div class="col-xs-8 head_title">
-    <h1 class="text-center">Viewing All Users</h1>
-    <h3>Admin - <%= @current_user.name %></h3>
+<div class="row">
+  <div class="col-xs-12 col-sm-4">
+    <div class="profile-side-nav text-left">
+      <h1 class="fiji-font">MY PROFILE</h1>
+      <br>
+      <div>
+        <% if @current_user.photo == nil %>
+          <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>
+        <% else %>
+          <img src="<%= @current_user.photo %>" class="user-pic">
+        <% end%>
+        <br><br>
+      </div>
+      <ul>
+        <li><a href="/profile">Profile Info</a></li>
+        <li><a href="/notes">My Notes</a></li>
+        <li><a href="/favorites">Saved Notes</a></li>
+        <% if @current_user.privilege == 2 %>
+        <br>
+        <p><strong>Admin</strong></p>
+        <hr>
+        <li class="ga-lt-red">All Users</li>
+        <li><a href="/admin/allnotes">All Notes</a></li>
+        <li><a href="/admin/allcourses">All Courses</a></li>
+        <li><a href="/courses/new">Create a Course</a></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-</div>
-<div class="container">
-<table class="table">
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>Status</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Points</th>
-      <th>Privileges</th>
-      <th># Notes</th>
-      <th># Comments</th>
-      <th>Delete</th>
-    </tr>
-  </thead>
-  <tbody>
+  <div class="col-xs-12 col-sm-8">
+    <h1 class="fiji-font">ALL USERS (<%=@users.length%>)</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Status</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Points</th>
+          <th>Privileges</th>
+          <th># Notes</th>
+          <th># Comments</th>
+          <th>Activate/Deactivate</th>
+        </tr>
+      </thead>
+      <tbody>
 
-    <% @users.each do |u| %>
-      <tr class="<%= u.is_active ? '' : 'deactivated' %>">
-        <th scope="row"><%=u.id%></th>
-        <td>
-          <% if u.is_active %>
-            Active
-          <% else %>
-            Deactivated
-          <% end %>
-        </td>
-        <td>
-          <a class="note-link" href="/profile/<%=u.id%>">
-            <% if u.id == @current_user.id %>
-              <%=u.name%> <strong class="me"><i class="fa fa-user-circle-o" aria-hidden="true"></i> (me)</strong>
-            <% else %>
-              <%=u.name%>
-            <% end %>
-          </a>
-        </td>
-        <td><%=u.email%></td>
-        <td><%=u.points%></td>
-        <td>
-          <% if @current_user.id != u.id %>
-            <%= bootstrap_form_for u, :url => "/admin/privilege/" + u.id.to_s, :method => :put do |f| %>
-              <%= f.collection_select :privilege, @privileges, :id, :name, {:selected => u.privilege} %>
-              <%= f.submit "Update", class: 'btn-xs btn-info'%>
-            <% end %>
-          <% else %>
-            <%=@privileges[u.privilege-1][:name]%>
-          <% end %>
+        <% @users.each do |u| %>
+          <tr class="<%= u.is_active ? '' : 'deactivated' %>">
+            <th scope="row"><%=u.id%></th>
+            <td>
+              <% if u.is_active %>
+                Active
+              <% else %>
+                Deactivated
+              <% end %>
+            </td>
+            <td>
+              <a class="note-link" href="/profile/<%=u.id%>">
+                <% if u.id == @current_user.id %>
+                  <%=u.name%> <strong class="me"><i class="fa fa-user-circle-o" aria-hidden="true"></i> (me)</strong>
+                <% else %>
+                  <%=u.name%>
+                <% end %>
+              </a>
+            </td>
+            <td><%=u.email%></td>
+            <td><%=u.points%></td>
+            <td>
+              <% if @current_user.id != u.id %>
+                <!-- <%= bootstrap_form_for u, :url => "/admin/privilege/" + u.id.to_s, :method => :put do |f| %>
+                  <%= f.collection_select :privilege, @privileges, :id, :name, {:selected => u.privilege, :label => ''} %>
+                  <%= f.submit "Update", class: 'btn-xs btn-info'%>
+                <% end %> -->
+                <%=@privileges[u.privilege-1][:name]%>
+              <% else %>
+                <%=@privileges[u.privilege-1][:name]%>
+              <% end %>
+            </td>
+            <td><%=u.notes.length%></td>
+            <td><%=u.comments.length%></td>
+            <td>
+              <% if u.id != @current_user.id %>
+                <% if u.is_active %>
+                  <%= link_to ('Deactivate').html_safe, "/admin/deactivate/" + u.id.to_s, method: :put, class: 'btn-sm btn-danger' %>
+                <% else %>
+                  <%= link_to ('Activate').html_safe, "/admin/deactivate/" + u.id.to_s, method: :put, class: 'btn-sm btn-danger' %>
+                <% end %>
 
-        </td>
-        <td><%=u.notes.length%></td>
-        <td><%=u.comments.length%></td>
-        <td>
-          <% if u.id != @current_user.id %>
-            <% if u.is_active %>
-              <%= link_to ('Deactivate User <i class="fa fa-user-times" aria-hidden="true"></i>').html_safe, "/admin/deactivate/" + u.id.to_s, method: :put, class: 'btn-sm btn-danger' %>
-            <% else %>
-              <%= link_to ('Activate User <i class="fa fa-user-plus" aria-hidden="true"></i>').html_safe, "/admin/deactivate/" + u.id.to_s, method: :put, class: 'btn-sm btn-danger' %>
-            <% end %>
-
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
