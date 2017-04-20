@@ -14,6 +14,7 @@ class CoursesController < ApplicationController
       n.content = Sanitize.clean(n.content)
       n.content = n.content[0..100] + '...'
     end
+    @tags = Tag.joins(:notes).select("tags.*, count(notes.id) as scount").group("tags.id").order("scount DESC").limit(10)
   end
 
 

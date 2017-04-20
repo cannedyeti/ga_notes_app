@@ -251,7 +251,7 @@ display: block;
 }
 
 .page_headline {
-  margin: 20px 20% 20px;
+  margin: 20px 13% 20px;
   background-color: #f6f6f6;
   height: 300px;
   h1{
@@ -365,4 +365,19 @@ select {
 hr {
   @extend .off-black;
   border-color: #222222;
+}
+
+.tag-sidebar-title {
+  text-align:right;
+  width: 75%;
+  font-family: 'poppins';
+  text-decoration: underline;
+}
+
+.tag-sidebar {
+  text-align: right;
+  width: 75%;
+  .tag:hover {
+    background-color: rgb(246,246,246);
+  }
 }
