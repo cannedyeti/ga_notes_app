@@ -21,10 +21,10 @@ class FavoritesController < ApplicationController
 
   def destroy
     Favorite.where(:user_id => @current_user.id, :note_id => params[:id]).first.delete
-    redirect_to '/favorites'
+    redirect_to :back
   end
 
-  private 
+  private
 
   def favorite_params
     params.require(:favorite).permit(:user_id, :note_id)

@@ -1,7 +1,6 @@
 <div class="container page_headline course_headline">
   <div class="col-xs-8 head_title">
-    <h1 class="text-center">Viewing my notes</h1>
-    <h3><%= @current_user.name %></h3>
+    <h1 class="text-center">My Notes</h1>
   </div>
 </div>
 
@@ -24,10 +23,10 @@
           <a class="note-link" href="/notes/<%=n.id%>"> <span>Continue reading <i class="fa fa-arrow-right" aria-hidden="true"></i></span></a>
         </div>
         <% if n.whitelist.length > 0 %>
-          <%= link_to "Publish", '/publish/' + n.id.to_s, method: :put, class: 'pull-right btn btn-red'%>
+          <%= link_to "Publish", '/publish/' + n.id.to_s, method: :put, class: 'pull-right btn btn-red-sm'%>
           <br>
         <% else %>
-          <%= link_to "Make Private", '/makeprivate/' + n.id.to_s, method: :put, class: 'pull-right btn btn-red'%>
+          <%= link_to "Make Private", '/makeprivate/' + n.id.to_s, method: :put, class: 'pull-right btn btn-grey'%>
           <br>
         <%end%>
         <br><br>
