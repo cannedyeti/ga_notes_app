@@ -10,7 +10,7 @@
     <p class="text-center">Aww there's no notes for <strong><%=@course.name%></strong>, yet!</p>
   <%else%>
     <% @notes.each do |n| %>
-      <% if (n.whitelist.length == 0 || n.whitelist.include?(@current_user.id.to_s))%>
+      <% if (n.whitelist.length == 0)%>
         <div class="col-xs-9 col-xs-offset-1">
           <a class="note-link" href="/notes/<%=n.id%>">
             <h3><strong><%= n.title.upcase %></strong></h3>
