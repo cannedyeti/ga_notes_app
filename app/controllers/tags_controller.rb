@@ -12,9 +12,16 @@ class TagsController < ApplicationController
     @notes = []
     @tag = Tag.find(params[:id])
     @tag.note_ids.each do |n|
-      temp = Note.find(n)
-      @notes.push(temp)
+      temp = nil
+      puts "n is blah blah" + n.to_s
+      temp = Note.where("id = ? AND whitelist = ?", *[n, "{}"]).first
+      puts temp.inspect
+      if temp
+        @notes.push(temp)
+      end
     end
+    
+    puts "notes: " + @notes.to_s
   end
 
   def destroy
