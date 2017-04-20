@@ -1,5 +1,12 @@
+menu: {
+    edit: {title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall'},
+    insert: {title: 'Insert', items: 'link media | template hr'},
+    table: {title: 'Table', items: 'inserttable tableprops deletetable | cell row column'},
+    view: {title: 'View', items: 'visualaid'},
+}
+
 toolbar:
-  - styleselect | bold italic | undo redo
+  - styleselect | bold italic underline strikethrough superscript subscript| removeformat | forecolor backcolor | undo redo
   - image | link | codesample | print
 plugins:
   - image
@@ -7,3 +14,6 @@ plugins:
   - codesample
   - hr
   - print
+  - table
+  - textcolor
+  - autoresize
