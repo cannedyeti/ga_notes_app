@@ -205,3 +205,17 @@ display: block;
     font-size: 17px;
   }
 }
+
+.badges {
+  .well{
+    background-color: rgb(200, 200, 200);
+    margin: 10px;
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+  }
+}
+.badgewell {
+  width: 85%;
+  background-color: rgba(0,123,255, .5);
+}

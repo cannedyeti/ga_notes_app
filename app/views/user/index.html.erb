@@ -10,6 +10,48 @@
       <p><strong>Course: </strong><%= @course.name %> (<%= @course.code %>)</p>
       <p><strong>Privileges: </strong><%= @current_user.privilege %></p>
       <p><strong>Points: </strong><%= @current_user.points %></p>
+        <div class="row badges">
+          <div class="well col-xs-3">
+            <%= image_tag 'boulder.png', class: 'badgers img-responsive', title: "Boulder Badge! Gained for signing up!", 'data-toggle' => 'tooltip'%>
+          </div>
+          <div class="well col-xs-3">
+            <% if @public_notes.length >= 1%>
+              <%= image_tag 'cascade.png', class: 'badgers img-responsive', title: "Cascade Badge! Gained for creating a post!", 'data-toggle' => 'tooltip'%>
+            <% end %>
+          </div>
+          <div class="well col-xs-3">
+            <% if @current_user.comments.length >= 1 && @public_notes.length >= 1 %>
+              <%= image_tag 'thunder.png', class: 'badgers img-responsive', title: "Thunder Badge! Gained for posting a comment.", 'data-toggle' => 'tooltip'%>
+            <% end %>
+          </div>
+          <div class="well col-xs-3">
+            <% if @current_user.comments.length >= 10 && @public_notes.length >= 1%>
+              <%= image_tag 'rainbow.png', class: 'badgers img-responsive', title: "Rainbow Badge! Gained by posting 10 comments", 'data-toggle' => 'tooltip'%>
+            <% end %>
+          </div>
+        </div>
+        <div class='row badges'>
+          <div class="well col-xs-3">
+            <% if @current_user.comments.length >= 10 && @public_notes.length >= 5%>
+              <%= image_tag 'marsh.png', class: 'badgers img-responsive', title: "Marsh Badge! 10 comments, 5 posts.", 'data-toggle' => 'tooltip'%>
+            <%end%>
+          </div>
+          <div class="well col-xs-3">
+            <% if @current_user.comments.length >= 20 && @public_notes.length >= 10%>
+              <%= image_tag 'soul.png', class: 'badgers img-responsive', title: "Soul Badge! 20 comments, 10 posts.", 'data-toggle' => 'tooltip'%>
+            <%end%>
+          </div>
+          <div class="well col-xs-3">
+            <% if @current_user.comments.length >= 40 && @public_notes.length >= 20%>
+              <%= image_tag 'earth.png', class: 'badgers img-responsive', title: "Earth Badge! 40 comments, 20 posts.", 'data-toggle' => 'tooltip'%>
+            <%end%>
+          </div>
+          <div class="well col-xs-3">
+            <% if @current_user.comments.length >= 80 && @public_notes.length >= 40%>
+              <%= image_tag 'volcano.png', class: 'badgers img-responsive', title: "Volcano Badge! 80 comments, 40 posts.", 'data-toggle' => 'tooltip'%>
+            <%end%>
+          </div>
+        </div>
       <a href="/profile/edit" class="btn btn-default">Edit Profile</a>
     </div>
     <div class="col-xs-12 col-sm-6">
