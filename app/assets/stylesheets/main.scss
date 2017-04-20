@@ -173,7 +173,7 @@ nav.navbar {
 
 .btn-grey {
   background-color: #f6f6f6;
-  @extend .mary-poppins-font
+  @extend .mary-poppins-font;
   font-weight: 600;
 }
 
@@ -184,7 +184,6 @@ nav.navbar {
 .btn-red-sign {
   width: 100%;
 }
-
 
 .btn {
   padding: 14px 12px;
