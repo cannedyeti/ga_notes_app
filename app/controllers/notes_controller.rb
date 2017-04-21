@@ -86,17 +86,17 @@ class NotesController < ApplicationController
     return note_params
   end
 
-  def add_to_white_list
-    n = Note.find(params[:id])
-    existing_whitelist = n.whitelist
-    # !!!!!!!! FIX THIS CURRENT USER PUSH TO THE ENTERED USER
-    existing_whitelist.push(@current_user.id.to_s)
-    # !!!!!!!!!
-    temp_param = note_params
-    temp_param[:whitelist] = existing_whitelist
-    n.update(temp_param)
-    redirect_to '/notes'
-  end
+  # def add_to_white_list
+  #   n = Note.find(params[:id])
+  #   existing_whitelist = n.whitelist
+  #   # !!!!!!!! FIX THIS CURRENT USER PUSH TO THE ENTERED USER
+  #   # existing_whitelist.push(@current_user.id.to_s)
+  #   # !!!!!!!!!
+  #   temp_param = note_params
+  #   temp_param[:whitelist] = existing_whitelist
+  #   n.update(temp_param)
+  #   redirect_to '/notes'
+  # end
 
   def create_tags(existing_tag_ids, note_params)
     tag_names = note_params[:tag_ids].downcase
@@ -106,8 +106,8 @@ class NotesController < ApplicationController
       new_tag = Tag.find_or_create_by(tag_name: tn)
       tag_ids.push(new_tag.id)
     end
-    existing_whitelist = note_params[:whitelist]
-    create_whitelist(existing_whitelist, note_params)
+    # existing_whitelist = note_params[:whitelist]
+    # create_whitelist(existing_whitelist, note_params)
     note_params[:tag_ids] = tag_ids
     return note_params
   end
@@ -116,7 +116,8 @@ class NotesController < ApplicationController
     #create the post
     whitelist = []
     note_params[:whitelist] = whitelist.push(@current_user.id)
-    @n = Note.new(create_tags([], note_params))
+    create_whitelist([], create_tags([], note_params))
+    @n = Note.new(create_whitelist([], create_tags([], note_params)))
     @n.save!
     redirect_to "/notes/#{@n.id}"
   end
