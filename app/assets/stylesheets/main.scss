@@ -77,8 +77,7 @@ nav.navbar {
 }
 
 .banner-img {
-   background-image:url('<%= asset_path("notes-banner.png") %> ');
-  // background: url('images/notes-banner.jpg');
+  background: image-url('notes-banner.jpg');
   height: 700px;
   background-repeat: no-repeat;
   background-size: cover;
