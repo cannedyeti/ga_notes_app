@@ -2,7 +2,7 @@ class UserController < ApplicationController
   def index
     @user = @current_user
     # @public_notes = Note.where("whitelist = '{}'", user_id: @user.id)
-    @public_notes = Note.where("user_id = ? AND whitelist = ?", *[@user_id, "{}"])
+    @public_notes = Note.where("user_id = ? AND whitelist = ?", *[@user.id, "{}"])
     @location = Location.find(@user.location_id)
     @course = Course.find(@user.default_course_id)
     @locations = Location.all
@@ -12,7 +12,7 @@ class UserController < ApplicationController
   def show
     @user = User.find(params[:id])
     # @public_notes = Note.where("whitelist = '{}'", user_id: @user.id)
-    @public_notes = Note.where("user_id = ? AND whitelist = ?", *[@user_id, "{}"])
+    @public_notes = Note.where("user_id = ? AND whitelist = ?", *[@user.id, "{}"])
     @location = Location.find(@user.location_id)
     @course = Course.find(@user.default_course_id)
   end
