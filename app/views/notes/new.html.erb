@@ -1,5 +1,7 @@
 <div class="container">
-  <h1 class=" text-left fiji-font">CREATE NOTE</h1>
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+  <h1 class="text-left fiji-font">CREATE NOTE</h1>
   <br>
   <div class="mary-poppins-font">
     <%= bootstrap_form_for @note do |f| %>
@@ -11,6 +13,8 @@
       <%= f.hidden_field :user_id, :value => @current_user.id %>
       <%= f.submit "Save As Draft", class: 'btn btn-grey'%>
     <% end %>
+  </div>
+  </div>
   </div>
 
 </div>

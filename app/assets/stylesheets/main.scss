@@ -284,7 +284,7 @@ display: block;
 }
 
 .page_headline {
-  margin: 20px 13% 20px;
+  margin: 20px 0px;
   background-color: #f6f6f6;
   height: 180px;
   h1{
@@ -294,6 +294,14 @@ display: block;
     font-weight: 700;
     color: black;
     margin-bottom: 20px;
+  }
+  h2 {
+    font-size: 3em;
+    @extend .fiji-font;
+    font-weight: 700;
+    color: black;
+    margin-bottom: 20px;
+    text-align: left;
   }
   .head_title {
     padding: 20px;
