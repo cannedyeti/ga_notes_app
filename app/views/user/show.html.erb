@@ -14,44 +14,44 @@
       <h4><strong>Privileges: </strong><%= @user.privilege %></h4>
       <h4><strong>Points: </strong><%= @user.points %></h4>
         <div class="row badges">
-          <div class="well col-xs-3">
-            <%= image_tag 'boulder.png', class: 'badgers img-responsive', title: "Boulder Badge! Gained for signing up!", 'data-toggle' => 'tooltip'%>
+          <div class="well col-xs-2">
+            <%= image_tag 'boulder.png', class: 'badgers', title: "Boulder Badge! Gained for signing up!", 'data-toggle' => 'tooltip'%>
           </div>
-          <div class="well col-xs-3">
+          <div class="well col-xs-2">
             <% if @public_notes.length >= 1%>
-              <%= image_tag 'cascade.png', class: 'badgers img-responsive', title: "Cascade Badge! Gained for creating a post!", 'data-toggle' => 'tooltip'%>
+              <%= image_tag 'cascade.png', class: 'badgers', title: "Cascade Badge! Gained for creating a post!", 'data-toggle' => 'tooltip'%>
             <% end %>
           </div>
-          <div class="well col-xs-3">
+          <div class="well col-xs-2">
             <% if @user.comments.length >= 1 && @public_notes.length >= 1 %>
-              <%= image_tag 'thunder.png', class: 'badgers img-responsive', title: "Thunder Badge! Gained for posting a comment.", 'data-toggle' => 'tooltip'%>
+              <%= image_tag 'thunder.png', class: 'badgers', title: "Thunder Badge! Gained for posting a comment.", 'data-toggle' => 'tooltip'%>
             <% end %>
           </div>
-          <div class="well col-xs-3">
+          <div class="well col-xs-2">
             <% if @user.comments.length >= 10 && @public_notes.length >= 1%>
-              <%= image_tag 'rainbow.png', class: 'badgers img-responsive', title: "Rainbow Badge! Gained by posting 10 comments", 'data-toggle' => 'tooltip'%>
+              <%= image_tag 'rainbow.png', class: 'badgers', title: "Rainbow Badge! Gained by posting 10 comments", 'data-toggle' => 'tooltip'%>
             <% end %>
           </div>
         </div>
         <div class='row badges'>
-          <div class="well col-xs-3">
+          <div class="well col-xs-2">
             <% if @user.comments.length >= 10 && @public_notes.length >= 5%>
-              <%= image_tag 'marsh.png', class: 'badgers img-responsive', title: "Marsh Badge! 10 comments, 5 posts.", 'data-toggle' => 'tooltip'%>
+              <%= image_tag 'marsh.png', class: 'badgers', title: "Marsh Badge! 10 comments, 5 posts.", 'data-toggle' => 'tooltip'%>
             <%end%>
           </div>
-          <div class="well col-xs-3">
+          <div class="well col-xs-2">
             <% if @user.comments.length >= 20 && @public_notes.length >= 10%>
-              <%= image_tag 'soul.png', class: 'badgers img-responsive', title: "Soul Badge! 20 comments, 10 posts.", 'data-toggle' => 'tooltip'%>
+              <%= image_tag 'soul.png', class: 'badgers', title: "Soul Badge! 20 comments, 10 posts.", 'data-toggle' => 'tooltip'%>
             <%end%>
           </div>
-          <div class="well col-xs-3">
+          <div class="well col-xs-2">
             <% if @user.comments.length >= 40 && @public_notes.length >= 20%>
-              <%= image_tag 'earth.png', class: 'badgers img-responsive', title: "Earth Badge! 40 comments, 20 posts.", 'data-toggle' => 'tooltip'%>
+              <%= image_tag 'earth.png', class: 'badgers', title: "Earth Badge! 40 comments, 20 posts.", 'data-toggle' => 'tooltip'%>
             <%end%>
           </div>
-          <div class="well col-xs-3">
+          <div class="well col-xs-2">
             <% if @user.comments.length >= 80 && @public_notes.length >= 40%>
-              <%= image_tag 'volcano.png', class: 'badgers img-responsive', title: "Volcano Badge! 80 comments, 40 posts.", 'data-toggle' => 'tooltip'%>
+              <%= image_tag 'volcano.png', class: 'badgers', title: "Volcano Badge! 80 comments, 40 posts.", 'data-toggle' => 'tooltip'%>
             <%end%>
           </div>
         </div>
@@ -61,7 +61,7 @@
         <% if @user.photo == nil %>
           <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>
         <% else %>
-          <img src="<%= @user.photo %>">
+          <img src="<%= @user.photo %>" class="user-pic">
         <% end%>
         <br><br>
       </div>
