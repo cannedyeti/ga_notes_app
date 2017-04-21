@@ -315,12 +315,22 @@ display: block;
   }
 }
 
+.badgers {
+  height: 30px;
+  position: relative;
+  left: -10px;
+  top: -10px;
+}
+
 .badges {
+  .containthisshit {
+    margin: 0 auto;
+  }
   .well{
     background-color: rgb(200, 200, 200);
     margin: 10px;
-    height: 90px;
-    width: 90px;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
   }
 }
