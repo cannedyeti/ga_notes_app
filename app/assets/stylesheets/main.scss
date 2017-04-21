@@ -189,6 +189,9 @@ nav.navbar {
   box-shadow: 0 3px 0 0 rgb(129,129,129);
   height: 52px;
   font-size: 1em;
+  &:hover {
+    background-color: rgb(210,210,210);
+  }
 }
 
 .btn-red-sm {
@@ -283,7 +286,7 @@ display: block;
 .page_headline {
   margin: 20px 13% 20px;
   background-color: #f6f6f6;
-  height: 300px;
+  height: 180px;
   h1{
     font-size: 80px;
     text-align: left;

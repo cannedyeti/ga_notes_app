@@ -1,6 +1,8 @@
-<div class="container page_headline course_headline">
-  <div class="col-xs-8 head_title">
-    <h1 class="text-center">My Notes</h1>
+<div class="page_headline course_headline">
+  <div class="row">
+    <div class="col-xs-8 head_title">
+      <h1>My notes</h1>
+    </div>
   </div>
 </div>
 
@@ -13,15 +15,35 @@
     </p>
   <% else %>
     <% @notes.each do |n| %>
-      <div class="col-xs-9 col-xs-offset-1">
+      <div class="note-div">
         <a class="note-link" href="/notes/<%=n.id%>">
-          <h3><strong><%= n.title %></strong></h3>
+          <h3 class="fiji-font"><%= n.title.upcase %></h3>
         </a>
-        by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %>
+        <p class="fiji-font">by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %></p>
+        <br>
         <div class="row preview">
           <p><%= n.content %></p>
+          <br>
           <a class="note-link" href="/notes/<%=n.id%>"> <span>Continue reading <i class="fa fa-arrow-right" aria-hidden="true"></i></span></a>
         </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-10">
+          <p class="note-foot">This was posted in <span><%= n.course.code %></span> and tagged with
+            <% n.tags.each do |t| %>
+              <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
+            <% end %>
+          </p>
+          </div>
+          <div class="col-xs-12 col-sm-2 text-right">
+            <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/notes/vote/false/'+ n.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote"%>
+            <%=n.up_votes.length%>
+            &ensp;
+            <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i> ').html_safe, '/notes/vote/true/'+ n.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
+            <%=n.down_votes.length%>
+          </div>
+        </div>
+      </div>
+      <div class="row text-center">
         <% if n.whitelist.length > 0 %>
           <%= link_to "Publish", '/publish/' + n.id.to_s, method: :put, class: 'pull-right btn btn-red-sm'%>
           <br>
@@ -29,14 +51,8 @@
           <%= link_to "Make Private", '/makeprivate/' + n.id.to_s, method: :put, class: 'pull-right btn btn-grey'%>
           <br>
         <%end%>
-        <br><br>
-        <p class="note-foot">This was posted in <span><%= n.course.code %></span> and tagged with
-        <% n.tags.each do |t| %>
-          <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
-        <% end %>
-        </p>
-      <hr>
       </div>
+      <hr>
     <% end %>
   <% end %>
 </div>
