@@ -13,5 +13,6 @@ module NotesApp
     # -- all .rb files in that directory are automatically loaded.
     config.time_zone = 'Pacific Time (US & Canada)'
     config.active_record.default_timezone = :local
+    config.serve_static_assets = true
   end
 end
