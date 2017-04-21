@@ -36,6 +36,7 @@ gem 'bootstrap_form'
 gem 'jquery-ui-rails'
 gem 'tinymce-rails'
 gem 'sanitize'
+gem 'rails_12factor', group: :production
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
