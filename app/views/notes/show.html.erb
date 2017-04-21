@@ -32,6 +32,13 @@
     <div class="text-center">
       <a href="/notes/<%=@note.id%>/edit" class="btn btn-grey">Edit Note</a>
       <%= link_to "Delete Note", note_path(@note), method: :delete, class: 'btn btn-red-sm' %>
+      <% if @note.whitelist.length > 0 %>
+          <%= link_to "Publish", '/publish/' + @note.id.to_s, method: :put, class: 'btn btn-red-sm'%>
+          <br>
+        <% else %>
+          <%= link_to "Make Private", '/makeprivate/' + @note.id.to_s, method: :put, class: 'btn btn-grey'%>
+          <br>
+      <%end%>
       <br>
     </div>
   <% elsif (@current_user && !@favorite_ids.include?(@note.id)) %>
