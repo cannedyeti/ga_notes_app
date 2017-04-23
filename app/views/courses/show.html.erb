@@ -12,57 +12,30 @@
       </div>
     </div>
   </div>
-</div>
-<div class="row">
-<div class="col-xs-6 col-xs-offset-2">
-  <% if @notes.length <= 0 %>
-    <br>
-    <p class="text-center">Aww there's no notes for <strong><%=@course.name%></strong>, yet!</p>
-  <%else%>
-    <% @notes.each do |n| %>
-      <% if (n.whitelist.length == 0)%>
-        <div class="note-div">
-          <a class="note-link" href="/notes/<%=n.id%>">
-            <h3 class="fiji-font"><%= n.title.upcase %></h3>
-          </a>
-          <p class="fiji-font">by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %></p>
 
-          <br>
-          <div class="row preview">
-            <p><%= n.content %></p>
-            <br>
-            <a class="note-link" href="/notes/<%=n.id%>"> <span>Continue reading <i class="fa fa-arrow-right" aria-hidden="true"></i></span></a>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 col-sm-10">
-            <p class="note-foot">This was posted in <span><%= @course.code %></span> and tagged with
-              <% n.tags.each do |t| %>
-                <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
-              <% end %>
-            </div>
-            <div class="col-xs-12 col-sm-2 text-right">
-              <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/notes/vote/false/'+ n.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote"%>
-              <%=n.up_votes.length%>
-              &ensp;
-              <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i> ').html_safe, '/notes/vote/true/'+ n.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
-              <%=n.down_votes.length%>
-            </div>
-            </p>
-          </div>
-        </div>
-        <hr>
+<div class="row">
+  <div class="col-xs-12 col-sm-9">
+    <% if @notes.length <= 0 %>
+      <br>
+      <p class="text-center">Aww there's no notes for <strong><%=@course.name%></strong>, yet!</p>
+    <%else%>
+      <% @notes.each do |n| %>
+        <% if (n.whitelist.length == 0)%>
+          <%= render "partials/note_preview", locals:  {n:  n} %>
+          <hr>
+        <% end %>
       <% end %>
+    <%end%>
+  </div>
+  <div class="col-xs-12 col-sm-3">
+    <h3 class="tag-sidebar-title">SEARCH BY TAGS</h3>
+    <% @tags.each do |t| %>
+      <div class="tag-sidebar">
+        <a class="tag-link" href="/find/<%=t.id %>">
+          <h5>#<%= t.tag_name %>(<%= t.notes.length%>)</h5>
+        </a>
+      </div>
     <% end %>
-  <%end%>
-</div>
-<div class="col-xs-3">
-  <h3 class="tag-sidebar-title">SEARCH BY TAGS</h3>
-  <% @tags.each do |t| %>
-        <div class="tag-sidebar">
-          <a class="tag-link" href="/find/<%=t.id %>">
-            <h5>#<%= t.tag_name %>(<%= t.notes.length%>)</h5>
-          </a>
-        </div>
-      <% end %>
+  </div>
 </div>
 </div>

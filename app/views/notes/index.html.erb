@@ -18,34 +18,7 @@
     </p>
   <% else %>
     <% @notes.each do |n| %>
-      <div class="note-div">
-        <a class="note-link" href="/notes/<%=n.id%>">
-          <h3 class="fiji-font"><%= n.title.upcase %></h3>
-        </a>
-        <p class="fiji-font">by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %></p>
-        <br>
-        <div class="row preview">
-          <p><%= n.content %></p>
-          <br>
-          <a class="note-link" href="/notes/<%=n.id%>"> <span>Continue reading <i class="fa fa-arrow-right" aria-hidden="true"></i></span></a>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 col-sm-10">
-          <p class="note-foot">This was posted in <span><%= n.course.code %></span> and tagged with
-            <% n.tags.each do |t| %>
-              <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
-            <% end %>
-          </p>
-          </div>
-          <div class="col-xs-12 col-sm-2 text-right">
-            <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/notes/vote/false/'+ n.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote"%>
-            <%=n.up_votes.length%>
-            &ensp;
-            <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i> ').html_safe, '/notes/vote/true/'+ n.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
-            <%=n.down_votes.length%>
-          </div>
-        </div>
-      </div>
+      <%= render "partials/note_preview", locals:  {n:  n} %>
       <div class="row text-center">
         <% if n.whitelist.length > 0 %>
           <%= link_to "Publish", '/publish/' + n.id.to_s, method: :put, class: 'pull-right btn btn-red-sm'%>

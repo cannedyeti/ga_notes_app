@@ -1,0 +1,24 @@
+<div class="note-div">
+  <a class="note-link" href="/notes/<%=locals[:n].id%>">
+    <h3 class="fiji-font"><%= locals[:n].title.upcase %></h3>
+  </a>
+
+<p class="fiji-font">by <%=locals[:n].user.name%> on <%= locals[:n].created_at.strftime("%b %d %Y at %l:%M %p") %></p>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-10">
+      <span class="note-foot">This was posted in <span><%= locals[:n].course.code %></span> and tagged with
+        <% locals[:n].tags.each do |t| %>
+          <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
+        <% end %>
+      </span>
+    </div>
+    <div class="col-xs-12 col-sm-2 text-right">
+      <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/notes/vote/false/'+ locals[:n].id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote"%>
+      <%=locals[:n].up_votes.length%>
+      &ensp;
+      <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i> ').html_safe, '/notes/vote/true/'+ locals[:n].id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
+      <%=locals[:n].down_votes.length%>
+    </div>
+</div>
+</div>
