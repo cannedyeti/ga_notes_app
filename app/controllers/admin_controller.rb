@@ -1,35 +1,60 @@
 class AdminController < ApplicationController
   def allusers
-    @users = User.all.order(points: :desc)
-    @privileges = Privilege.all
+    if @current_user && (@current_user.privilege == 2)
+      @users = User.all.order(points: :desc)
+      @privileges = Privilege.all
+    else
+      redirect_to '/notes'
+      flash[:warning] = "Invalid permissions"
+    end
   end
 
   def allnotes
-    #only get notes that are private
-    @notes = Note.where("whitelist = '{}'").order(down_votes: :desc)
-    @typeMap = {
-      0 => "Public",
-      1 => "Private",
-      2 => "Shared"
-    }
+    if @current_user && (@current_user.privilege == 2)
+    #only get notes that aren't private
+      @notes = Note.where("whitelist = '{}'").order(down_votes: :desc)
+      @typeMap = {
+        0 => "Public",
+        1 => "Private",
+        2 => "Shared"
+      }
+    else
+      redirect_to '/'
+      flash[:warning] = "Invalid permissions"
+    end
   end
 
   def allcourses
-    @courses = Course.all.order(id: :asc)
+    if @current_user && (@current_user.privilege == 2)
+      @courses = Course.all.order(id: :asc)
+    else
+      redirect_to '/'
+      flash[:warning] = "Invalid permissions"
+    end
   end
 
   def toggle_deactivate
-    u = User.find(params[:id])
-    is_active = !u.is_active
-    u.update(is_active: is_active)
-    redirect_to :back
+    if @current_user && (@current_user.privilege == 2)
+      u = User.find(params[:id])
+      is_active = !u.is_active
+      u.update(is_active: is_active)
+      redirect_to :back
+    else
+      redirect_to '/'
+      flash[:warning] = "Invalid permissions"
+    end
   end
 
   def update_privilege
-    u = User.find(params[:id])
-    u.update(user_params)
-    flash[:success] = "Updated privileges for " + u.name
-    redirect_to :back
+    if @current_user && (@current_user.privilege == 2)
+      u = User.find(params[:id])
+      u.update(user_params)
+      flash[:success] = "Updated privileges for " + u.name
+      redirect_to :back
+    else
+      redirect_to '/'
+      flash[:warning] = "Invalid permissions"
+    end
   end
 
   private

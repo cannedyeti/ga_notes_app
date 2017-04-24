@@ -78,9 +78,9 @@
         <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a> &#8729; &ensp;
       <% end %>
       <%= c.up_votes.length - c.down_votes.length %> &ensp;
-      <%= link_to ('<i class="fa fa-female" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ c.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
+      <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ c.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
       &ensp;
-      <%= link_to ('<i class="fa fa-male" aria-hidden="true"></i> ').html_safe, '/comments/vote/true/'+ c.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
+      <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i>').html_safe, '/comments/vote/true/'+ c.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
 
       <% if @current_user && @current_user.id == c.user.id%>
         &ensp;
@@ -95,9 +95,9 @@
             <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a> &#8729; &ensp;
           <% end %>
           <%= r.up_votes.length - r.down_votes.length %> &ensp;
-          <%= link_to ('<i class="fa fa-female" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ r.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
+          <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ r.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
           &ensp;
-          <%= link_to ('<i class="fa fa-male" aria-hidden="true"></i> ').html_safe, '/comments/vote/true/'+ r.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
+          <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i>').html_safe, '/comments/vote/true/'+ r.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
           <% if @current_user && @current_user.id == r.user.id%>
             &ensp;
             <%= link_to "Delete", "/comments/" + r.id.to_s, method: :delete, action: 'destroy_reply'%>

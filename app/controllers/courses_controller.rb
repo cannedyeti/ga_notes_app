@@ -20,28 +20,53 @@ class CoursesController < ApplicationController
 
 
   def new
-    @course = Course.new
+    if @current_user.privilege == 2
+      @course = Course.new
+    else
+      redirect_to "/"
+      flash[:danger] = "You do not have the privilege to do this."
+    end
   end
 
   def edit
-    @course = Course.find(params[:id])
+    if @current_user.privilege == 2
+      @course = Course.find(params[:id])
+    else
+      redirect_to "/"
+      flash[:danger] = "You do not have the privilege to do this."
+    end
   end
 
   def update
-    c = Course.find(params[:id])
-    c.update(course_params)
-    redirect_to "/admin/allcourses"
+    if @current_user.privilege == 2
+      c = Course.find(params[:id])
+      c.update(course_params)
+      redirect_to "/admin/allcourses"
+    else
+      redirect_to "/"
+      flash[:danger] = "You do not have the privilege to do this."
+    end
   end
 
   def create
-    Course.create(course_params)
-    redirect_to "/admin/allcourses"
+    if @current_user.privilege == 2
+      Course.create(course_params)
+      redirect_to "/admin/allcourses"
+    else
+      redirect_to "/"
+      flash[:danger] = "You do not have the privilege to do this."
+    end
   end
 
   def destroy
-    @c = Course.find(params[:id])
-    @c.delete
-    redirect_to :back
+    if @current_user.privilege == 2
+      @c = Course.find(params[:id])
+      @c.delete
+      redirect_to :back
+    else
+      redirect_to "/"
+      flash[:danger] = "You do not have the privilege to do this."
+    end
   end
 
   private
