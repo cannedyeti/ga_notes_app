@@ -23,7 +23,9 @@ class UserController < ApplicationController
   end
 
   def create
-    User.create(user_params)
+    temp_param = user_params
+    temp_param[:email] = user_params[:email].downcase
+    User.create(temp_param)
     redirect_to login_path
   end
 

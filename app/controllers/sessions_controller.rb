@@ -1,7 +1,9 @@
 class SessionsController < ApplicationController
 
   def create
-    user = User.authenticate(user_params)
+    temp_param = user_params
+    temp_param[:email] = user_params[:email].downcase
+    user = User.authenticate(temp_param)
     if user
       if user != -1
         session[:user_id] = user.id
