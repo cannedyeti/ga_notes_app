@@ -85,7 +85,18 @@
               <p><strong>Name & Email</strong></p>
               <%= f.text_field :name, class: 'form-field sign-in-field', placeholder: "Your name"%>
               <%= f.email_field :email, class: 'form-field sign-in-field', placeholder: "Your email"%>
-              <p><small>Password: ************</small></p>
+            </div>
+            <br>
+            <div class="account-well">
+              <p><strong>Change Password</strong></p>
+              <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                  <%= f.password_field :password_digest_new, label: 'New Password', class: 'form-field sign-in-field', placeholder: "New password"%>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                  <%= f.password_field :password_digest_check, label: 'Password confirmation', class: 'form-field sign-in-field', placeholder: "Confirm New Password"%>
+                </div>
+              </div>
             </div>
             <br>
             <div class="account-well">
@@ -100,7 +111,12 @@
               <p><small>Privileges: <%= @current_user.privilege %></small></p>
               <p><small>Points: <%= @current_user.points %></small></p>
             </div>
-            <%= f.submit "Save Changes", class: 'btn btn-red'%>
+            <br>
+            <div class="account-well">
+              <%= f.password_field :password_digest_current, label: 'Enter current password to save changes to your profile.', class: 'form-field sign-in-field', placeholder: "Current Password"%>
+              <%= f.submit "Save Changes", class: 'btn btn-red'%>
+            </div>
+            <br>
           <% end %>
         </div>
       </div>
