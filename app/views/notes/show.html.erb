@@ -4,7 +4,7 @@
     <h1 class="main"><strong><%=@note.title%></strong></h1>
     <h4><%=@note.course.name%></h4>
 
-    <p><a class="profile-link" href="/profile/<%=@note.user.id%>">By <span><%= @note.user.name %></span></a></p>
+    <p class="gray">By <a class="profile-link" href="/profile/<%=@note.user.id%>"><%= @note.user.name %></a></p>
   </div>
   <div class="note-content">
     <p><%=@note.content.html_safe%></p>

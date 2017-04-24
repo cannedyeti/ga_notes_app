@@ -7,6 +7,34 @@ body {
   font-family: News\ 706,Georgia,serif;
 }
 
+.footer {
+  background-color: #222222;
+  color: #a2a2a2;
+  ul {
+    padding-left: 0px;
+  }
+  a {
+    text-decoration: none;
+    color: #a2a2a2;
+    font-size: 1.2em;
+  }
+  p {
+    font-size: 1.4em;
+  }
+  hr {
+    border-color: rgb(56,56,56);
+  }
+  .round-icon {
+    margin: 10px;
+    // height: 50px;
+    // width: 50px;
+    border-radius: 50%;
+    padding: 10px;
+    background-color: #a2a2a2;
+    color: #222222;
+  }
+}
+
 .fancy-font {
   font-family: News\ 706,Georgia,serif;
 }
@@ -223,7 +251,8 @@ nav.navbar {
   color: rgb(162, 162, 162);
   &:hover {
     text-decoration: none;
-    color: rgb(162, 162, 162);
+    color: #fa4542;
+    // color: rgb(162, 162, 162);
     span{
       color: #fa4542;
     }
