@@ -1,22 +1,22 @@
-<h1 class="headline text-center">#<%= @tag.tag_name %></h1>
 <div class="container">
+  <div class="page_headline course_headline">
+    <div class="row">
+      <div class="col-xs-8 head_title">
+        <h1>#<%= @tag.tag_name %></h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <hr class="hr-gray">
+      </div>
+    </div>
+  </div>
 
   <% if @notes.length >= 1 %>
     <% @notes.each do |n| %>
-          <div class="well">
-            <a class="note-link" href="/notes/<%=n.id%>">
-              <h3><%= n.title %></h3>
-            </a>
-            by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %>
-            <br><br>
-            <% n.tags.each do |t| %>
-              <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
-            <% end %>
-          </div>
+      <%= render "partials/note_preview_from_tag", locals:  {n:  n} %>
     <% end %>
-
   <% else %>
-    <h1>NOTHING</h1>
+    <h1 class="fiji-font text-center">NOTHING</h1>
   <% end %>
 </div>
-  

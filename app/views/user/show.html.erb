@@ -1,12 +1,13 @@
-<div class="container page_headline course_headline">
-  <div class="col-xs-8 head_title">
-    <h1 class="text-center">Viewing <%= @user.name %></h1>
-    <h3><%= @user.is_active ? '' : '(deactivated)' %></h3>
-  </div>
-</div>
-
-<br>
 <div class="container">
+  <div class="page_headline course_headline">
+    <div class="row">
+      <div class="col-xs-12 head_title">
+        <h2><%= @user.name %>'s Profile</h2>
+        <h3><%= @user.is_active ? '' : '(deactivated)' %></h3>
+        <hr>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-xs-12 col-sm-6">
       <h4><strong>Location: </strong><%= @location.name %></h4>
@@ -67,25 +68,26 @@
       </div>
     </div>
   </div>
-</div>
-<div class="container">
   <% @user.notes.each do |n| %>
     <% if (n.whitelist.length == 0 || n.whitelist.include?(@current_user.id.to_s))%>
-      <a class="note-link" href="/notes/<%=n.id%>">
-        <h4><strong><%= n.title %></strong> by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %></h4>
-      </a>
-      <div class="row">
-        <div class="col-xs-12 col-sm-10">
-          <% n.tags.each do |t| %>
-            <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
-          <% end %>
-        </div>
-        <div class="col-xs-12 col-sm-2 text-right">
-          <i class="fa fa-envelope" aria-hidden="true"></i>
-          <%=n.up_votes.length%>
-          &ensp;
-          <i class="fa fa-male" aria-hidden="true"></i>
-          <%=n.down_votes.length%>
+      <div class="note-div">
+        <a class="note-link" href="/notes/<%=n.id%>">
+          <h3 class="fiji-font"><%= n.title.upcase %></h3>
+        </a>
+        <p class="fiji-font">by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %></p>
+        <div class="row">
+          <div class="col-xs-12 col-sm-10">
+            <% n.tags.each do |t| %>
+              <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
+            <% end %>
+          </div>
+          <div class="col-xs-12 col-sm-2 text-right">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <%=n.up_votes.length%>
+            &ensp;
+            <i class="fa fa-male" aria-hidden="true"></i>
+            <%=n.down_votes.length%>
+          </div>
         </div>
       </div>
     <% end%>

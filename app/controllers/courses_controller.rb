@@ -9,7 +9,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:course_id])
-    @notes = Note.where(:course_id => params[:course_id]).order(up_votes: :desc)
+    @notes = Note.where("course_id = ? AND whitelist = ?", *[params[:course_id], "{}"]).order(up_votes: :desc)
     @notes.each do |n|
       n.content = Sanitize.clean(n.content)
       n.content = n.content[0..100] + '...'

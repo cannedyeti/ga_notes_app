@@ -7,6 +7,42 @@ body {
   font-family: News\ 706,Georgia,serif;
 }
 
+.hr-gray {
+  border-color: rgb(162, 162, 162);
+}
+
+.footer {
+  background-color: #222222;
+  color: #a2a2a2;
+  ul {
+    padding-left: 0px;
+  }
+  a {
+    transition: all .3s ease-in-out;
+    text-decoration: none;
+    color: #a2a2a2;
+    &:hover {
+      color: white;
+      transform: translate(20px, 0px);
+    }
+  }
+  p {
+    font-size: 1.4em;
+  }
+  hr {
+    border-color: rgb(56,56,56);
+  }
+  .round-icon {
+    margin: 10px;
+    // height: 50px;
+    // width: 50px;
+    border-radius: 50%;
+    padding: 10px;
+    background-color: #a2a2a2;
+    color: #222222;
+  }
+}
+
 .fancy-font {
   font-family: News\ 706,Georgia,serif;
 }
@@ -223,7 +259,8 @@ nav.navbar {
   color: rgb(162, 162, 162);
   &:hover {
     text-decoration: none;
-    color: rgb(162, 162, 162);
+    color: #fa4542;
+    // color: rgb(162, 162, 162);
     span{
       color: #fa4542;
     }
@@ -284,7 +321,7 @@ display: block;
 }
 
 .page_headline {
-  margin: 20px 13% 20px;
+  margin: 20px 0px;
   background-color: #f6f6f6;
   height: 180px;
   h1{
@@ -294,6 +331,14 @@ display: block;
     font-weight: 700;
     color: black;
     margin-bottom: 20px;
+  }
+  h2 {
+    font-size: 3em;
+    @extend .fiji-font;
+    font-weight: 700;
+    color: black;
+    margin-bottom: 20px;
+    text-align: left;
   }
   .head_title {
     padding: 20px;
@@ -408,7 +453,6 @@ hr {
 
 .tag-sidebar-title {
   text-align:right;
-  width: 75%;
   @extend .fiji-font;
   text-decoration: underline;
 }
@@ -416,5 +460,4 @@ hr {
 .tag-sidebar {
   margin: 15px 0px;
   text-align: right;
-  width: 75%;
 }

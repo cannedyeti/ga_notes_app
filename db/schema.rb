@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170420134016) do
+ActiveRecord::Schema.define(version: 20170421153350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170420134016) do
     t.integer  "note_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.integer  "comment_id"
     t.integer  "parent_id"
     t.index ["note_id"], name: "index_comments_on_note_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
@@ -92,7 +93,7 @@ ActiveRecord::Schema.define(version: 20170420134016) do
     t.string   "password_digest"
     t.string   "photo"
     t.integer  "points",            default: 0
-    t.integer  "privilege",         default: 0
+    t.integer  "privilege",         default: 1
     t.text     "favorites",         default: [],                array: true
     t.integer  "default_course_id"
     t.integer  "location_id"
