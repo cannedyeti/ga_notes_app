@@ -56,8 +56,6 @@ Rails.application.routes.draw do
   delete 'tags/:note_id/:tag_id' => "tags#destroy"
   put 'notes/vote/:isDown/:id' => "notes#vote"
   put 'comments/vote/:isDown/:id' => "comments#vote"
-
-
   resources :users
   resources :notes
 
