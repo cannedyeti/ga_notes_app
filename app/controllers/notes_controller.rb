@@ -31,10 +31,16 @@ class NotesController < ApplicationController
 
   def publish
     n = Note.find(params[:id])
-    n.update(:whitelist => [])
-    redirect_to '/notes'
+    if @current_user.id == n.user.id
+      n.update(:whitelist => [])
+      redirect_to '/notes'
+    else
+      redirect_to "/notes"
+      flash[:warning] = "You do not have the privilege for this."
+    end
   end
 
+# does not need route protection
   def add_points(beforePoints, afterPoints, user_id)
     u = User.find(user_id)
     points = u.points || 0
@@ -126,20 +132,30 @@ class NotesController < ApplicationController
   end
 
   def create
-    #create the post
-    whitelist = []
-    note_params[:whitelist] = whitelist.push(@current_user.id)
-    create_whitelist([], create_tags([], note_params))
-    @n = Note.new(create_whitelist([], create_tags([], note_params)))
-    @n.save!
-    redirect_to "/notes/#{@n.id}"
+    if @current_user
+      #create the post
+      whitelist = []
+      note_params[:whitelist] = whitelist.push(@current_user.id)
+      create_whitelist([], create_tags([], note_params))
+      @n = Note.new(create_whitelist([], create_tags([], note_params)))
+      @n.save!
+      redirect_to "/notes/#{@n.id}"
+    else
+      redirect_to "/notes"
+      flash[:warning] = "You must be logged in to create a note."
+    end
   end
 
   def update
     n = Note.find(params[:id])
-    existing_tag_ids = n.tag_ids
-    n.update(create_tags(existing_tag_ids, note_params))
-    redirect_to "/notes/#{n.id}"
+    if @current_user && (@current_user.id == n.user.id)
+      existing_tag_ids = n.tag_ids
+      n.update(create_tags(existing_tag_ids, note_params))
+      redirect_to "/notes/#{n.id}"
+    else
+      redirect_to "/notes/#{n.id}"
+      flash[:warning] = "Only the note creator can edit a note."
+    end
   end
 
 
@@ -164,7 +180,12 @@ class NotesController < ApplicationController
 
   def edit
     @note = Note.find(params[:id])
-    @courses = Course.all
+    if @current_user && (@current_user.id == @note.user.id)
+      @courses = Course.all
+    else
+      redirect_to "/notes/#{@note.id}"
+      flash[:warning] = "Only the note creator can edit a note."
+    end
   end
 
   def show
