@@ -27,33 +27,34 @@
   </div>
 
 
-
-  <% if @current_user && @current_user.id == @note.user.id %>
-    <div class="text-center">
-      <a href="/notes/<%=@note.id%>/edit" class="btn btn-grey">Edit Note</a>
-      <%= link_to "Delete Note", note_path(@note), method: :delete, class: 'btn btn-red-sm' %>
-      <% if @note.whitelist.length > 0 %>
-          <%= link_to "Publish", '/publish/' + @note.id.to_s, method: :put, class: 'btn btn-red-sm'%>
-          <br>
-        <% else %>
-          <%= link_to "Make Private", '/makeprivate/' + @note.id.to_s, method: :put, class: 'btn btn-grey'%>
-          <br>
-      <%end%>
-      <br>
-    </div>
-  <% elsif (@current_user && !@favorite_ids.include?(@note.id)) %>
-    <div class="text-center">
-      <%= bootstrap_form_for :favorite do |f| %>
-        <%= f.hidden_field :user_id, :value => @current_user.id%>
-        <%= f.hidden_field :note_id, :value => @note.id%>
-        <%= f.submit ('Save note').html_safe, class: 'btn btn-grey'%>
-      <% end %>
-    </div>
-  <%else%>
-    <div class="text-center">
-      <%= link_to ('Remove from saved notes').html_safe, '/favorites/'+ @note.id.to_s, method: :delete, class: 'btn btn-red-sm' %>
-    </div>
-  <%end%>
+  <% if @current_user %>
+    <% if @current_user.id == @note.user.id %>
+      <div class="text-center">
+        <a href="/notes/<%=@note.id%>/edit" class="btn btn-grey">Edit Note</a>
+        <%= link_to "Delete Note", note_path(@note), method: :delete, class: 'btn btn-red-sm' %>
+        <% if @note.whitelist.length > 0 %>
+            <%= link_to "Publish", '/publish/' + @note.id.to_s, method: :put, class: 'btn btn-red-sm'%>
+            <br>
+          <% else %>
+            <%= link_to "Make Private", '/makeprivate/' + @note.id.to_s, method: :put, class: 'btn btn-grey'%>
+            <br>
+        <%end%>
+        <br>
+      </div>
+    <% elsif (!@favorite_ids.include?(@note.id)) %>
+      <div class="text-center">
+        <%= bootstrap_form_for :favorite do |f| %>
+          <%= f.hidden_field :user_id, :value => @current_user.id%>
+          <%= f.hidden_field :note_id, :value => @note.id%>
+          <%= f.submit ('Save note').html_safe, class: 'btn btn-grey'%>
+        <% end %>
+      </div>
+    <%else%>
+      <div class="text-center">
+        <%= link_to ('Remove from saved notes').html_safe, '/favorites/'+ @note.id.to_s, method: :delete, class: 'btn btn-red-sm' %>
+      </div>
+    <%end%>
+  <% end %>
 
   <br>
   <div class="container">
@@ -81,7 +82,7 @@
       &ensp;
       <%= link_to ('<i class="fa fa-male" aria-hidden="true"></i> ').html_safe, '/comments/vote/true/'+ c.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
 
-      <% if @current_user.id == c.user.id%>
+      <% if @current_user && @current_user.id == c.user.id%>
         &ensp;
         <%= link_to "Delete", "/comments/" + c.id.to_s, method: :delete%>
       <% end %>
@@ -97,7 +98,7 @@
           <%= link_to ('<i class="fa fa-female" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ r.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
           &ensp;
           <%= link_to ('<i class="fa fa-male" aria-hidden="true"></i> ').html_safe, '/comments/vote/true/'+ r.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
-          <% if @current_user.id == r.user.id%>
+          <% if @current_user && @current_user.id == r.user.id%>
             &ensp;
             <%= link_to "Delete", "/comments/" + r.id.to_s, method: :delete, action: 'destroy_reply'%>
           <% end %>

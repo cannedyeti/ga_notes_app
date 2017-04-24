@@ -44,7 +44,7 @@
 
         <% @courses.each do |u| %>
           <tr>
-            <th scope="row"><%=u.name%></th>
+            <th scope="row"><a href="/courses/<%=u.id%>"><%=u.name%></a></th>
             <td><%=u.code%></td>
             <td><%=u.description[0..50]%>...</td>
             <td><%=u.notes.length%></td>

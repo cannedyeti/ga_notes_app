@@ -34,48 +34,51 @@ class NotesController < ApplicationController
   end
 
   def vote
-    #don't let user vote if the note is private
     n = Note.find(params[:id])
-    if n.whitelist.length != 1
-      #don't let the user vote on their own note
-      if n.user_id != @current_user.id
-        isDown = (params[:isDown] == 'true')
-        beforePoints = 0
-        afterPoints = 0
-        dv = []
-        uv = []
-        if isDown
-          dv = n.down_votes
-          uv = n.up_votes
-          beforePoints = uv.length - dv.length
-        else
-          dv = n.up_votes
-          uv = n.down_votes
-          beforePoints = dv.length - uv.length
+    #don't let user vote if they're not logged in
+    if @current_user
+      #don't let user vote if the note is private
+      if n.whitelist.length != 1
+        #don't let the user vote on their own note
+        if n.user_id != @current_user.id
+          isDown = (params[:isDown] == 'true')
+          beforePoints = 0
+          afterPoints = 0
+          dv = []
+          uv = []
+          if isDown
+            dv = n.down_votes
+            uv = n.up_votes
+            beforePoints = uv.length - dv.length
+          else
+            dv = n.up_votes
+            uv = n.down_votes
+            beforePoints = dv.length - uv.length
+          end
+
+          if !(dv.include?(@current_user.id.to_s))
+            dv.push(@current_user.id.to_s)
+          else
+            dv.delete(@current_user.id.to_s)
+          end
+
+          if uv.include?(@current_user.id.to_s)
+            uv.delete(@current_user.id.to_s)
+          end
+
+          if isDown
+            afterPoints = uv.length - dv.length
+            n.update(up_votes: uv, down_votes: dv)
+          else
+            afterPoints = dv.length - uv.length
+            n.update(up_votes: dv, down_votes: uv)
+          end
+          add_points(beforePoints, afterPoints, n.user_id)
+          redirect_to :back
         end
-
-        if !(dv.include?(@current_user.id.to_s))
-          dv.push(@current_user.id.to_s)
-        else
-          dv.delete(@current_user.id.to_s)
-        end
-
-        if uv.include?(@current_user.id.to_s)
-          uv.delete(@current_user.id.to_s)
-        end
-
-        if isDown
-          afterPoints = uv.length - dv.length
-          n.update(up_votes: uv, down_votes: dv)
-        else
-          afterPoints = dv.length - uv.length
-          n.update(up_votes: dv, down_votes: uv)
-        end
-
-        add_points(beforePoints, afterPoints, n.user_id)
-
-        redirect_to :back
       end
+    else
+      flash[:warning] = "You need to sign in or sign up to like/dislike."
     end
   end
 
@@ -145,10 +148,12 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
     @comments = Comment.where(:note_id => @note.id, :parent_id => nil).order(created_at: :desc)
     @comment = Comment.new
-    @user = @current_user
-    @favorite_ids = []
-    @current_user.favorites.each do |f|
-      @favorite_ids.push(f.note_id)
+    if @current_user
+      @user = @current_user
+      @favorite_ids = []
+      @current_user.favorites.each do |f|
+        @favorite_ids.push(f.note_id)
+      end
     end
   end
 
