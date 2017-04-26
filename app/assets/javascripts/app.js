@@ -3,7 +3,8 @@ $( document ).ready(function() {
 
     $(".comment-reply").hide();
 
-    $(".reply-btn").click(function(){
+    $(".reply-btn").click(function(e){
+      e.preventDefault();
       $("#" + event.target.id + "_reply_form").toggle();
     });
 

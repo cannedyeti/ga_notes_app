@@ -1,0 +1,46 @@
+<div class="row badges">
+  <div class="containthisshit">
+    <div class="well col-xs-2">
+      <%= image_tag 'boulder.png', class: 'badgers', title: "Boulder Badge! Gained for signing up!", 'data-toggle' => 'tooltip'%>
+    </div>
+    <div class="well col-xs-2">
+      <% if locals[:public_notes].length >= 1%>
+        <%= image_tag 'cascade.png', class: 'badgers', title: "Cascade Badge! Gained for creating a post!", 'data-toggle' => 'tooltip'%>
+      <% end %>
+    </div>
+    <div class="well col-xs-2">
+      <% if locals[:current_user].comments.length >= 1 && locals[:public_notes].length >= 1 %>
+        <%= image_tag 'thunder.png', class: 'badgers', title: "Thunder Badge! Gained for posting a comment.", 'data-toggle' => 'tooltip'%>
+      <% end %>
+    </div>
+    <div class="well col-xs-2">
+      <% if locals[:current_user].comments.length >= 10 && locals[:public_notes].length >= 1%>
+        <%= image_tag 'rainbow.png', class: 'badgers', title: "Rainbow Badge! Gained by posting 10 comments", 'data-toggle' => 'tooltip'%>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class='row badges'>
+  <div class="containthisshit">
+    <div class="well col-xs-2">
+      <% if locals[:current_user].comments.length >= 10 && locals[:public_notes].length >= 5%>
+        <%= image_tag 'marsh.png', class: 'badgers', title: "Marsh Badge! 10 comments, 5 posts.", 'data-toggle' => 'tooltip'%>
+      <%end%>
+    </div>
+    <div class="well col-xs-2">
+      <% if locals[:current_user].comments.length >= 20 && locals[:public_notes].length >= 10%>
+        <%= image_tag 'soul.png', class: 'badgers', title: "Soul Badge! 20 comments, 10 posts.", 'data-toggle' => 'tooltip'%>
+      <%end%>
+    </div>
+    <div class="well col-xs-2">
+      <% if locals[:current_user].comments.length >= 40 && locals[:public_notes].length >= 20%>
+        <%= image_tag 'earth.png', class: 'badgers', title: "Earth Badge! 40 comments, 20 posts.", 'data-toggle' => 'tooltip'%>
+      <%end%>
+    </div>
+    <div class="well col-xs-2">
+      <% if locals[:current_user].comments.length >= 80 && locals[:public_notes].length >= 40%>
+        <%= image_tag 'volcano.png', class: 'badgers', title: "Volcano Badge! 80 comments, 40 posts.", 'data-toggle' => 'tooltip'%>
+      <%end%>
+    </div>
+  </div>
+</div>
