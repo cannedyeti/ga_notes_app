@@ -1,12 +1,17 @@
 class FavoritesController < ApplicationController
+  require 'will_paginate/array'
+
   def index
     if @current_user
       @user = @current_user
+      favorites = []
       @favorites = []
       @favorite_ids = []
       @current_user.favorites.each do |f|
+        favorites.push(Note.find(f.note_id))
         @favorites.push(Note.find(f.note_id))
-      end
+    end
+      @favorites = favorites.paginate(:page => params[:page], :per_page => 10)
       @favorites.each do |n|
         n.content = Sanitize.clean(n.content)
         n.content = n.content[0..200] + '...'
