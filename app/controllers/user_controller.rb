@@ -8,7 +8,11 @@ class UserController < ApplicationController
       @course = Course.find(@user.default_course_id)
       @locations = Location.all
       @courses = Course.all
-    else 
+      @privilegeMap = {
+        1 => "Basic",
+        2 => "Admin",
+      }
+    else
       redirect_to "/"
       flash[:warning] = "Please log in before doing that."
     end

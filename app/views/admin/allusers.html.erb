@@ -25,6 +25,7 @@
         <li><a href="/courses/new">Create a Course</a></li>
         <% end %>
       </ul>
+      <%= render "partials/badges", locals:  {current_user:  @current_user, public_notes: @public_notes} %>
     </div>
   </div>
   <div class="col-xs-12 col-sm-8">
