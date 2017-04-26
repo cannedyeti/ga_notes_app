@@ -19,6 +19,7 @@
   <% else %>
     <% @notes.each do |n| %>
       <%= render "partials/note_preview", locals:  {n:  n} %>
+      <%= will_paginate @notes %>
       <div class="row text-center">
         <% if n.whitelist.length > 0 %>
           <%= link_to "Publish", '/publish/' + n.id.to_s, method: :put, class: 'pull-right btn btn-red-sm'%>

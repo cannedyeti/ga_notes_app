@@ -4,12 +4,14 @@ class CoursesController < ApplicationController
 
   def index
     @courses = Course.all
-    @tags = Tag.joins(:notes).select("tags.*, count(notes.id) as scount").group("tags.id").order("scount DESC").limit(9)
+    @tags = Tag.joins(:notes).select("tags.*, count(notes.whitelist) as scount").group("tags.id").order("scount DESC").limit(9)
+    
   end
 
   def show
     @course = Course.find(params[:course_id])
     @notes = Note.where("course_id = ? AND whitelist = ?", *[params[:course_id], "{}"]).order(up_votes: :desc)
+    @notes = @notes.paginate(:page => params[:page], :per_page => 10)
     @notes.each do |n|
       n.content = Sanitize.clean(n.content)
       n.content = n.content[0..100] + '...'

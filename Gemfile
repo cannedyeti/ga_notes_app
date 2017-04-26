@@ -35,6 +35,7 @@ gem "font-awesome-rails"
 gem 'bootstrap_form'
 gem 'jquery-ui-rails'
 gem 'tinymce-rails'
+gem 'will_paginate', '~> 3.1.0'
 gem 'sanitize'
 gem 'rails_12factor', group: :production
 # Use Capistrano for deployment

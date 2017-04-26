@@ -18,9 +18,7 @@ class TagsController < ApplicationController
         @notes.push(temp)
       end
     end
-    
-    puts "notes: " + @notes.to_s
-  end
+  end 
 
   def destroy
     #delete the association, not the tag

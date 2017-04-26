@@ -1,10 +1,13 @@
 class NotesController < ApplicationController
   def index
     @notes = Note.where(:user_id => @current_user.id)
+    @notes = @notes.paginate(:page => params[:page], :per_page => 10)
     @notes.each do |n|
       n.content = Sanitize.clean(n.content)
       n.content = n.content[0..100] + '...'
     end
+    # Post.paginate(:page => params[:page], :per_page => 30)
+    
   end
 
   def new
