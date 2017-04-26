@@ -14,7 +14,8 @@
 
   <% if @notes.length >= 1 %>
     <% @notes.each do |n| %>
-      <%= render "partials/note_preview_from_tag", locals:  {n:  n} %>
+      <%= render "partials/note_preview", locals:  {n:  n} %>
+      <hr class="hr-gray">
     <% end %>
   <% else %>
     <h1 class="fiji-font text-center">NOTHING</h1>

@@ -14,11 +14,24 @@
     </div>
     <ul class="nav navbar-nav pull-right">
       <li class="dropdown">
-        <a href="/courses">Course
+        <a href="/courses">Courses
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <% @courses.each do |c| %>
-            <li><a href="/courses/<%=c.id%>"><%= c.code %></a></li>
+            <% if c.is_official_course %>
+              <li><a href="/courses/<%=c.id%>"><%= c.code %></a></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="/courses">Other Topics
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <% @courses.each do |c| %>
+            <% if !c.is_official_course %>
+              <li><a href="/courses/<%=c.id%>"><%= c.code %></a></li>
+            <% end %>
           <% end %>
         </ul>
       </li>

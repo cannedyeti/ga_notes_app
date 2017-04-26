@@ -6,7 +6,8 @@
         <%= bootstrap_form_for @course do |f| %>
           <%= f.text_field :name, class: 'form-field sign-in-field', placeholder: "Course Name"%>
           <%= f.text_field :code, class: 'form-field sign-in-field', placeholder: "Course Code" %>
-          <%= f.text_area :description, class: 'my-text-area', class: 'form-field sign-in-field', rows: "5", placeholder:"Course Description" %>
+          <%= f.text_area :description, class: 'my-text-area form-field sign-in-field', rows: "5", placeholder:"Course Description" %>
+          <%= f.check_box :is_official_course, label: "This is an official GA course"%>
           <%= f.submit "Create course", class: 'btn btn-red-sign'%>
         <% end %>
       </div>

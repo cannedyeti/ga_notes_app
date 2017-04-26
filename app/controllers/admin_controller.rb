@@ -1,6 +1,7 @@
 class AdminController < ApplicationController
   def allusers
     if @current_user && (@current_user.privilege == 2)
+      @public_notes = Note.where("user_id = ? AND whitelist = ?", *[@current_user.id, "{}"])
       @users = User.all.order(points: :desc)
       @privileges = Privilege.all
     else
@@ -12,6 +13,7 @@ class AdminController < ApplicationController
   def allnotes
     if @current_user && (@current_user.privilege == 2)
     #only get notes that aren't private
+      @public_notes = Note.where("user_id = ? AND whitelist = ?", *[@current_user.id, "{}"])
       @notes = Note.where("whitelist = '{}'").order(down_votes: :desc)
       @typeMap = {
         0 => "Public",
@@ -26,6 +28,7 @@ class AdminController < ApplicationController
 
   def allcourses
     if @current_user && (@current_user.privilege == 2)
+      @public_notes = Note.where("user_id = ? AND whitelist = ?", *[@current_user.id, "{}"])
       @courses = Course.all.order(id: :asc)
     else
       redirect_to '/'
