@@ -2,7 +2,7 @@
   <div class="container">
   <div>
     <h1 class="main"><strong><%=@note.title%></strong></h1>
-    <h4><%=@note.course.name%></h4>
+    <h4><a href="/courses/<%=@note.course.id%>" class="ga-lt-red"><%=@note.course.name%></a></h4>
 
     <p class="gray">By <a class="profile-link" href="/profile/<%=@note.user.id%>"><%= @note.user.name %></a></p>
   </div>
@@ -73,37 +73,9 @@
 
     <br>
     <% @comments.each do |c| %>
-      <p><strong><%= c.user.name %></strong> <%=c.content%></p>
-      <% if @note.whitelist.length != 1 %>
-        <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a> &#8729; &ensp;
-      <% end %>
-      <%= c.up_votes.length - c.down_votes.length %> &ensp;
-      <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ c.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
-      &ensp;
-      <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i>').html_safe, '/comments/vote/true/'+ c.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
-
-      <% if @current_user && @current_user.id == c.user.id%>
-        &ensp;
-        <%= link_to "Delete", "/comments/" + c.id.to_s, method: :delete%>
-      <% end %>
-      <p><%= c.created_at.strftime("%b %d %Y at %l:%M %p") %></p>
-
+      <%= render "partials/comment", locals:  {c:  c, current_user: @current_user, note: @note} %>
       <% c.child_comments.each do |r| %>
-        <div class="reply">
-          <p><strong><%= r.user.name %></strong> <%=r.content%></p>
-          <% if @note.whitelist.length != 1 %>
-            <a href="#" id="comment_<%=c.id%>" class="reply-btn">Reply </a> &#8729; &ensp;
-          <% end %>
-          <%= r.up_votes.length - r.down_votes.length %> &ensp;
-          <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ r.id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
-          &ensp;
-          <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i>').html_safe, '/comments/vote/true/'+ r.id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
-          <% if @current_user && @current_user.id == r.user.id%>
-            &ensp;
-            <%= link_to "Delete", "/comments/" + r.id.to_s, method: :delete, action: 'destroy_reply'%>
-          <% end %>
-          <p><%= r.created_at.strftime("%b %d %Y at %l:%M %p") %></p>
-        </div>
+        <%= render "partials/reply", locals:  {r:  r, c: c, current_user: @current_user, note: @note} %>
       <% end %>
 
       <div id="comment_<%=c.id%>_reply_form" class="comment-reply text-right">

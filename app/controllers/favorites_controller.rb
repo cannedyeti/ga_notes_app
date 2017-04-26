@@ -7,10 +7,6 @@ class FavoritesController < ApplicationController
       @current_user.favorites.each do |f|
         @favorites.push(Note.find(f.note_id))
       end
-      @favorites.each do |n|
-        n.content = Sanitize.clean(n.content)
-        n.content = n.content[0..200] + '...'
-      end
     else
       redirect_to "/"
       flash[:warning] = "Please log in before doing that."

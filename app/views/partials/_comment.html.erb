@@ -1,0 +1,27 @@
+<div class="comment">
+  <div class="row">
+    <div class="col-xs-1">
+      <div class="comment-pic-container">
+        <a href='/profile/<%=locals[:c].user.id%>'>
+            <%= image_tag locals[:c].user.photo ? locals[:c].user.photo : 'default-user-image.png',  class: 'comment-pic' %>
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-11">
+      <p><strong><a href="/profile/<%=locals[:c].user.id%>" class="red-link"><%= locals[:c].user.name %></a></strong> <%=locals[:c].content%></p>
+      <% if locals[:note].whitelist.length != 1 %>
+        <a href="#" id="comment_<%=locals[:c].id%>" class="reply-btn ga-lt-red">Reply </a> &#8729;
+      <% end %>
+      <% if locals[:current_user] && locals[:current_user].id == locals[:c].user.id%>
+        <%= link_to "Delete", "/comments/" + locals[:c].id.to_s, method: :delete, class: "ga-lt-red"%> &#8729;
+      <% end %>
+      &ensp;
+      <%= locals[:c].up_votes.length - locals[:c].down_votes.length %> &ensp;
+      <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ locals[:c].id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
+      &ensp;
+      <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i>').html_safe, '/comments/vote/true/'+ locals[:c].id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
+      &ensp; &#8729;
+      <%= locals[:c].created_at.strftime("%b %d %Y at %l:%M %p") %>
+    </div>
+  </div>
+</div>

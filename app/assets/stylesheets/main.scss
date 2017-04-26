@@ -63,6 +63,9 @@ body {
 
 .ga-lt-red {
   color: #fa4542;
+  &:hover {
+    color: #fa4542;
+  }
 }
 
 .dk-gray {
@@ -461,7 +464,8 @@ select {
 }
 
 .preview {
-  margin: 30px 10px;
+  padding-top: 8px;
+  margin: 0px;
 }
 
 .note-foot {
