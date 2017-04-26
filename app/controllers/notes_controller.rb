@@ -2,19 +2,15 @@ class NotesController < ApplicationController
   def index
     @notes = Note.where(:user_id => @current_user.id)
     @notes = @notes.paginate(:page => params[:page], :per_page => 10)
-    @notes.each do |n|
-      n.content = Sanitize.clean(n.content)
-      n.content = n.content[0..200] + '...'
-    end
     # Post.paginate(:page => params[:page], :per_page => 30)
-    
+
   end
 
   def new
     if @current_user
       @note = Note.new
       @courses = Course.all
-    else 
+    else
       redirect_to "/"
       flash[:warning] = "You must be logged in to post."
     end
@@ -26,7 +22,7 @@ class NotesController < ApplicationController
     if @current_user.id == n.user.id
       n.update(:whitelist => [@current_user.id.to_s])
       redirect_to '/notes'
-    else 
+    else
       redirect_to "/notes"
       flash[:warning] = "You do not have the privilege for this."
     end
@@ -176,7 +172,7 @@ class NotesController < ApplicationController
       puts "request.referer" + request.referer
       redirect_to '/courses'
     else
-      redirect_to '/notes' 
+      redirect_to '/notes'
       flash[:danger] = "You cannot delete this note."
     end
   end

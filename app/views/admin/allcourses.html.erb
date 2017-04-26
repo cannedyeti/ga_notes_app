@@ -51,16 +51,16 @@
             <td><%=u.description[0..50]%>...</td>
             <td><%=u.notes.length%></td>
             <td><%=u.is_official_course ? "Yes" : "No"%></td>
-            <td>
+            <td class="text-center">
               <% if u.notes.length > 0 %>
-                <a href="#" class="btn-sm btn-danger" data-toggle="tooltip" title="Warning, don't delete courses that have notes!"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                <a href="#" class="btn-red-xs btn-custom-xs" data-toggle="tooltip" title="Warning, don't delete courses that have notes!"><i class="fa fa-trash" aria-hidden="true"></i></a>
               <% else %>
-                <%= link_to ('<i class="fa fa-trash" aria-hidden="true"></i>').html_safe, '/courses/'+ u.id.to_s, method: :delete, title: "Warning, don't delete courses that have notes!", 'data-toggle' => 'tooltip', class: "btn-sm btn-danger"%>
+                <%= link_to ('<i class="fa fa-trash" aria-hidden="true"></i>').html_safe, '/courses/'+ u.id.to_s, method: :delete, title: "Warning, don't delete courses that have notes!", 'data-toggle' => 'tooltip', class: "btn-red-xs btn-custom-xs"%>
               <% end %>
 
             </td>
-            <td>
-              <a class="btn-sm btn-info" href="/courses/<%=u.id%>/edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+            <td class="text-center">
+              <a class="btn-grey btn-custom-xs" href="/courses/<%=u.id%>/edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
             </td>
           </tr>
         <% end %>

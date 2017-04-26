@@ -12,6 +12,7 @@ body {
 }
 
 .footer {
+  margin-top: 55px;
   background-color: #222222;
   color: #a2a2a2;
   ul {
@@ -62,6 +63,9 @@ body {
 
 .ga-lt-red {
   color: #fa4542;
+  &:hover {
+    color: #fa4542;
+  }
 }
 
 .dk-gray {
@@ -201,7 +205,7 @@ nav.navbar {
   }
 }
 
-.btn-red, .btn-red-home, .btn-red-sign, .btn-red-sm {
+.btn-red, .btn-red-home, .btn-red-sign, .btn-red-sm, .btn-red-xs {
   margin: 10px 0 30px 0;
   background-color: #fa4542;
   font-family: 'Poppins', sans-serif;
@@ -232,6 +236,16 @@ nav.navbar {
 
 .btn-red-sm {
   font-size: 1em;
+}
+
+.btn-custom-xs {
+  height: 20px;
+  padding:5px;
+  font-size: 0.7em;
+  border-style: none;
+  border-radius: 3px;
+  margin-top:0px;
+  margin-bottom:5px;
 }
 
 .btn-red-home {
@@ -435,12 +449,23 @@ select {
   }
 }
 
+.admin-select {
+  height: 20px !important;
+  // width: 50%;
+
+}
+
+.admin-select-btn {
+  // width: 40%;
+}
+
 .control-label {
   font-weight: normal;
 }
 
 .preview {
-  margin: 30px 10px;
+  padding-top: 8px;
+  margin: 0px;
 }
 
 .note-foot {

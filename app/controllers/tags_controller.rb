@@ -17,8 +17,6 @@ class TagsController < ApplicationController
       temp = nil
       temp = Note.where("id = ? AND whitelist = ?", *[n, "{}"]).first
       if temp
-        temp.content = Sanitize.clean(temp.content)
-        temp.content = temp.content[0..200] + '...'
         notes.push(temp)
       end
     end
