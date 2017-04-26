@@ -17,6 +17,7 @@
       <%= render "partials/note_preview", locals:  {n:  n} %>
       <hr class="hr-gray">
     <% end %>
+    <%= will_paginate @notes %>
   <% else %>
     <h1 class="fiji-font text-center">NOTHING</h1>
   <% end %>
