@@ -408,9 +408,13 @@ display: block;
   padding: 1rem;
   border-radius: 0px;
 }
+.pokeball-img {
+  height: 28px;
+}
 
 .user-pic {
   max-height: 300px;
+  max-width: 350px;
 }
 .sign-in-field {
   color: rgb(126,126,126);
@@ -460,4 +464,9 @@ hr {
 .tag-sidebar {
   margin: 15px 0px;
   text-align: right;
+}
+
+.tooltip-inner {
+    width: 200px;
+    /* If max-width does not work, try using width instead */
 }
