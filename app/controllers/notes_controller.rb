@@ -6,8 +6,6 @@ class NotesController < ApplicationController
       n.content = Sanitize.clean(n.content)
       n.content = n.content[0..200] + '...'
     end
-    # Post.paginate(:page => params[:page], :per_page => 30)
-    
   end
 
   def new
