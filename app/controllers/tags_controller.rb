@@ -1,6 +1,4 @@
 class TagsController < ApplicationController
-  require 'will_paginate/array'
-
   def index
   end
 
@@ -11,7 +9,7 @@ class TagsController < ApplicationController
   end
 
   def show
-    notes = []
+    @notes = []
     @tag = Tag.find(params[:id])
     @tag.note_ids.each do |n|
       temp = nil
@@ -19,10 +17,9 @@ class TagsController < ApplicationController
       if temp
         temp.content = Sanitize.clean(temp.content)
         temp.content = temp.content[0..200] + '...'
-        notes.push(temp)
+        @notes.push(temp)
       end
     end
-    @notes = notes.paginate(:page => params[:page], :per_page => 10)
   end
 
   def destroy
