@@ -9,7 +9,7 @@ class FavoritesController < ApplicationController
       end
       @favorites.each do |n|
         n.content = Sanitize.clean(n.content)
-        n.content = n.content[0..100] + '...'
+        n.content = n.content[0..200] + '...'
       end
     else
       redirect_to "/"

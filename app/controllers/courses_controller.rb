@@ -14,7 +14,7 @@ class CoursesController < ApplicationController
     @notes = @notes.paginate(:page => params[:page], :per_page => 10)
     @notes.each do |n|
       n.content = Sanitize.clean(n.content)
-      n.content = n.content[0..100] + '...'
+      n.content = n.content[0..200] + '...'
     end
     @tags = Tag.joins(:notes).select("tags.*, count(notes.id) as scount").group("tags.id").order("scount DESC").limit(10)
   end

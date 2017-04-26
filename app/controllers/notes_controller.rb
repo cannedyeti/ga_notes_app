@@ -4,7 +4,7 @@ class NotesController < ApplicationController
     @notes = @notes.paginate(:page => params[:page], :per_page => 10)
     @notes.each do |n|
       n.content = Sanitize.clean(n.content)
-      n.content = n.content[0..100] + '...'
+      n.content = n.content[0..200] + '...'
     end
     # Post.paginate(:page => params[:page], :per_page => 30)
     
