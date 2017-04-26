@@ -38,7 +38,7 @@
           <th>Name</th>
           <th>Email</th>
           <th>Points</th>
-          <th>Privileges</th>
+          <th>Privilege</th>
           <th># Notes</th>
           <th># Comments</th>
           <th>Activate/Deactivate</th>
@@ -59,33 +59,32 @@
             <td>
               <a class="note-link" href="/profile/<%=u.id%>">
                 <% if u.id == @current_user.id %>
-                  <%=u.name%> <strong class="me"><i class="fa fa-user-circle-o" aria-hidden="true"></i> (me)</strong>
+                  <%=u.name%> (me)
                 <% else %>
                   <%=u.name%>
                 <% end %>
               </a>
             </td>
             <td><%=u.email%></td>
-            <td><%=u.points%></td>
-            <td>
+            <td class="text-center"><%=u.points%></td>
+            <td class="text-center">
               <% if @current_user.id != u.id %>
-                <!-- <%= bootstrap_form_for u, :url => "/admin/privilege/" + u.id.to_s, :method => :put do |f| %>
-                  <%= f.collection_select :privilege, @privileges, :id, :name, {:selected => u.privilege, :label => ''} %>
-                  <%= f.submit "Update", class: 'btn-xs btn-info'%>
-                <% end %> -->
-                <%=@privileges[u.privilege-1][:name]%>
+                <%= bootstrap_form_for u, :url => "/admin/privilege/" + u.id.to_s, class: 'form-inline', :method => :put do |f| %>
+                  <%= f.collection_select :privilege, @privileges, :id, :name, {:selected => u.privilege, :hide_label => true}, class: 'admin-select' %>
+                  <%= f.submit "Update", class: 'btn-grey btn-custom-xs'%>
+                <% end %>
               <% else %>
                 <%=@privileges[u.privilege-1][:name]%>
               <% end %>
             </td>
-            <td><%=u.notes.length%></td>
-            <td><%=u.comments.length%></td>
-            <td>
+            <td class="text-center"><%=u.notes.length%></td>
+            <td class="text-center"><%=u.comments.length%></td>
+            <td class="text-center">
               <% if u.id != @current_user.id %>
                 <% if u.is_active %>
-                  <%= link_to ('Deactivate').html_safe, "/admin/deactivate/" + u.id.to_s, method: :put, class: 'btn-sm btn-danger' %>
+                  <%= link_to ('Deactivate').html_safe, "/admin/deactivate/" + u.id.to_s, method: :put, class: 'btn-red-xs btn-custom-xs' %>
                 <% else %>
-                  <%= link_to ('Activate').html_safe, "/admin/deactivate/" + u.id.to_s, method: :put, class: 'btn-sm btn-danger' %>
+                  <%= link_to ('Activate').html_safe, "/admin/deactivate/" + u.id.to_s, method: :put, class: 'btn-red-xs btn-custom-xs' %>
                 <% end %>
 
               <% end %>

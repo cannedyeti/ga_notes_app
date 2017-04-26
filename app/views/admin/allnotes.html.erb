@@ -35,8 +35,8 @@
         <tr>
           <th>id</th>
           <th>Title</th>
-          <th>Up Votes</th>
-          <th>Down Votes</th>
+          <th><i class="fa fa-thumbs-up" aria-hidden="true"></i></th>
+          <th><i class="fa fa-thumbs-down" aria-hidden="true"></i></th>
           <th>Author</th>
           <th>Course</th>
           <th>Created At</th>
@@ -62,8 +62,8 @@
             <% else %>
               <td><%=@typeMap[u.whitelist.length]%></td>
             <% end %>
-            <td>
-              <%= link_to ('<i class="fa fa-trash" aria-hidden="true"></i>').html_safe, note_path(u), method: :delete, class: 'btn-sm btn-danger' %>
+            <td class="text-center">
+              <%= link_to ('<i class="fa fa-trash" aria-hidden="true"></i>').html_safe, note_path(u), method: :delete, class: 'btn-red-xs btn-custom-xs' %>
             </td>
           </tr>
         <% end %>
