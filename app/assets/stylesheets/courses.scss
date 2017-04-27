@@ -10,6 +10,20 @@
     padding: 20px 0px;
     margin: 10px;
   }
+
+  .course-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    height: 15px;
+    border-bottom: 1px solid  rgb(162,162,162);
+    text-align: center;
+    span {
+      color: rgb(34,34,34);
+      font-size: 1.4em;
+      background-color: rgb(228,241,254);
+      padding: 0 10px;
+    }
+  }
 }
 
 .vote {
@@ -55,14 +69,12 @@
     text-decoration: underline;
     &:hover {
       color: #fa4542;
-      // span {
-      //   color: black;
-      // }
     }
   }
 }
 
 .tag {
+  transition: all .5s ease-in-out;
   @extend .gray;
   padding: 2px;
   border-radius: 2px;

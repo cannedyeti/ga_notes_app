@@ -12,6 +12,7 @@ body {
 }
 
 .footer {
+  margin-top: 55px;
   background-color: #222222;
   color: #a2a2a2;
   ul {
@@ -26,20 +27,11 @@ body {
       transform: translate(20px, 0px);
     }
   }
-  p {
-    font-size: 1.4em;
-  }
   hr {
     border-color: rgb(56,56,56);
   }
-  .round-icon {
-    margin: 10px;
-    // height: 50px;
-    // width: 50px;
-    border-radius: 50%;
-    padding: 10px;
-    background-color: #a2a2a2;
-    color: #222222;
+  .pokeball-img {
+    height: 20px;
   }
 }
 
@@ -62,6 +54,9 @@ body {
 
 .ga-lt-red {
   color: #fa4542;
+  &:hover {
+    color: #fa4542;
+  }
 }
 
 .dk-gray {
@@ -201,7 +196,7 @@ nav.navbar {
   }
 }
 
-.btn-red, .btn-red-home, .btn-red-sign, .btn-red-sm {
+.btn-red, .btn-red-home, .btn-red-sign, .btn-red-sm, .btn-red-xs {
   margin: 10px 0 30px 0;
   background-color: #fa4542;
   font-family: 'Poppins', sans-serif;
@@ -232,6 +227,16 @@ nav.navbar {
 
 .btn-red-sm {
   font-size: 1em;
+}
+
+.btn-custom-xs {
+  height: 20px;
+  padding:5px;
+  font-size: 0.7em;
+  border-style: none;
+  border-radius: 3px;
+  margin-top:0px;
+  margin-bottom:5px;
 }
 
 .btn-red-home {
@@ -340,8 +345,10 @@ display: block;
     margin-bottom: 20px;
     text-align: left;
   }
+  h4, p {
+    @extend .mary-poppins-font;
+  }
   .head_title {
-    padding: 20px;
     font-family: 'Fjalla One', sans-serif;
   }
 }
@@ -408,9 +415,6 @@ display: block;
   padding: 1rem;
   border-radius: 0px;
 }
-.pokeball-img {
-  height: 28px;
-}
 
 .user-pic {
   max-height: 300px;
@@ -435,12 +439,23 @@ select {
   }
 }
 
+.admin-select {
+  height: 20px !important;
+  // width: 50%;
+
+}
+
+.admin-select-btn {
+  // width: 40%;
+}
+
 .control-label {
   font-weight: normal;
 }
 
 .preview {
-  margin: 30px 10px;
+  padding-top: 8px;
+  margin: 0px;
 }
 
 .note-foot {
@@ -475,3 +490,4 @@ hr {
   font-size: 15px;
   font-family: Poppins;
 }
+

@@ -1,96 +1,33 @@
 <div class="container">
-  <div class="page_headline course_headline">
-    <div class="row">
-      <div class="col-xs-12 head_title">
-        <h2><%= @user.name %>'s Profile</h2>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 page_headline">
+      <div class="head_title">
+        <h2><%= @user.name %></h2>
         <h3><%= @user.is_active ? '' : '(deactivated)' %></h3>
-        <hr>
+        <p><strong>Location: </strong><%= @location.name %></p>
+        <p><strong>Course: </strong><%= @course.name %> (<%= @course.code %>)</p>
+        <p><strong>Privilege: </strong><%= @privilegeMap[@user.privilege] %></p>
+        <p><strong>Points: </strong><%= @user.points %></p>
+        <!-- badges is being weird......doesn't render properly -->
+        <!-- <%= render "partials/badges", locals:  {current_user:  @user, public_notes: @public_notes} %> -->
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-6">
-      <h4><strong>Location: </strong><%= @location.name %></h4>
-      <h4><strong>Course: </strong><%= @course.name %> (<%= @course.code %>)</h4>
-      <h4><strong>Privileges: </strong><%= @user.privilege %></h4>
-      <h4><strong>Points: </strong><%= @user.points %></h4>
-        <div class="row badges">
-          <div class="well col-xs-2">
-            <%= image_tag 'boulder.png', class: 'badgers', title: "Boulder Badge! Gained for signing up!", 'data-toggle' => 'tooltip'%>
-          </div>
-          <div class="well col-xs-2">
-            <% if @public_notes.length >= 1%>
-              <%= image_tag 'cascade.png', class: 'badgers', title: "Cascade Badge! Gained for creating a post!", 'data-toggle' => 'tooltip'%>
-            <% end %>
-          </div>
-          <div class="well col-xs-2">
-            <% if @user.comments.length >= 1 && @public_notes.length >= 1 %>
-              <%= image_tag 'thunder.png', class: 'badgers', title: "Thunder Badge! Gained for posting a comment.", 'data-toggle' => 'tooltip'%>
-            <% end %>
-          </div>
-          <div class="well col-xs-2">
-            <% if @user.comments.length >= 10 && @public_notes.length >= 1%>
-              <%= image_tag 'rainbow.png', class: 'badgers', title: "Rainbow Badge! Gained by posting 10 comments", 'data-toggle' => 'tooltip'%>
-            <% end %>
-          </div>
-        </div>
-        <div class='row badges'>
-          <div class="well col-xs-2">
-            <% if @user.comments.length >= 10 && @public_notes.length >= 5%>
-              <%= image_tag 'marsh.png', class: 'badgers', title: "Marsh Badge! 10 comments, 5 posts.", 'data-toggle' => 'tooltip'%>
-            <%end%>
-          </div>
-          <div class="well col-xs-2">
-            <% if @user.comments.length >= 20 && @public_notes.length >= 10%>
-              <%= image_tag 'soul.png', class: 'badgers', title: "Soul Badge! 20 comments, 10 posts.", 'data-toggle' => 'tooltip'%>
-            <%end%>
-          </div>
-          <div class="well col-xs-2">
-            <% if @user.comments.length >= 40 && @public_notes.length >= 20%>
-              <%= image_tag 'earth.png', class: 'badgers', title: "Earth Badge! 40 comments, 20 posts.", 'data-toggle' => 'tooltip'%>
-            <%end%>
-          </div>
-          <div class="well col-xs-2">
-            <% if @user.comments.length >= 80 && @public_notes.length >= 40%>
-              <%= image_tag 'volcano.png', class: 'badgers', title: "Volcano Badge! 80 comments, 40 posts.", 'data-toggle' => 'tooltip'%>
-            <%end%>
-          </div>
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-6">
-      <div class="text-center">
+    <div class="col-xs-12 col-sm-6 text-right">
+      <br><br>
         <% if @user.photo == nil %>
           <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>
         <% else %>
           <img src="<%= @user.photo %>" class="user-pic">
         <% end%>
-        <br><br>
       </div>
-    </div>
   </div>
+
+  <hr>
+  <h3 class="fiji-font text-center"><strong>Notes: </strong></h3><br>
   <% @user.notes.each do |n| %>
     <% if (n.whitelist.length == 0 || n.whitelist.include?(@current_user.id.to_s))%>
-      <div class="note-div">
-        <a class="note-link" href="/notes/<%=n.id%>">
-          <h3 class="fiji-font"><%= n.title.upcase %></h3>
-        </a>
-        <p class="fiji-font">by <%=n.user.name%> on <%= n.created_at.strftime("%b %d %Y at %l:%M %p") %></p>
-        <div class="row">
-          <div class="col-xs-12 col-sm-10">
-            <% n.tags.each do |t| %>
-              <a class="tag" href="/find/<%=t.id %>">#<%=t.tag_name%></a>
-            <% end %>
-          </div>
-          <div class="col-xs-12 col-sm-2 text-right">
-            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-            <%=n.up_votes.length%>
-            &ensp;
-            <i class="fa fa-thumbs-down" aria-hidden="true"></i>
-            <%=n.down_votes.length%>
-          </div>
-        </div>
-      </div>
+      <%= render "partials/note_preview", locals:  {n:  n} %>
+      <hr>
     <% end%>
-    <hr>
   <% end %>
 </div>
