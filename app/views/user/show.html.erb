@@ -8,10 +8,13 @@
         <p><strong>Course: </strong><%= @course.name %> (<%= @course.code %>)</p>
         <p><strong>Privilege: </strong><%= @privilegeMap[@user.privilege] %></p>
         <p><strong>Points: </strong><%= @user.points %></p>
-        <!-- badges is being weird......doesn't render properly -->
-        <!-- <%= render "partials/badges", locals:  {current_user:  @user, public_notes: @public_notes} %> -->
       </div>
+      <p><strong>Achievements</strong></p>
+      <%= render "partials/badges", locals:  {current_user:  @user, public_notes: @public_notes} %>
     </div>
+    
+        <!-- badges is being weird......doesn't render properly -->
+    
     <div class="col-xs-12 col-sm-6 text-right">
       <br><br>
         <% if @user.photo == nil %>

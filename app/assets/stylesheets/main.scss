@@ -108,7 +108,7 @@ nav.navbar {
 }
 
 .banner-img {
-  background: image-url('notes-banner.jpg');
+  background: image-url('notes-banner.png');
   height: 700px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -211,7 +211,7 @@ nav.navbar {
   }
 }
 
-.btn-grey {
+.btn-grey, .btn-grey-sm {
   background-color: rgb(195,195,195);
   margin: 10px 0 30px 0;
   @extend .mary-poppins-font;
@@ -223,6 +223,12 @@ nav.navbar {
   &:hover {
     background-color: rgb(210,210,210);
   }
+}
+
+.btn-grey-sm {
+  height: 30px;
+  border-radius: 3px;
+  border-style: none;
 }
 
 .btn-red-sm {
@@ -328,7 +334,7 @@ display: block;
 .page_headline {
   margin: 20px 0px;
   background-color: #f6f6f6;
-  height: 180px;
+  min-height: 180px;
   h1{
     font-size: 80px;
     text-align: left;
@@ -486,6 +492,8 @@ hr {
     /* If max-width does not work, try using width instead */
 }
 
-.form-control option {
-  font-size: 400px;
+.form-control {
+  font-size: 15px;
+  font-family: Poppins;
 }
+

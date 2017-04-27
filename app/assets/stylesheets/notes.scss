@@ -38,10 +38,18 @@
     color: #fa4542;
   }
 
+  .helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+
   .comment-pic {
+    display: inline-block;
     max-height: 60px;
     max-width: 60px;
     margin: auto;
+    vertical-align: middle;
   }
 
   .comment-pic-container {
