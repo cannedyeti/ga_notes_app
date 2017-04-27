@@ -60,7 +60,7 @@
   <div class="container">
     <% if @note.whitelist.length != 1 %>
       <%= form_for :comment, :url => {:controller => "comments", :action => "create"}, html:{method:'post'} do |f| %>
-        <%= f.text_area :content, class: "my-text-area", placeholder: "Write a comment..." %>
+        <%= f.text_area :content, class: "my-text-area form-field sign-in-field", placeholder: "Write a comment..." %>
         <% if @current_user %>
           <%= f.hidden_field :user_id, :value => @current_user.id %>
         <% end %>
@@ -80,7 +80,7 @@
 
       <div id="comment_<%=c.id%>_reply_form" class="comment-reply text-right">
         <%= form_for :comment, :url => {:controller => "comments", :action => "create"}, html:{method:'post'} do |f| %>
-          <%= f.text_area :content, class: "my-text-area", placeholder: "Write a reply..." %>
+          <%= f.text_area :content, class: "my-text-area form-field sign-in-field", placeholder: "Write a reply..." %>
           <% if @current_user %>
             <%= f.hidden_field :user_id, :value => @current_user.id %>
           <% end %>
