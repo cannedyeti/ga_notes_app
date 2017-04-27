@@ -67,7 +67,7 @@
         <%= f.hidden_field :note_id, :value => @note.id %>
         <%= f.hidden_field :parent_id, :value => nil %>
         <br>
-        <%= f.submit "add comment" %>
+        <%= f.submit "add comment", class: "btn-grey-sm" %>
       <% end %>
     <% end %>
 
@@ -87,7 +87,7 @@
           <%= f.hidden_field :note_id, :value => @note.id %>
           <%= f.hidden_field :parent_id, :value => c.id %>
           <br>
-          <%= f.submit "reply" %>
+          <%= f.submit "reply", class: "btn-grey-sm" %>
         <% end %>
       </div>
       <br>

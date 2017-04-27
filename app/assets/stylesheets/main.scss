@@ -211,7 +211,7 @@ nav.navbar {
   }
 }
 
-.btn-grey {
+.btn-grey, .btn-grey-sm {
   background-color: rgb(195,195,195);
   margin: 10px 0 30px 0;
   @extend .mary-poppins-font;
@@ -223,6 +223,12 @@ nav.navbar {
   &:hover {
     background-color: rgb(210,210,210);
   }
+}
+
+.btn-grey-sm {
+  height: 30px;
+  border-radius: 3px;
+  border-style: none;
 }
 
 .btn-red-sm {

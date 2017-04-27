@@ -3,7 +3,7 @@
     <div class="col-xs-1">
       <div class="comment-pic-container">
         <a href='/profile/<%=locals[:c].user.id%>'>
-            <%= image_tag locals[:c].user.photo ? locals[:c].user.photo : 'default-user-image.png',  class: 'comment-pic' %>
+            <span class="helper"></span><%= image_tag locals[:c].user.photo ? locals[:c].user.photo : 'default-user-image.png',  class: 'comment-pic' %>
         </a>
       </div>
     </div>
