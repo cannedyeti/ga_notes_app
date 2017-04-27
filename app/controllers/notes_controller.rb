@@ -169,8 +169,7 @@ class NotesController < ApplicationController
       end
       c.destroy_all
       n.delete
-      puts "request.referer" + request.referer
-      redirect_to '/courses'
+      redirect_to :back
     else
       redirect_to '/notes'
       flash[:danger] = "You cannot delete this note."

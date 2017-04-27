@@ -19,8 +19,9 @@
   <% else %>
     <% @notes.each do |n| %>
       <%= render "partials/note_preview", locals:  {n:  n} %>
-      <%= will_paginate @notes %>
-      <div class="row text-center">
+      <div>
+        <a href="/notes/<%=n.id%>/edit" class="btn btn-grey">Edit Note</a>
+        <%= link_to "Delete Note", note_path(n), method: :delete, class: 'btn-red-sm btn' %>
         <% if n.whitelist.length > 0 %>
           <%= link_to "Publish", '/publish/' + n.id.to_s, method: :put, class: 'pull-right btn btn-red-sm'%>
           <br>
@@ -31,5 +32,6 @@
       </div>
       <hr>
     <% end %>
+    <%= will_paginate @notes %>
   <% end %>
 </div>
