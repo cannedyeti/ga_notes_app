@@ -345,8 +345,10 @@ display: block;
     margin-bottom: 20px;
     text-align: left;
   }
+  h4, p {
+    @extend .mary-poppins-font;
+  }
   .head_title {
-    padding: 20px;
     font-family: 'Fjalla One', sans-serif;
   }
 }

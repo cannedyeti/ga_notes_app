@@ -24,6 +24,10 @@ class UserController < ApplicationController
     @public_notes = Note.where("user_id = ? AND whitelist = ?", *[@user.id, "{}"])
     @location = Location.find(@user.location_id)
     @course = Course.find(@user.default_course_id)
+    @privilegeMap = {
+      1 => "Basic",
+      2 => "Admin",
+    }
   end
 
   def create
