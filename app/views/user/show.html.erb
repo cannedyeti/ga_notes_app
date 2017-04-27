@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-4 page_headline">
+    <div class="col-xs-12 col-sm-6 page_headline">
       <div class="head_title">
         <h2><%= @user.name %></h2>
         <h3><%= @user.is_active ? '' : '(deactivated)' %></h3>
@@ -9,12 +9,13 @@
         <p><strong>Privilege: </strong><%= @privilegeMap[@user.privilege] %></p>
         <p><strong>Points: </strong><%= @user.points %></p>
       </div>
+      <p><strong>Achievements</strong></p>
+      <%= render "partials/badges", locals:  {current_user:  @user, public_notes: @public_notes} %>
     </div>
-    <div class="col-xs-12 col-sm-4 badger-container">
+    
         <!-- badges is being weird......doesn't render properly -->
-        <%= render "partials/badges", locals:  {current_user:  @user, public_notes: @public_notes} %>
-    </div>
-    <div class="col-xs-12 col-sm-4 text-right">
+    
+    <div class="col-xs-12 col-sm-6 text-right">
       <br><br>
         <% if @user.photo == nil %>
           <%= image_tag 'default-user-image.png',  class: 'profile-pic' %>

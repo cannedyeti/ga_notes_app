@@ -16,6 +16,8 @@
           <li><a href="/notes">My Notes</a></li>
           <li><a href="/favorites">Saved Notes</a></li>
           <br>
+          <p><strong>Achievements</strong></p>
+          <hr>
           <%= render "partials/badges", locals:  {current_user:  @current_user, public_notes: @public_notes} %>
           <% if @current_user.privilege == 2 %>
           <br>
