@@ -55,7 +55,7 @@
             <br>
             <div class="account-well">
               <p><strong>About Me</strong></p>
-              <%= f.collection_select :location_id, @locations, :id, :name %>
+              <%= f.collection_select :location_id, @locations, :id, :name, class: 'options' %>
               <%= f.collection_select :default_course_id, @courses, :id, :name %>
               <%= f.text_field :photo, class: 'form-field sign-in-field', placeholder: "Enter a valid URL" %>
             </div>
