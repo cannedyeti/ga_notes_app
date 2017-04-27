@@ -1,9 +1,28 @@
 <% locals[:n].content = Sanitize.clean(locals[:n].content) %>
 <% locals[:n].content = locals[:n].content[0..500] + '...' %>
 <div class="note-div">
-  <a class="note-link" href="/notes/<%=locals[:n].id%>">
-    <h3 class="fiji-font"><%= locals[:n].title.upcase %></h3>
-  </a>
+  <div class="row">
+    <div class="col-xs-9">
+      <a class="note-link" href="/notes/<%=locals[:n].id%>">
+        <h3 class="fiji-font" style="margin-top:0px;"><%= locals[:n].title.upcase %></h3>
+      </a>
+    </div>
+    <div class="col-xs-3">
+      <div class="row">
+        <div class="col-xs-6 text-right" style="padding-right: 0px;">
+          <%= image_tag 'calendar.png', class: 'calendar-icon'%>
+          <span class="calendar-date"><%=locals[:n].created_at.strftime("%d")%></span>
+        </div>
+        <div class="col-xs-6">
+          <%= locals[:n].created_at.strftime("%a, %m/%d") %>
+          <br>
+          <%= locals[:n].created_at.strftime("%l:%M %p") %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 
   <p class="note-foot">by <a class="profile-link" href="/profile/<%=locals[:n].user.id%>"><%= locals[:n].user.name %></a> on <%= locals[:n].created_at.strftime("%b %d %Y at %l:%M %p") %></p>
 

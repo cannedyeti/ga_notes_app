@@ -1,6 +1,17 @@
 // Place all the styles related to the notes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.calendar-icon {
+  height: 40px;
+}
+.calendar-date {
+  position:absolute;
+  font-weight:bold;
+  font-size: 1.3em;
+  right: 5px;
+  top: 14px;
+  font-family: 'Poppins', sans-serif;
+}
 
 .my-text-area{
   width: 100%;
