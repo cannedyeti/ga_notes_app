@@ -55,14 +55,12 @@
     text-decoration: underline;
     &:hover {
       color: #fa4542;
-      // span {
-      //   color: black;
-      // }
     }
   }
 }
 
 .tag {
+  transition: all .5s ease-in-out;
   @extend .gray;
   padding: 2px;
   border-radius: 2px;
