@@ -15,6 +15,8 @@
         <li><a href="/profile">Profile Info</a></li>
         <li><a href="/notes">My Notes</a></li>
         <li><a href="/favorites">Saved Notes</a></li>
+        <br>
+        <%= render "partials/badges", locals:  {current_user:  @current_user, public_notes: @public_notes} %>
         <% if @current_user.privilege == 2 %>
         <br>
         <p><strong>Admin</strong></p>
@@ -25,7 +27,6 @@
         <li><a href="/courses/new">Create a Course</a></li>
         <% end %>
       </ul>
-      <%= render "partials/badges", locals:  {current_user:  @current_user, public_notes: @public_notes} %>
     </div>
   </div>
   <div class="col-xs-12 col-sm-8">

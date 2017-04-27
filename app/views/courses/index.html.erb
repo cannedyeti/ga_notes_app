@@ -2,14 +2,14 @@
   <div class="page_headline course_headline">
     <div class="col-xs-8 head_title">
       <h1 class="text-center">FIRE UP</h1>
-      <hr style="border-color: grey">
       <h3><%="Find your next great note in our global community." %></h3>
+      <br>
     </div>
     <div class="col-xs-4">
       <div class="desc_container">
-        <h4><strong>Pick your poison</strong></h4>
-        <br>
-        <p>Browse notes by course, topic, or by popular tags!</p>
+        <h5 class="mary-poppins-font"><strong>Pick your poison</strong></h5>
+        <p><small>Browse notes by course title or topic!</small></p>
+        <a href="#pop-tags-id" class="red-link">View Popular Tags</a>
       </div>
     </div>
   </div>
@@ -18,32 +18,42 @@
 <div class="all-courses">
   <br>
   <h1 class="text-center mary-poppins-font" style="letter-spacing:0.7px;font-weight:700">Start Learning</h1>
-  <br>
-  <div class="container text-center">
-    <div class="row">
-      <% @courses.each do |c| %>
-        <div class="col-xs-4">
-          <div class="well course-well">
-            <a class="course-link" href="/courses/<%= c.id %>">
-              <div class="row">
-                <div class="col-xs-10">
-                  <h3><strong><%= c.name %></strong></h3>
-                  <p class="gray"><strong>DESCRIPTION</strong></p>
-                  <p><%= c.description[0..40] %>...</p>
-                </div>
-                <div class="col-xs-2">
-                  <i class="arrow fa fa-angle-right fa-3x" aria-hidden="true"></i>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      <% end %>
+  <div class="container">
+    <div class="course-title">
+      <span>
+        Courses
+      </span>
+    </div>
+    <br>
+    <div class="text-center">
+      <div class="row">
+        <% @courses.each do |c| %>
+          <% if c.is_official_course %>
+            <%= render "partials/course_well", locals:  {c:  c} %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="course-title">
+      <span>
+        Other Topics
+      </span>
+    </div>
+    <br>
+    <div class="text-center">
+      <div class="row">
+        <% @courses.each do |c| %>
+          <% if !c.is_official_course %>
+            <%= render "partials/course_well", locals:  {c:  c} %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
-
-<div class="pop-tags">
+<div id="pop-tags-id" class="pop-tags">
   <br>
   <h1 class="text-center mary-poppins-font" style="letter-spacing:0.7px;font-weight:700">Browse By Popular Tags</h1>
   <br>
