@@ -88,7 +88,11 @@ class NotesController < ApplicationController
             afterPoints = dv.length - uv.length
             n.update(up_votes: dv, down_votes: uv)
           end
-          add_points(beforePoints, afterPoints, n.user_id)
+
+          #only add points if it is on an official course
+          if n.course.is_official_course
+            add_points(beforePoints, afterPoints, n.user_id)
+          end
           redirect_to :back
         end
       end

@@ -61,7 +61,10 @@ class CommentsController < ApplicationController
             n.update(up_votes: dv, down_votes: uv)
           end
 
-          add_points(beforePoints, afterPoints, n.user_id)
+          #only vote if the note is an official course
+          if note.course.is_official_course
+            add_points(beforePoints, afterPoints, n.user_id)
+          end
 
           if n.parent_id == nil
             redirect_to '/notes/' + n.note_id.to_s + "#comment_" + n.id.to_s

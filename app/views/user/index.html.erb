@@ -66,7 +66,7 @@
             <div class="account-well">
               <p><strong>Other Info</strong></p>
               <p><small>Privilege: <%= @privilegeMap[@current_user.privilege] %></small></p>
-              <p><small>Points: <%= @current_user.points %></small></p>
+              <p data-toggle="tooltip" title="Your points are accumulated from the number of likes/dislikes on each of your course-related posts and comments" data-placement="left"><small>Points: <%= @current_user.points %></small></p>
             </div>
             <br>
             <div class="account-well">
