@@ -74,7 +74,7 @@
     <br>
     <% @comments.each do |c| %>
       <%= render "partials/comment", locals:  {c:  c, current_user: @current_user, note: @note} %>
-      <% c.child_comments.each do |r| %>
+      <% c.child_comments.order("created_at asc").each do |r| %>
         <%= render "partials/reply", locals:  {r:  r, c: c, current_user: @current_user, note: @note} %>
       <% end %>
 
