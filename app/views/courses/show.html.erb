@@ -22,7 +22,7 @@
     <%else%>
       <% @notes.each do |n| %>
         <% if (n.whitelist.length == 0)%>
-          <%= render "partials/note_preview", locals:  {n:  n} %>
+          <%= render "partials/note_preview", locals:  {n:  n, current_user: @current_user} %>
           <hr class="hr-gray">
         <% end %>
       <% end %>

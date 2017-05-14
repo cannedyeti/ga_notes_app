@@ -18,7 +18,7 @@
     </p>
   <% else %>
     <% @notes.each do |n| %>
-      <%= render "partials/note_preview", locals:  {n:  n} %>
+      <%= render "partials/note_preview", locals:  {n:  n, current_user: @current_user} %>
       <div>
         <a href="/notes/<%=n.id%>/edit" class="btn btn-grey">Edit Note</a>
         <%= link_to "Delete Note", note_path(n), method: :delete, class: 'btn-red-sm btn' %>

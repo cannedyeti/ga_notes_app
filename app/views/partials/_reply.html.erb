@@ -15,9 +15,9 @@
       <% end %>
       &ensp;
       <%= locals[:r].up_votes.length - locals[:r].down_votes.length %> &ensp;
-      <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ locals[:r].id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote" %>
+      <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/comments/vote/false/'+ locals[:r].id.to_s, method: :put, title: (locals[:r].user.id == locals[:current_user].id ? "You can't like your own comment" : "Like"), 'data-toggle' => 'tooltip', class: "vote" %>
       &ensp;
-      <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i>').html_safe, '/comments/vote/true/'+ locals[:r].id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
+      <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i>').html_safe, '/comments/vote/true/'+ locals[:r].id.to_s, method: :put, title: (locals[:r].user.id == locals[:current_user].id ? "You can't dislike your own comment" : "Dislike"), 'data-toggle' => 'tooltip', class: "vote" %>
       &ensp; &#8729;
       <%= locals[:r].created_at.strftime("%b %d %Y at %l:%M %p") %>
     </div>

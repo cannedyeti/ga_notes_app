@@ -42,10 +42,10 @@
     <% end %>
     </div>
     <div class="col-xs-12 col-sm-2 text-right">
-      <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/notes/vote/false/'+ locals[:n].id.to_s, method: :put, title: "Like", 'data-toggle' => 'tooltip', class: "vote"%>
+      <%= link_to ('<i class="fa fa-thumbs-up" aria-hidden="true"></i>').html_safe, '/notes/vote/false/'+ locals[:n].id.to_s, method: :put, title: (locals[:n].user.id == locals[:current_user].id ? "You can't like your own note" : "Like"), 'data-toggle' => 'tooltip', class: "vote"%>
       <%=locals[:n].up_votes.length%>
       &ensp;
-      <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i> ').html_safe, '/notes/vote/true/'+ locals[:n].id.to_s, method: :put, title: 'Dislike', 'data-toggle' => 'tooltip', class: "vote" %>
+      <%= link_to ('<i class="fa fa-thumbs-down" aria-hidden="true"></i> ').html_safe, '/notes/vote/true/'+ locals[:n].id.to_s, method: :put, title: (locals[:n].user.id == locals[:current_user].id ? "You can't dislike your own note" : "Dislike"), 'data-toggle' => 'tooltip', class: "vote" %>
       <%=locals[:n].down_votes.length%>
     </div>
   </div>
