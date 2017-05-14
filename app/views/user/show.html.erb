@@ -4,16 +4,14 @@
       <div class="head_title">
         <h2><%= @user.name %></h2>
         <h3><%= @user.is_active ? '' : '(deactivated)' %></h3>
-        <p><strong>Location: </strong><%= @location.name %></p>
-        <p><strong>Course: </strong><%= @course.name %> (<%= @course.code %>)</p>
+        <p><strong>Location: </strong><%= @location == '' ? 'No location set' : @location.name %></p>
+        <p><strong>Course: </strong><%= @course == '' ? 'No course set' : @course.name %> <%= @course == '' ? @course : '(' + @course.code + ')' %></p>
         <p><strong>Privilege: </strong><%= @privilegeMap[@user.privilege] %></p>
         <p><strong>Points: </strong><%= @user.points %></p>
       </div>
       <p><strong>Achievements</strong></p>
       <%= render "partials/badges", locals:  {current_user:  @user, public_notes: @public_notes} %>
     </div>
-
-        <!-- badges is being weird......doesn't render properly -->
 
     <div class="col-xs-12 col-sm-6 text-right">
       <br><br>

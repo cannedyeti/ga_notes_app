@@ -4,8 +4,8 @@ class UserController < ApplicationController
       @user = @current_user
       # @public_notes = Note.where("whitelist = '{}'", user_id: @user.id)
       @public_notes = Note.where("user_id = ? AND whitelist = ?", *[@user.id, "{}"])
-      @location = Location.find(@user.location_id)
-      @course = Course.find(@user.default_course_id)
+      @location = @user.location_id ? Location.find(@user.location_id) : ''
+      @course = @user.default_course_id ? Course.find(@user.default_course_id) : ''
       @locations = Location.all
       @courses = Course.all
       @privilegeMap = {
@@ -22,8 +22,8 @@ class UserController < ApplicationController
     @user = User.find(params[:id])
     # @public_notes = Note.where("whitelist = '{}'", user_id: @user.id)
     @public_notes = Note.where("user_id = ? AND whitelist = ?", *[@user.id, "{}"])
-    @location = Location.find(@user.location_id)
-    @course = Course.find(@user.default_course_id)
+    @location = @user.location_id ? Location.find(@user.location_id) : ''
+    @course = @user.default_course_id ? Course.find(@user.default_course_id) : ''
     @privilegeMap = {
       1 => "Basic",
       2 => "Admin",
@@ -87,7 +87,7 @@ class UserController < ApplicationController
   def new
     @user = User.new
     @locations = Location.all
-    @courses = Course.all
+    @courses = Course.where("is_official_course")
   end
 
   private
