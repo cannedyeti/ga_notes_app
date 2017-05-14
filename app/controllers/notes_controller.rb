@@ -125,6 +125,8 @@ class NotesController < ApplicationController
     tag_ids = []
     tag_ids.concat existing_tag_ids
     tag_names.split(/\s*,\s*/).each do |tn|
+      #take out the leading hashtag
+      tn[0] == '#' ? tn = tn[1..-1] : tn = tn
       new_tag = Tag.find_or_create_by(tag_name: tn)
       tag_ids.push(new_tag.id)
     end
