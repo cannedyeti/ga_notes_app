@@ -11,7 +11,7 @@
 <div class="container">
   <% @favorites.each do |n| %>
     <% if (n.whitelist.length == 0 || n.whitelist.include?(@current_user.id.to_s))%>
-        <%= render "partials/note_preview", locals:  {n:  n} %>
+        <%= render "partials/note_preview", locals:  {n:  n, current_user: @current_user} %>
         <hr>
     <% end%>
   <% end %>
