@@ -39,6 +39,7 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'sanitize'
 gem 'rails_12factor', group: :production
 gem 'seed_dump'
+gem 'httparty'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
