@@ -1,11 +1,15 @@
+require 'httparty'
+
 class UserController < ApplicationController
+  include HTTParty
+
   def index
     if @current_user
       @user = @current_user
       # @public_notes = Note.where("whitelist = '{}'", user_id: @user.id)
       @public_notes = Note.where("user_id = ? AND whitelist = ?", *[@user.id, "{}"])
-      @location = Location.find(@user.location_id)
-      @course = Course.find(@user.default_course_id)
+      @location = @user.location_id ? Location.find(@user.location_id) : ''
+      @course = @user.default_course_id ? Course.find(@user.default_course_id) : ''
       @locations = Location.all
       @courses = Course.all
       @privilegeMap = {
@@ -22,8 +26,8 @@ class UserController < ApplicationController
     @user = User.find(params[:id])
     # @public_notes = Note.where("whitelist = '{}'", user_id: @user.id)
     @public_notes = Note.where("user_id = ? AND whitelist = ?", *[@user.id, "{}"])
-    @location = Location.find(@user.location_id)
-    @course = Course.find(@user.default_course_id)
+    @location = @user.location_id ? Location.find(@user.location_id) : ''
+    @course = @user.default_course_id ? Course.find(@user.default_course_id) : ''
     @privilegeMap = {
       1 => "Basic",
       2 => "Admin",
@@ -56,8 +60,17 @@ class UserController < ApplicationController
       user = User.authenticate(params)
       if user
         if user != -1
-          user.update(remove_unwanted_params(user_params, isChangingPassword))
-          flash[:success] = "Profile Updated"
+          if user_params[:photo]
+            if !is_photo_url_valid(user_params[:photo])
+              flash[:danger] = "Please provide a valid photo url. Note: urls should start with http:// or https://"
+            else
+              user.update(remove_unwanted_params(user_params, isChangingPassword))
+              flash[:success] = "Profile Updated"
+            end
+          else
+            user.update(remove_unwanted_params(user_params, isChangingPassword))
+            flash[:success] = "Profile Updated"
+          end
         else
           flash[:danger] = "Current Password is invalid."
         end
@@ -68,6 +81,23 @@ class UserController < ApplicationController
     else
       redirect_to "/"
       flash[:warning] = "Please log in before doing that."
+    end
+  end
+
+  def is_photo_url_valid(url)
+    # handle httparty errors for improperly formatted urls
+    begin
+      resp = HTTParty.get(URI.parse(url))
+    rescue HTTParty::Error
+      return false
+    rescue StandardError
+      return false
+    end
+
+    if resp.code == 200
+      return resp.headers['Content-Type'].start_with? 'image'
+    else
+      return false
     end
   end
 
@@ -87,7 +117,7 @@ class UserController < ApplicationController
   def new
     @user = User.new
     @locations = Location.all
-    @courses = Course.all
+    @courses = Course.where("is_official_course")
   end
 
   private

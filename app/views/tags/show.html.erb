@@ -14,7 +14,7 @@
 
   <% if @notes.length >= 1 %>
     <% @notes.each do |n| %>
-      <%= render "partials/note_preview", locals:  {n:  n} %>
+      <%= render "partials/note_preview", locals:  {n:  n, current_user: @current_user} %>
       <hr class="hr-gray">
     <% end %>
     <%= will_paginate @notes %>

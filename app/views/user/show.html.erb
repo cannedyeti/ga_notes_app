@@ -4,17 +4,15 @@
       <div class="head_title">
         <h2><%= @user.name %></h2>
         <h3><%= @user.is_active ? '' : '(deactivated)' %></h3>
-        <p><strong>Location: </strong><%= @location.name %></p>
-        <p><strong>Course: </strong><%= @course.name %> (<%= @course.code %>)</p>
+        <p><strong>Location: </strong><%= @location == '' ? 'No location set' : @location.name %></p>
+        <p><strong>Course: </strong><%= @course == '' ? 'No course set' : @course.name %> <%= @course == '' ? @course : '(' + @course.code + ')' %></p>
         <p><strong>Privilege: </strong><%= @privilegeMap[@user.privilege] %></p>
         <p><strong>Points: </strong><%= @user.points %></p>
       </div>
       <p><strong>Achievements</strong></p>
       <%= render "partials/badges", locals:  {current_user:  @user, public_notes: @public_notes} %>
     </div>
-    
-        <!-- badges is being weird......doesn't render properly -->
-    
+
     <div class="col-xs-12 col-sm-6 text-right">
       <br><br>
         <% if @user.photo == nil %>
@@ -29,7 +27,7 @@
   <h3 class="fiji-font text-center"><strong>Notes: </strong></h3><br>
   <% @user.notes.each do |n| %>
     <% if (n.whitelist.length == 0 || n.whitelist.include?(@current_user.id.to_s))%>
-      <%= render "partials/note_preview", locals:  {n:  n} %>
+      <%= render "partials/note_preview", locals:  {n:  n, current_user: @current_user} %>
       <hr>
     <% end%>
   <% end %>
