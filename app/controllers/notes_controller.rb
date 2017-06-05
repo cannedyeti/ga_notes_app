@@ -93,7 +93,7 @@ class NotesController < ApplicationController
           if n.course.is_official_course
             add_points(beforePoints, afterPoints, n.user_id)
           end
-          redirect_to :back
+          # redirect_to :back
         end
       end
     else
